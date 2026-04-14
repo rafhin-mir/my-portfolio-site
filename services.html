@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services — Rafhin Visuals</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,75..125,100..900;1,75..125,100..900&family=Azeret+Mono:wght@400;500&family=IvyPresto+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --black:     #050505;
+      --white:     #f5f5f5;
+      --secondary: #1c1c1c;
+      --primary:   #18abda;
+    }
+
+    @keyframes pageIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .page-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: #050505;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 1;
+      transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .page-loader.hidden { opacity: 0; pointer-events: none; }
+    .page-loader img {
+      height: 84px;
+      width: auto;
+      opacity: 0;
+      animation: loaderLogo .5s cubic-bezier(0.22, 1, 0.36, 1) .1s forwards;
+    }
+    @keyframes loaderLogo {
+      from { opacity: 0; transform: scale(.94); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .65s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform .65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--black);
+      color: var(--white);
+      font-family: 'Archivo', sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    /* ── grain ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: .045;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ── nav ── */
+    .site-nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 200;
+      padding: 22px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to bottom, rgba(5,5,5,.9) 0%, transparent 100%);
+    }
+    .nav-logo {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+    .nav-logo img {
+      height: 48px;
+      width: auto;
+      display: block;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links a {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(245,245,245,.55);
+      text-decoration: none;
+      transition: color .2s ease;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a.active { color: var(--white); }
+
+    /* ── shared layout ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 48% 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .section-label {
+      font-family: 'IvyPresto Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(28px, 3vw, 52px);
+      letter-spacing: -.02em;
+      line-height: 1;
+      color: var(--white);
+      margin: 0;
+    }
+    .section-title {
+      font-weight: 900;
+      font-size: clamp(40px, 5.5vw, 80px);
+      letter-spacing: -.048em;
+      line-height: .88;
+      text-transform: uppercase;
+      color: var(--white);
+      margin: 0;
+    }
+    .section-heading-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      position: sticky;
+      top: 120px;
+      padding-left: 60px;
+    }
+
+    /* ══════════════════════════════════
+       PRODUCTION STUDIO SECTION
+    ══════════════════════════════════ */
+    .production-section {
+      padding: 200px 180px 100px;
+      background: var(--black);
+    }
+
+    /* accordion */
+    .accordion {
+      display: flex;
+      flex-direction: column;
+      max-width: 520px;
+    }
+
+    details.acc-item {
+      border-top: 1px solid rgba(245,245,245,.5);
+    }
+    details.acc-item:last-child {
+      border-bottom: 1px solid rgba(245,245,245,.5);
+    }
+
+    details.acc-item summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 0;
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+    }
+    details.acc-item summary::-webkit-details-marker { display: none; }
+
+    .acc-name {
+      font-size: clamp(14px, 1.4vw, 22px);
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+
+    .acc-icon {
+      font-size: 18px;
+      font-weight: 300;
+      color: rgba(245,245,245,.5);
+      transition: transform .25s ease, opacity .25s ease;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    details[open] .acc-icon {
+      transform: rotate(45deg);
+      opacity: 1;
+    }
+
+    .acc-body {
+      overflow: hidden;
+      height: 0;
+      transition: height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    /* keep content in DOM flow — JS handles visibility via height */
+    details .acc-body { display: block !important; }
+    .acc-body-inner {
+      padding: 0 0 24px;
+    }
+    .acc-body ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .acc-body ul li {
+      font-size: clamp(12px, 1vw, 16px);
+      font-weight: 500;
+      color: rgba(245,245,245,.5);
+      letter-spacing: .01em;
+      padding-left: 20px;
+      position: relative;
+    }
+    .acc-body ul li::before {
+      content: '○';
+      position: absolute;
+      left: 0;
+      color: rgba(245,245,245,.25);
+      font-size: clamp(13px, 1.2vw, 17px);
+    }
+
+    /* ══════════════════════════════════
+       AGENCY SECTION
+    ══════════════════════════════════ */
+    .agency-section {
+      padding: 100px 180px;
+      background: #0a0a0a;
+    }
+
+    .agency-list {
+      display: flex;
+      flex-direction: column;
+      max-width: 520px;
+    }
+
+    .agency-item {
+      display: grid;
+      grid-template-columns: 1fr 140px;
+      gap: 32px;
+      align-items: center;
+      padding: 36px 0;
+      border-top: 1px solid rgba(245,245,245,.5);
+    }
+    .agency-item:last-child {
+      border-bottom: 1px solid rgba(245,245,245,.5);
+    }
+    .agency-item-content {
+      position: relative;
+      padding-left: 28px;
+    }
+    .agency-item-content::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 10px;
+      border-left: 1px solid rgba(245,245,245,.55);
+      border-top: 1px solid rgba(245,245,245,.55);
+      border-bottom: 1px solid rgba(245,245,245,.55);
+    }
+
+    .agency-item-num {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      color: rgba(245,245,245,.35);
+      margin: 0 0 8px;
+    }
+    .agency-item-name {
+      font-weight: 900;
+      font-size: clamp(20px, 2.2vw, 34px);
+      letter-spacing: -.04em;
+      line-height: .9;
+      text-transform: uppercase;
+      color: var(--white);
+      margin: 0 0 14px;
+    }
+    .agency-item-desc {
+      font-size: clamp(12px, 1vw, 15px);
+      line-height: 1.7;
+      color: rgba(245,245,245,.45);
+      margin: 0;
+      max-width: 380px;
+    }
+    .agency-item-img {
+      width: 140px;
+      height: 140px;
+      border-radius: 10px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .agency-item-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ══════════════════════════════════
+       CTA SECTION
+    ══════════════════════════════════ */
+    .collab-section {
+      position: relative;
+      overflow: hidden;
+      min-height: 340px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 40px;
+      text-align: center;
+    }
+    .collab-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .collab-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(.35);
+    }
+    .collab-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(5,5,5,.75) 0%, rgba(5,5,5,.25) 100%);
+      z-index: 1;
+    }
+    .collab-content {
+      position: relative;
+      z-index: 2;
+    }
+    .collab-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(245,245,245,.5);
+      margin: 0 0 16px;
+    }
+    .collab-heading {
+      font-weight: 900;
+      font-size: clamp(52px, 8vw, 120px);
+      letter-spacing: -.05em;
+      line-height: .88;
+      text-transform: uppercase;
+      color: var(--white);
+      margin: 0 0 32px;
+    }
+    .collab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: var(--white);
+      color: var(--black);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: opacity .2s ease;
+    }
+    .collab-btn:hover { opacity: .85; }
+
+    /* ── footer ── */
+    .site-footer {
+      padding: 52px 40px 28px;
+      border-top: 1px solid rgba(245,245,245,.06);
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 48px;
+    }
+    .footer-left { display: flex; flex-direction: column; gap: 16px; }
+    .footer-logo-text {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+    .footer-logo-text img {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
+    .footer-socials { display: flex; gap: 10px; }
+    .social-btn {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: rgba(245,245,245,.07);
+      border: 1px solid rgba(245,245,245,.11);
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none;
+      color: rgba(245,245,245,.55);
+      transition: background .2s ease;
+    }
+    .social-btn:hover { background: rgba(245,245,245,.14); color: var(--white); }
+    .footer-tagline {
+      font-size: 12px;
+      line-height: 1.65;
+      color: #ffffff;
+      margin: 0;
+    }
+    .footer-nav-right {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      padding-top: 4px;
+    }
+    .footer-nav-right a {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-decoration: none;
+      transition: color .2s ease;
+    }
+    .footer-nav-right a:hover { color: var(--white); }
+    .footer-nav-right a.footer-active { color: var(--primary); }
+    .footer-bottom {
+      border-top: 1px solid rgba(245,245,245,.5);
+      padding-top: 20px;
+    }
+    .footer-copy {
+      font-size: 11px;
+      color: #ffffff;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-loader" id="pageLoader">
+    <img src="assets/brand_assets/RV-Logo-White-Transparent.png" alt="Rafhin Visuals">
+  </div>
+
+  <!-- ══════════════════════════════════ NAV -->
+  <nav class="site-nav">
+    <a href="index.html" class="nav-logo"><img src="assets/brand_assets/RV-Logo-White-Transparent.png" alt="Rafhin Visuals"></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#cases">Automotive</a></li>
+      <li><a href="work.html">Work</a></li>
+      <li><a href="services.html" class="active">Services</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ══════════════════════════════════ PRODUCTION STUDIO -->
+  <section class="production-section">
+    <div class="two-col">
+
+      <div class="section-heading-group">
+        <p class="section-label">the way</p>
+        <h2 class="section-title">I WORK</h2>
+      </div>
+
+      <div class="accordion">
+
+        <details class="acc-item">
+          <summary>
+            <span class="acc-name">Approach</span>
+            <span class="acc-icon">+</span>
+          </summary>
+          <div class="acc-body"><div class="acc-body-inner">
+            <ul>
+              <li>Clear thinking behind every decision</li>
+              <li>Detail-driven from start to finish</li>
+              <li>Built for long-term consistency</li>
+            </ul>
+          </div></div>
+        </details>
+
+        <details class="acc-item">
+          <summary>
+            <span class="acc-name">Creative Direction</span>
+            <span class="acc-icon">+</span>
+          </summary>
+          <div class="acc-body"><div class="acc-body-inner">
+            <ul>
+              <li>Direction defined before anything is shot</li>
+              <li>Cohesive visuals across every output</li>
+              <li>Intentional structure, not reactive shooting</li>
+            </ul>
+          </div></div>
+        </details>
+
+        <details class="acc-item">
+          <summary>
+            <span class="acc-name">Production</span>
+            <span class="acc-icon">+</span>
+          </summary>
+          <div class="acc-body"><div class="acc-body-inner">
+            <ul>
+              <li>End-to-end video and photography</li>
+              <li>Captured for both short and long-form</li>
+              <li>Executed with precision throughout</li>
+            </ul>
+          </div></div>
+        </details>
+
+        <details class="acc-item">
+          <summary>
+            <span class="acc-name">Post Production</span>
+            <span class="acc-icon">+</span>
+          </summary>
+          <div class="acc-body"><div class="acc-body-inner">
+            <ul>
+              <li>Clean, controlled editing and color</li>
+              <li>Sound designed to enhance, not distract</li>
+              <li>Optimized for each platform</li>
+            </ul>
+          </div></div>
+        </details>
+
+        <details class="acc-item">
+          <summary>
+            <span class="acc-name">Photography</span>
+            <span class="acc-icon">+</span>
+          </summary>
+          <div class="acc-body"><div class="acc-body-inner">
+            <ul>
+              <li>Automotive as the foundation</li>
+              <li>Applied across brand, product, and lifestyle</li>
+              <li>Consistent, high-level visual standard</li>
+            </ul>
+          </div></div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ AGENCY -->
+  <section class="agency-section">
+    <div class="two-col">
+
+      <div class="section-heading-group">
+        <p class="section-label">the</p>
+        <h2 class="section-title">AGENCY</h2>
+      </div>
+
+      <div class="agency-list">
+
+        <div class="agency-item">
+          <div class="agency-item-content">
+            <p class="agency-item-num">01</p>
+            <h3 class="agency-item-name">Content Strategy</h3>
+            <p class="agency-item-desc">We define what to shoot, when to post, and how it positions your brand. Every decision is made with growth in mind, ensuring your content attracts the right audience and builds long-term value.</p>
+          </div>
+          <div class="agency-item-img">
+            <img src="https://placehold.co/140x140/111/222?text=+" alt="Content Strategy">
+          </div>
+        </div>
+
+        <div class="agency-item">
+          <div class="agency-item-content">
+            <p class="agency-item-num">02</p>
+            <h3 class="agency-item-name">Short Form Content</h3>
+            <p class="agency-item-desc">Built for attention and consistency. We create structured, repeatable formats designed to perform across Instagram, TikTok, and other short-form platforms without sacrificing quality.</p>
+          </div>
+          <div class="agency-item-img">
+            <img src="https://placehold.co/140x140/111/222?text=+" alt="Short Form Content">
+          </div>
+        </div>
+
+        <div class="agency-item">
+          <div class="agency-item-content">
+            <p class="agency-item-num">03</p>
+            <h3 class="agency-item-name">UGC</h3>
+            <p class="agency-item-desc">Platform-native content that feels natural and performs. Designed to blend into feeds while still maintaining a strong and intentional brand presence.</p>
+          </div>
+          <div class="agency-item-img">
+            <img src="https://placehold.co/140x140/111/222?text=+" alt="UGC">
+          </div>
+        </div>
+
+        <div class="agency-item">
+          <div class="agency-item-content">
+            <p class="agency-item-num">04</p>
+            <h3 class="agency-item-name">Long Form / YouTube</h3>
+            <p class="agency-item-desc">Story-driven content that builds authority over time. Focused on retention, pacing, and creating videos that people actually stay to watch.</p>
+          </div>
+          <div class="agency-item-img">
+            <img src="https://placehold.co/140x140/111/222?text=+" alt="Long Form / YouTube">
+          </div>
+        </div>
+
+        <div class="agency-item">
+          <div class="agency-item-content">
+            <p class="agency-item-num">05</p>
+            <h3 class="agency-item-name">Creative Campaigns</h3>
+            <p class="agency-item-desc">Content built around key moments. Whether it's a launch, feature, or brand push, everything is designed to create impact and stand out.</p>
+          </div>
+          <div class="agency-item-img">
+            <img src="https://placehold.co/140x140/111/222?text=+" alt="Creative Campaigns">
+          </div>
+        </div>
+
+        <div class="agency-item">
+          <div class="agency-item-content">
+            <p class="agency-item-num">06</p>
+            <h3 class="agency-item-name">Monthly Content</h3>
+            <p class="agency-item-desc">A system for consistent output. Planned, produced, and delivered in a way that keeps your brand active without needing constant direction or oversight.</p>
+          </div>
+          <div class="agency-item-img">
+            <img src="https://placehold.co/140x140/111/222?text=+" alt="Monthly Content">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ LET'S COLLABORATE -->
+  <section class="collab-section">
+    <div class="collab-bg">
+      <img src="https://placehold.co/1440x400/0d0d0d/1a1a1a?text=+" alt="">
+    </div>
+    <div class="collab-overlay"></div>
+    <div class="collab-content">
+      <p class="collab-eyebrow">Get In Touch</p>
+      <h2 class="collab-heading">LET'S<br>COLLABORATE</h2>
+      <a href="contact.html" class="collab-btn">Start a Project</a>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-left">
+        <a href="index.html" class="footer-logo-text"><img src="assets/brand_assets/RV-Logo-White-Transparent.png" alt="Rafhin Visuals"></a>
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/_rafhin/" class="social-btn" aria-label="Instagram" target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/>
+            </svg>
+          </a>
+          <a href="https://www.tiktok.com/@_rafhin" class="social-btn" aria-label="TikTok" target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.05a8.27 8.27 0 0 0 4.84 1.55V7.15a4.85 4.85 0 0 1-1.07-.46z"/>
+            </svg>
+          </a>
+          <a href="https://www.youtube.com/@_rafhin/featured" class="social-btn" aria-label="YouTube" target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+              <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+        </div>
+        <p class="footer-tagline">Built with intent. Made to last.</p>
+      </div>
+      <nav class="footer-nav-right">
+        <a href="index.html">Home</a>
+        <a href="index.html#cases">Automotive</a>
+        <a href="work.html">Work</a>
+        <a href="services.html" class="footer-active">Services</a>
+        <a href="index.html#about">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Rafhin Visuals. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('details.acc-item').forEach(details => {
+      const summary = details.querySelector('summary');
+      const body    = details.querySelector('.acc-body');
+
+      summary.addEventListener('click', e => {
+        e.preventDefault();
+
+        if (details.open) {
+          // Collapse: snap to explicit px, then animate to 0
+          body.style.height = body.scrollHeight + 'px';
+          requestAnimationFrame(() => requestAnimationFrame(() => {
+            body.style.height = '0';
+          }));
+          body.addEventListener('transitionend', () => {
+            details.removeAttribute('open');
+          }, { once: true });
+        } else {
+          // Expand: open first so scrollHeight is measurable
+          details.setAttribute('open', '');
+          body.style.height = '0';
+          requestAnimationFrame(() => requestAnimationFrame(() => {
+            body.style.height = body.scrollHeight + 'px';
+          }));
+          body.addEventListener('transitionend', () => {
+            body.style.height = 'auto'; // let it breathe after animation
+          }, { once: true });
+        }
+      });
+    });
+  </script>
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
+
+    const loader = document.getElementById('pageLoader');
+    setTimeout(() => loader.classList.add('hidden'), 900);
+    setTimeout(() => loader.remove(), 2100);
+
+    document.querySelectorAll('section, footer').forEach(el => {
+      if (el.getBoundingClientRect().top > window.innerHeight) {
+        el.classList.add('reveal');
+        observer.observe(el);
+      }
+    });
+  </script>
+</body>
+</html>

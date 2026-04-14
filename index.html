@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,75..125,100..900;1,75..125,100..900&family=IvyPresto+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,75..125,100..900;1,75..125,100..900&family=Azeret+Mono:wght@400;500&family=IvyPresto+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -19,6 +19,47 @@
       --radius:    12px;
     }
 
+    @keyframes pageIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── page loader ── */
+    .page-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: #050505;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 1;
+      transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .page-loader.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .page-loader img {
+      height: 84px;
+      width: auto;
+      opacity: 0;
+      animation: loaderLogo .5s cubic-bezier(0.22, 1, 0.36, 1) .1s forwards;
+    }
+    @keyframes loaderLogo {
+      from { opacity: 0; transform: scale(.94); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .65s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform .65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
     *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
@@ -55,12 +96,14 @@
       background: linear-gradient(to bottom, rgba(5,5,5,.85) 0%, transparent 100%);
     }
     .nav-logo {
-      font-weight: 900;
-      font-size: 15px;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--white);
       text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+    .nav-logo img {
+      height: 48px;
+      width: auto;
+      display: block;
     }
     .nav-links {
       display: flex;
@@ -98,8 +141,8 @@
     }
     .hero-content {
       position: absolute;
-      bottom: 260px;
-      left: 40px;
+      bottom: 380px;
+      left: 100px;
       z-index: 20;
       max-width: 680px;
     }
@@ -290,27 +333,72 @@
     .creation-explore:hover { color: var(--white); }
     .creation-explore:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; border-radius: 2px; }
 
-    /* ── clients ── */
-    .clients-row {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 56px;
-      flex-wrap: wrap;
-      padding: 56px 40px;
+    /* ── brands ── */
+    .brands-section {
+      padding: 72px 40px 80px;
+      text-align: center;
     }
-    .client-item {
-      opacity: .3;
-      filter: brightness(0) invert(1);
-      font-family: 'Archivo', sans-serif;
-      font-weight: 800;
-      font-size: 18px;
-      letter-spacing: -.01em;
-      color: white;
+    .brands-eyebrow {
+      font-size: clamp(14px, 1.5vw, 22px);
+      font-weight: 900;
+      letter-spacing: -.03em;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin: 0 0 56px;
+      line-height: 1.1;
+    }
+    .brands-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .brand-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 16px;
+      opacity: .22;
       transition: opacity .3s ease;
       cursor: default;
+      border: 1px solid transparent;
     }
-    .client-item:hover { opacity: .7; }
+    .brand-item:hover { opacity: .55; }
+    .brand-item span {
+      font-family: 'Archivo', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: -.01em;
+      color: #ffffff;
+      text-transform: uppercase;
+      line-height: 1.1;
+      white-space: nowrap;
+    }
+    .brand-item.serif span {
+      font-family: 'IvyPresto Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 17px;
+      letter-spacing: .02em;
+      text-transform: none;
+    }
+    .brand-item.thin span {
+      font-weight: 400;
+      letter-spacing: .12em;
+      font-size: 13px;
+    }
+    .brand-item.wide span {
+      letter-spacing: .18em;
+      font-size: 12px;
+    }
+    .brand-item.script span {
+      font-family: 'IvyPresto Display', serif;
+      font-style: italic;
+      font-size: 20px;
+      font-weight: 400;
+      text-transform: none;
+    }
 
     /* ── expertise ── */
     .exp-header {
@@ -321,7 +409,7 @@
       font-family: 'IvyPresto Display', serif;
       font-style: italic;
       font-weight: 400;
-      font-size: clamp(28px, 3.2vw, 52px);
+      font-size: clamp(80px, 3.2vw, 80px);
       letter-spacing: -.02em;
       line-height: 1;
       color: var(--white);
@@ -338,14 +426,16 @@
     }
     .exp-layout {
       display: grid;
-      grid-template-columns: 44% 1fr;
-      gap: 80px;
+      grid-template-columns: 28% 44%;
+      gap: 100px;
       align-items: start;
+      justify-content: center;
     }
     .exp-photo {
       border-radius: 14px;
       overflow: hidden;
-      aspect-ratio: 4/5;
+      aspect-ratio: 2/3;
+      width: 100%;
     }
     .exp-photo img {
       width: 100%;
@@ -355,10 +445,10 @@
     }
     .exp-list { display: flex; flex-direction: column; }
     .exp-list-item {
-      padding: 22px 0;
-      border-bottom: 1px solid rgba(245,245,245,.1);
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(245,245,245,.5);
     }
-    .exp-list-item:first-child { border-top: 1px solid rgba(245,245,245,.1); }
+    .exp-list-item:first-child { border-top: 1px solid rgba(245,245,245,.5); }
     .exp-list-name {
       font-weight: 900;
       font-size: clamp(20px, 2.5vw, 38px);
@@ -394,7 +484,7 @@
       background: linear-gradient(to bottom, rgba(5,5,5,.45) 0%, rgba(5,5,5,.15) 50%, rgba(5,5,5,.55) 100%);
     }
     .cta-eyebrow {
-      font-size: 10px;
+      font-size: 13px;
       font-weight: 700;
       letter-spacing: .22em;
       text-transform: uppercase;
@@ -405,7 +495,7 @@
     }
     .cta-heading {
       font-weight: 900;
-      font-size: clamp(60px, 11vw, 168px);
+      font-size: clamp(60px, 11vw, 60px);
       letter-spacing: -.05em;
       line-height: .86;
       text-transform: uppercase;
@@ -460,7 +550,7 @@
       text-transform: uppercase;
       padding: 13px 26px;
       border-radius: 100px;
-      border: 1px solid rgba(245,245,245,.22);
+      border: 1px solid rgba(245,245,245,.5);
       text-decoration: none;
       cursor: pointer;
       transition: border-color .2s ease, transform .2s cubic-bezier(.25,.46,.45,.94);
@@ -471,45 +561,98 @@
 
     /* ── hero stripe ── */
     .hero-stripe {
-      display: flex;
-      gap: 3px;
-      margin: 0 0 20px;
-    }
-    .hero-stripe span {
-      width: 28px;
-      height: 3px;
-      border-radius: 2px;
+      width: 60px;
+      height: 2px;
+      border-radius: 9999px;
+      background: linear-gradient(to right, #b8960c, #d4af6a, #f0e8d0);
+      margin: 0 0 16px;
     }
 
-    /* ── photo collage ── */
-    .hero-photos {
+    /* ── 3D carousel ── */
+    .hero-carousel {
       position: absolute;
-      right: 0;
+      right: 4%;
       top: 0;
-      width: 62%;
+      width: 54%;
       height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1000px;
+      perspective-origin: 50% 50%;
+      pointer-events: none;
     }
-    .photo-card {
+
+    .carousel-tilt {
+      transform-style: preserve-3d;
+      animation: carouselTilt 9s ease-in-out infinite alternate;
+    }
+    @keyframes carouselTilt {
+      0%   { transform: rotateX(4deg) rotateZ(-0.5deg); }
+      100% { transform: rotateX(-4deg) rotateZ(0.5deg); }
+    }
+    .carousel-track {
+      position: relative;
+      width: 170px;
+      height: 280px;
+      transform-style: preserve-3d;
+      animation: carouselSpin 100s linear infinite;
+    }
+
+    @keyframes carouselSpin {
+      from { transform: rotateY(0deg); }
+      to   { transform: rotateY(360deg); }
+    }
+
+
+    .carousel-card {
       position: absolute;
+      inset: 0;
+      width: 170px;
+      height: 280px;
+      border-radius: 14px;
       overflow: hidden;
+      border: 1px solid rgba(255,255,255,.1);
       box-shadow:
-        0 2px 6px rgba(0,0,0,.55),
-        0 18px 52px rgba(0,0,0,.75);
-      border: 1px solid rgba(255,255,255,.07);
+        0 4px 12px rgba(0,0,0,.6),
+        0 20px 60px rgba(0,0,0,.5);
+      backface-visibility: visible;
     }
-    .photo-card img {
+
+    .carousel-card:nth-child(1) { transform: rotateY(0deg)   translateZ(255px); }
+    .carousel-card:nth-child(2) { transform: rotateY(40deg)  translateZ(255px); }
+    .carousel-card:nth-child(3) { transform: rotateY(80deg)  translateZ(255px); }
+    .carousel-card:nth-child(4) { transform: rotateY(120deg) translateZ(255px); }
+    .carousel-card:nth-child(5) { transform: rotateY(160deg) translateZ(255px); }
+    .carousel-card:nth-child(6) { transform: rotateY(200deg) translateZ(255px); }
+    .carousel-card:nth-child(7) { transform: rotateY(240deg) translateZ(255px); }
+    .carousel-card:nth-child(8) { transform: rotateY(280deg) translateZ(255px); }
+    .carousel-card:nth-child(9) { transform: rotateY(320deg) translateZ(255px); }
+
+    .carousel-card img,
+    .carousel-card video {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      filter: grayscale(100%) brightness(.8) contrast(1.05);
+      filter: grayscale(100%) brightness(.75) contrast(1.1);
     }
-    /* bottom fade so photos dissolve into black */
-    .hero-photos::after {
+
+    /* left fade so carousel dissolves into text */
+    .hero-carousel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--black) 0%, transparent 18%);
+      z-index: 10;
+      pointer-events: none;
+    }
+    /* bottom fade */
+    .hero-carousel::after {
       content: '';
       position: absolute;
       bottom: 0; left: 0; right: 0;
-      height: 30%;
+      height: 28%;
       background: linear-gradient(to top, var(--black) 0%, transparent 100%);
       z-index: 10;
       pointer-events: none;
@@ -517,16 +660,17 @@
 
     /* ── mission section ── */
     .mission-section {
-      padding: 110px 40px 100px;
+      padding: 25px 40px 100px;
       text-align: center;
     }
     .mission-text {
-      max-width: 500px;
+      max-width: 925px;
       margin: 0 auto 36px;
-      font-size: 13.5px;
+      font-size: 25px;
       line-height: 1.9;
-      color: rgba(245,245,245,.48);
+      color: #ffffff;
       letter-spacing: .005em;
+      font-family: 'Azeret Mono', sans-serif;
     }
 
     /* ── footer ── */
@@ -542,13 +686,14 @@
     }
     .footer-left { display: flex; flex-direction: column; gap: 16px; }
     .footer-logo-text {
-      font-weight: 900;
-      font-size: 22px;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      color: var(--white);
       text-decoration: none;
-      line-height: 1;
+      display: flex;
+      align-items: center;
+    }
+    .footer-logo-text img {
+      height: 40px;
+      width: auto;
+      display: block;
     }
     .footer-socials { display: flex; gap: 10px; }
     .social-btn {
@@ -565,7 +710,7 @@
     .footer-tagline {
       font-size: 12px;
       line-height: 1.65;
-      color: rgba(245,245,245,.28);
+      color: #ffffff;
       margin: 0;
     }
     .footer-nav-right {
@@ -580,35 +725,40 @@
       font-weight: 600;
       letter-spacing: .08em;
       text-transform: uppercase;
-      color: rgba(245,245,245,.35);
+      color: #ffffff;
       text-decoration: none;
       transition: color .2s ease;
     }
     .footer-nav-right a:hover { color: var(--white); }
     .footer-nav-right a.footer-active { color: var(--primary); }
     .footer-bottom {
-      border-top: 1px solid rgba(245,245,245,.06);
+      border-top: 1px solid rgba(245,245,245,.5);
       padding-top: 20px;
     }
     .footer-copy {
       font-size: 11px;
-      color: rgba(245,245,245,.18);
+      color: #ffffff;
       margin: 0;
     }
   </style>
 </head>
 <body>
 
+  <!-- loader -->
+  <div class="page-loader" id="pageLoader">
+    <img src="assets/brand_assets/RV-Logo-White-Transparent.png" alt="Rafhin Visuals">
+  </div>
+
   <!-- ══════════════════════════════════ NAV -->
   <nav class="site-nav">
-    <a href="#" class="nav-logo">OUR.</a>
+    <a href="#" class="nav-logo"><img src="assets/brand_assets/RV-Logo-White-Transparent.png" alt="Rafhin Visuals"></a>
     <ul class="nav-links">
       <li><a href="#">Home</a></li>
-      <li><a href="#cases">Case Studies</a></li>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#services">Services</a></li>
+      <li><a href="#cases">Automotive</a></li>
+      <li><a href="work.html">Work</a></li>
+      <li><a href="services.html">Services</a></li>
       <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="contact.html">Contact</a></li>
     </ul>
   </nav>
 
@@ -616,30 +766,28 @@
   <section class="hero">
     <div class="hero-bg"></div>
 
-    <!-- photo collage -->
-    <div class="hero-photos">
-      <!-- back-left card -->
-      <div class="photo-card" style="width:42%;aspect-ratio:3/4;left:0;top:10%;transform:rotate(-4.5deg);z-index:1;">
-        <img src="https://placehold.co/380x510/555555/777777?text=+" alt="">
+    <!-- 3D carousel -->
+    <div class="hero-carousel">
+      <div class="carousel-tilt">
+      <div class="carousel-track">
+        <div class="carousel-card"><img src="https://placehold.co/170x280/2a2a2a/3a3a3a?text=+" alt=""></div>
+        <div class="carousel-card"><img src="https://placehold.co/170x280/1e1e1e/2e2e2e?text=+" alt=""></div>
+        <div class="carousel-card"><img src="https://placehold.co/170x280/252525/353535?text=+" alt=""></div>
+        <div class="carousel-card"><img src="https://placehold.co/170x280/1a1a1a/2a2a2a?text=+" alt=""></div>
+        <div class="carousel-card"><img src="https://placehold.co/170x280/222222/323232?text=+" alt=""></div>
+        <div class="carousel-card"><img src="https://placehold.co/170x280/2e2e2e/3e3e3e?text=+" alt=""></div>
+        <div class="carousel-card"><img src="https://placehold.co/170x280/202020/303030?text=+" alt=""></div>
+        <div class="carousel-card"><img src="https://placehold.co/170x280/282828/383838?text=+" alt=""></div>
+        <div class="carousel-card"><img src="https://placehold.co/170x280/1c1c1c/2c2c2c?text=+" alt=""></div>
       </div>
-      <!-- center card -->
-      <div class="photo-card" style="width:44%;aspect-ratio:2/3;left:25%;top:5%;transform:rotate(3deg);z-index:2;">
-        <img src="https://placehold.co/400x600/444444/666666?text=+" alt="">
-      </div>
-      <!-- front-right card -->
-      <div class="photo-card" style="width:40%;aspect-ratio:3/4;right:2%;top:17%;transform:rotate(-2deg);z-index:3;">
-        <img src="https://placehold.co/360x480/4a4a4a/6a6a6a?text=+" alt="">
       </div>
     </div>
 
     <!-- text block -->
     <div class="hero-content">
-      <div class="hero-stripe">
-        <span style="background:#2563eb;"></span>
-        <span style="background:#dc2626;"></span>
-        <span style="background:#f5f5f5;"></span>
-      </div>
-      <p class="hero-italic">for ourselves</p>
+      <div class="hero-stripe"></div>
+      <p class="hero-italic">for those who build different
+      </p>
       <p class="hero-bold-by">BY</p>
       <p class="hero-bold-main">OURSELVES</p>
     </div>
@@ -653,7 +801,8 @@
 
   <!-- ══════════════════════════════════ MISSION -->
   <section class="mission-section">
-    <p class="mission-text">We are a production studio that partners with creatives, brands, and agencies from concept to completion, creating impactful content that highlights diverse human experiences and amplifies important voices. Partner with us for a creative ally dedicated to exceptional storytelling.</p>
+    <p class="mission-text">We work with brands, creatives, and agencies from concept to completion, shaping each project with clarity, precision, and intent.
+Our focus is on refined visuals and considered execution, creating work that is both distinctive and enduring.</p>
     <a href="#work" class="btn-ghost">Learn More &nbsp;→</a>
   </section>
 
@@ -703,17 +852,37 @@
 
   <div class="divider"></div>
 
-  <!-- ══════════════════════════════════ CLIENTS -->
-  <div class="clients-row">
-    <div class="client-item" style="font-size:22px;letter-spacing:.02em;">BBC</div>
-    <div class="client-item" style="font-size:22px;letter-spacing:-.03em;">DJI</div>
-    <div class="client-item" style="font-size:16px;letter-spacing:.08em;">KFTV</div>
-    <div class="client-item" style="line-height:1.1;text-align:center;">
-      <div style="font-size:17px;">SONY</div>
-      <div style="font-size:9px;letter-spacing:.14em;font-weight:500;opacity:.8;">CINEMA LINE</div>
+  <!-- ══════════════════════════════════ BRANDS -->
+  <section class="brands-section">
+    <p class="brands-eyebrow">Premier Brands<br>Partner With Ourselves</p>
+    <div class="brands-grid">
+
+      <div class="brand-item serif"><span>Ferrari</span></div>
+      <div class="brand-item"><span>The North Face</span></div>
+      <div class="brand-item thin"><span>Hulu</span></div>
+      <div class="brand-item"><span>RCA</span></div>
+      <div class="brand-item wide"><span>Nike</span></div>
+
+      <div class="brand-item script"><span>Apple</span></div>
+      <div class="brand-item"><span>Republic Records</span></div>
+      <div class="brand-item thin"><span>Interscope</span></div>
+      <div class="brand-item"><span>Island Records</span></div>
+      <div class="brand-item"><span>Def Jam</span></div>
+
+      <div class="brand-item wide"><span>Capitol</span></div>
+      <div class="brand-item"><span>YouTube</span></div>
+      <div class="brand-item serif"><span>Warner Bros</span></div>
+      <div class="brand-item thin"><span>Sprite</span></div>
+      <div class="brand-item wide"><span>Bose</span></div>
+
+      <div class="brand-item"><span>JIF</span></div>
+      <div class="brand-item thin"><span>Bumble</span></div>
+      <div class="brand-item"><span>Robinhood</span></div>
+      <div class="brand-item wide"><span>Sony</span></div>
+      <div class="brand-item"><span>DJI</span></div>
+
     </div>
-    <div class="client-item" style="font-size:15px;letter-spacing:.02em;">Shutterstock</div>
-  </div>
+  </section>
 
   <div class="divider"></div>
 
@@ -763,39 +932,65 @@
   <footer class="site-footer">
     <div class="footer-top">
       <div class="footer-left">
-        <a href="#" class="footer-logo-text">OUR.</a>
+        <a href="#" class="footer-logo-text"><img src="assets/brand_assets/RV-Logo-White-Transparent.png" alt="Rafhin Visuals"></a>
         <div class="footer-socials">
           <!-- Instagram -->
-          <a href="#" class="social-btn" aria-label="Instagram">
+          <a href="https://www.instagram.com/_rafhin/" class="social-btn" aria-label="Instagram" target="_blank" rel="noopener">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
               <circle cx="12" cy="12" r="4"/>
               <circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/>
             </svg>
           </a>
-          <!-- YouTube -->
-          <a href="#" class="social-btn" aria-label="YouTube">
+          <a href="https://www.tiktok.com/@_rafhin" class="social-btn" aria-label="TikTok" target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.05a8.27 8.27 0 0 0 4.84 1.55V7.15a4.85 4.85 0 0 1-1.07-.46z"/>
+            </svg>
+          </a>
+          <a href="https://www.youtube.com/@_rafhin/featured" class="social-btn" aria-label="YouTube" target="_blank" rel="noopener">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
               <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/>
             </svg>
           </a>
         </div>
-        <p class="footer-tagline">Created By ourselves,<br>for ourselves.</p>
+        <p class="footer-tagline">Built with intent. Made to last.</p>
       </div>
       <nav class="footer-nav-right">
         <a href="#" class="footer-active">Home</a>
-        <a href="#cases">Case Studies</a>
-        <a href="#work">Work</a>
-        <a href="#services">Services</a>
+        <a href="#cases">Automotive</a>
+        <a href="work.html">Work</a>
+        <a href="services.html">Services</a>
         <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+        <a href="contact.html">Contact</a>
       </nav>
     </div>
     <div class="footer-bottom">
-      <p class="footer-copy">© 2025 OURSELVES. All Rights Reserved.</p>
+      <p class="footer-copy">© 2026 Rafhin Visuals. All Rights Reserved.</p>
     </div>
   </footer>
 
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
+
+    // loader
+    const loader = document.getElementById('pageLoader');
+    setTimeout(() => loader.classList.add('hidden'), 900);
+    setTimeout(() => loader.remove(), 2100);
+
+    document.querySelectorAll('section, .divider, .brands-section, .mission-section, .clients-row').forEach(el => {
+      if (el.getBoundingClientRect().top > window.innerHeight) {
+        el.classList.add('reveal');
+        observer.observe(el);
+      }
+    });
+  </script>
 </body>
 </html>
