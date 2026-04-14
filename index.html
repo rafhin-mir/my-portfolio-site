@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OUR. — Founders by Ourselves</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,75..125,100..900;1,75..125,100..900&family=IvyPresto+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --black:     #050505;
+      --white:     #f5f5f5;
+      --secondary: #1c1c1c;
+      --primary:   #18abda;
+      --primary-50:#18abda40;
+      --radius:    12px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--black);
+      color: var(--white);
+      font-family: 'Archivo', sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    /* ── grain ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: .045;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ── nav ── */
+    .site-nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 200;
+      padding: 22px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to bottom, rgba(5,5,5,.85) 0%, transparent 100%);
+    }
+    .nav-logo {
+      font-weight: 900;
+      font-size: 15px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      margin: 0; padding: 0;
+    }
+    .nav-links a {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(245,245,245,.55);
+      text-decoration: none;
+      transition: color .2s ease;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; border-radius: 2px; }
+
+    /* ── hero ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-column-gap: 16px;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 80% at 75% 50%, rgba(14,14,14,.0) 0%, var(--black) 80%),
+        radial-gradient(ellipse 40% 60% at 20% 90%, rgba(24,171,218,.07) 0%, transparent 70%);
+    }
+    .hero-content {
+      position: absolute;
+      bottom: 260px;
+      left: 40px;
+      z-index: 20;
+      max-width: 680px;
+    }
+    em, i, [style*="italic"] { font-family: 'IvyPresto Display', serif; }
+
+    .hero-italic {
+      font-family: 'IvyPresto Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(36px, 4vw, 64px);
+      letter-spacing: -.02em;
+      line-height: .95;
+      margin: 0;
+    }
+    .hero-bold-by {
+      font-weight: 900;
+      font-size: clamp(34px, 4vw, 64px);
+      letter-spacing: -.04em;
+      line-height: .92;
+      text-transform: uppercase;
+      margin: 0;
+    }
+    .hero-bold-main {
+      font-weight: 900;
+      font-size: clamp(52px, 6.5vw, 104px);
+      letter-spacing: -.05em;
+      line-height: .87;
+      text-transform: uppercase;
+      margin: 0 0 24px;
+    }
+    /* ── scroll indicator ── */
+    .scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      right: 40px;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: .35;
+    }
+    .scroll-hint span {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 28px;
+      height: 1px;
+      background: var(--white);
+    }
+
+    /* ── section chrome ── */
+    .section { padding: 96px 40px; }
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: lowercase;
+      color: rgba(245,245,245,.55);
+      margin: 0 0 6px;
+    }
+    .section-heading {
+      font-weight: 900;
+      font-size: clamp(42px, 5.5vw, 80px);
+      letter-spacing: -.04em;
+      line-height: .92;
+      text-transform: uppercase;
+      margin: 0;
+    }
+    .divider {
+      height: 1px;
+      margin: 0 40px;
+      background: linear-gradient(to right, transparent, rgba(245,245,245,.08), transparent);
+    }
+
+    /* ── creations section ── */
+    .creations-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .creations-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: rgba(245,245,245,.38);
+      margin: 0 0 10px;
+    }
+    .creations-italic {
+      font-family: 'IvyPresto Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(30px, 3.5vw, 56px);
+      letter-spacing: -.02em;
+      line-height: 1.0;
+      color: var(--white);
+      margin: 0;
+    }
+    .creations-title {
+      font-weight: 900;
+      font-size: clamp(52px, 7vw, 112px);
+      letter-spacing: -.048em;
+      line-height: .86;
+      text-transform: uppercase;
+      color: var(--white);
+      margin: 0;
+    }
+    .creations-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .creation-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      height: 460px;
+      cursor: pointer;
+    }
+    .creation-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(.88) saturate(.8);
+      transition:
+        transform .8s cubic-bezier(.25,.46,.45,.94),
+        filter .4s ease;
+    }
+    .creation-card:hover img {
+      transform: scale(1.04);
+      filter: brightness(.96) saturate(.9);
+    }
+    .creation-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(5,5,5,.9) 0%, rgba(5,5,5,.28) 48%, transparent 78%);
+    }
+    .creation-body {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 28px 32px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .creation-tag {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 12px;
+      background: rgba(8,8,8,.7);
+      color: rgba(245,245,245,.6);
+      border: 1px solid rgba(245,245,245,.12);
+    }
+    .creation-tag-accent {
+      background: rgba(24,171,218,.14);
+      color: var(--primary);
+      border-color: rgba(24,171,218,.45);
+    }
+    .creation-name {
+      font-weight: 900;
+      font-size: clamp(20px, 2.2vw, 32px);
+      letter-spacing: -.02em;
+      line-height: 1.1;
+      text-transform: uppercase;
+      color: var(--white);
+      margin: 0 0 10px;
+    }
+    .creation-explore {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: rgba(245,245,245,.42);
+      text-decoration: none;
+      transition: color .2s ease;
+    }
+    .creation-explore:hover { color: var(--white); }
+    .creation-explore:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; border-radius: 2px; }
+
+    /* ── clients ── */
+    .clients-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 56px;
+      flex-wrap: wrap;
+      padding: 56px 40px;
+    }
+    .client-item {
+      opacity: .3;
+      filter: brightness(0) invert(1);
+      font-family: 'Archivo', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: -.01em;
+      color: white;
+      transition: opacity .3s ease;
+      cursor: default;
+    }
+    .client-item:hover { opacity: .7; }
+
+    /* ── expertise ── */
+    .exp-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .exp-italic-heading {
+      font-family: 'IvyPresto Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(28px, 3.2vw, 52px);
+      letter-spacing: -.02em;
+      line-height: 1;
+      color: var(--white);
+      margin: 0;
+    }
+    .exp-bold-heading {
+      font-weight: 900;
+      font-size: clamp(52px, 7vw, 112px);
+      letter-spacing: -.048em;
+      line-height: .86;
+      text-transform: uppercase;
+      color: var(--white);
+      margin: 0;
+    }
+    .exp-layout {
+      display: grid;
+      grid-template-columns: 44% 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .exp-photo {
+      border-radius: 14px;
+      overflow: hidden;
+      aspect-ratio: 4/5;
+    }
+    .exp-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .exp-list { display: flex; flex-direction: column; }
+    .exp-list-item {
+      padding: 22px 0;
+      border-bottom: 1px solid rgba(245,245,245,.1);
+    }
+    .exp-list-item:first-child { border-top: 1px solid rgba(245,245,245,.1); }
+    .exp-list-name {
+      font-weight: 900;
+      font-size: clamp(20px, 2.5vw, 38px);
+      letter-spacing: -.03em;
+      line-height: 1.0;
+      text-transform: uppercase;
+      color: var(--white);
+      margin: 0;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      position: relative;
+      overflow: hidden;
+      padding: 160px 40px 130px;
+      text-align: center;
+    }
+    .cta-bg-img {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .cta-bg-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(.38) saturate(.55);
+    }
+    .cta-dark-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(to bottom, rgba(5,5,5,.45) 0%, rgba(5,5,5,.15) 50%, rgba(5,5,5,.55) 100%);
+    }
+    .cta-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: rgba(245,245,245,.45);
+      margin: 0 0 20px;
+      position: relative;
+      z-index: 2;
+    }
+    .cta-heading {
+      font-weight: 900;
+      font-size: clamp(60px, 11vw, 168px);
+      letter-spacing: -.05em;
+      line-height: .86;
+      text-transform: uppercase;
+      margin: 0;
+      color: var(--white);
+      position: relative;
+      z-index: 2;
+    }
+    .cta-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+      margin-top: 52px;
+    }
+
+    /* ── buttons ── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary);
+      color: var(--black);
+      font-family: 'Archivo', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      border-radius: 100px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background .2s ease, transform .2s cubic-bezier(.25,.46,.45,.94);
+    }
+    .btn-primary:hover { background: #20c0ee; transform: translateY(-2px); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:focus-visible { outline: 2px solid var(--white); outline-offset: 4px; }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--white);
+      font-family: 'Archivo', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 13px 26px;
+      border-radius: 100px;
+      border: 1px solid rgba(245,245,245,.22);
+      text-decoration: none;
+      cursor: pointer;
+      transition: border-color .2s ease, transform .2s cubic-bezier(.25,.46,.45,.94);
+    }
+    .btn-ghost:hover { border-color: rgba(245,245,245,.6); transform: translateY(-2px); }
+    .btn-ghost:active { transform: translateY(0); }
+    .btn-ghost:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
+
+    /* ── hero stripe ── */
+    .hero-stripe {
+      display: flex;
+      gap: 3px;
+      margin: 0 0 20px;
+    }
+    .hero-stripe span {
+      width: 28px;
+      height: 3px;
+      border-radius: 2px;
+    }
+
+    /* ── photo collage ── */
+    .hero-photos {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 62%;
+      height: 100%;
+    }
+    .photo-card {
+      position: absolute;
+      overflow: hidden;
+      box-shadow:
+        0 2px 6px rgba(0,0,0,.55),
+        0 18px 52px rgba(0,0,0,.75);
+      border: 1px solid rgba(255,255,255,.07);
+    }
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(100%) brightness(.8) contrast(1.05);
+    }
+    /* bottom fade so photos dissolve into black */
+    .hero-photos::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 30%;
+      background: linear-gradient(to top, var(--black) 0%, transparent 100%);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    /* ── mission section ── */
+    .mission-section {
+      padding: 110px 40px 100px;
+      text-align: center;
+    }
+    .mission-text {
+      max-width: 500px;
+      margin: 0 auto 36px;
+      font-size: 13.5px;
+      line-height: 1.9;
+      color: rgba(245,245,245,.48);
+      letter-spacing: .005em;
+    }
+
+    /* ── footer ── */
+    .site-footer {
+      padding: 52px 40px 28px;
+      border-top: 1px solid rgba(245,245,245,.06);
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 48px;
+    }
+    .footer-left { display: flex; flex-direction: column; gap: 16px; }
+    .footer-logo-text {
+      font-weight: 900;
+      font-size: 22px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+      line-height: 1;
+    }
+    .footer-socials { display: flex; gap: 10px; }
+    .social-btn {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: rgba(245,245,245,.07);
+      border: 1px solid rgba(245,245,245,.11);
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none;
+      color: rgba(245,245,245,.55);
+      transition: background .2s ease;
+    }
+    .social-btn:hover { background: rgba(245,245,245,.14); color: var(--white); }
+    .footer-tagline {
+      font-size: 12px;
+      line-height: 1.65;
+      color: rgba(245,245,245,.28);
+      margin: 0;
+    }
+    .footer-nav-right {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      padding-top: 4px;
+    }
+    .footer-nav-right a {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(245,245,245,.35);
+      text-decoration: none;
+      transition: color .2s ease;
+    }
+    .footer-nav-right a:hover { color: var(--white); }
+    .footer-nav-right a.footer-active { color: var(--primary); }
+    .footer-bottom {
+      border-top: 1px solid rgba(245,245,245,.06);
+      padding-top: 20px;
+    }
+    .footer-copy {
+      font-size: 11px;
+      color: rgba(245,245,245,.18);
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════ NAV -->
+  <nav class="site-nav">
+    <a href="#" class="nav-logo">OUR.</a>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#cases">Case Studies</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ══════════════════════════════════ HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+
+    <!-- photo collage -->
+    <div class="hero-photos">
+      <!-- back-left card -->
+      <div class="photo-card" style="width:42%;aspect-ratio:3/4;left:0;top:10%;transform:rotate(-4.5deg);z-index:1;">
+        <img src="https://placehold.co/380x510/555555/777777?text=+" alt="">
+      </div>
+      <!-- center card -->
+      <div class="photo-card" style="width:44%;aspect-ratio:2/3;left:25%;top:5%;transform:rotate(3deg);z-index:2;">
+        <img src="https://placehold.co/400x600/444444/666666?text=+" alt="">
+      </div>
+      <!-- front-right card -->
+      <div class="photo-card" style="width:40%;aspect-ratio:3/4;right:2%;top:17%;transform:rotate(-2deg);z-index:3;">
+        <img src="https://placehold.co/360x480/4a4a4a/6a6a6a?text=+" alt="">
+      </div>
+    </div>
+
+    <!-- text block -->
+    <div class="hero-content">
+      <div class="hero-stripe">
+        <span style="background:#2563eb;"></span>
+        <span style="background:#dc2626;"></span>
+        <span style="background:#f5f5f5;"></span>
+      </div>
+      <p class="hero-italic">for ourselves</p>
+      <p class="hero-bold-by">BY</p>
+      <p class="hero-bold-main">OURSELVES</p>
+    </div>
+
+    <!-- scroll hint -->
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ MISSION -->
+  <section class="mission-section">
+    <p class="mission-text">We are a production studio that partners with creatives, brands, and agencies from concept to completion, creating impactful content that highlights diverse human experiences and amplifies important voices. Partner with us for a creative ally dedicated to exceptional storytelling.</p>
+    <a href="#work" class="btn-ghost">Learn More &nbsp;→</a>
+  </section>
+
+  <!-- ══════════════════════════════════ CREATIONS -->
+  <section class="section" id="work">
+    <div class="creations-header">
+      <p class="creations-eyebrow">Featured</p>
+      <p class="creations-italic">our finest</p>
+      <h2 class="creations-title">Creations</h2>
+    </div>
+
+    <div class="creations-stack">
+      <!-- Card 1 -->
+      <div class="creation-card">
+        <img src="https://placehold.co/1360x460/2a2018/3a3020?text=+" alt="Coulda Fest Tour Trailer">
+        <div class="creation-overlay"></div>
+        <div class="creation-body">
+          <span class="creation-tag">Gruber × Snoop Dogg</span>
+          <p class="creation-name">Coulda Fest Tour Trailer</p>
+          <a href="#" class="creation-explore">Explore →</a>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="creation-card">
+        <img src="https://placehold.co/1360x460/101820/182030?text=+" alt="Nike × Dead Protocol">
+        <div class="creation-overlay"></div>
+        <div class="creation-body">
+          <span class="creation-tag creation-tag-accent">Nike | Dead Protocol</span>
+          <p class="creation-name">Nike × Dead Protocol</p>
+          <a href="#" class="creation-explore">Explore →</a>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="creation-card">
+        <img src="https://placehold.co/1360x460/0f1a0f/182818?text=+" alt="Lioness: A Freedom Project for Man">
+        <div class="creation-overlay"></div>
+        <div class="creation-body">
+          <span class="creation-tag">Documentary · Feature</span>
+          <p class="creation-name">Lioness: A Freedom Project for Man</p>
+          <a href="#" class="creation-explore">Explore →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════ CLIENTS -->
+  <div class="clients-row">
+    <div class="client-item" style="font-size:22px;letter-spacing:.02em;">BBC</div>
+    <div class="client-item" style="font-size:22px;letter-spacing:-.03em;">DJI</div>
+    <div class="client-item" style="font-size:16px;letter-spacing:.08em;">KFTV</div>
+    <div class="client-item" style="line-height:1.1;text-align:center;">
+      <div style="font-size:17px;">SONY</div>
+      <div style="font-size:9px;letter-spacing:.14em;font-weight:500;opacity:.8;">CINEMA LINE</div>
+    </div>
+    <div class="client-item" style="font-size:15px;letter-spacing:.02em;">Shutterstock</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════ EXPERTISE -->
+  <section class="section" id="expertise">
+    <div class="exp-header">
+      <p class="exp-italic-heading">key</p>
+      <h2 class="exp-bold-heading">Expertise</h2>
+    </div>
+
+    <div class="exp-layout">
+      <div class="exp-photo">
+        <img src="https://placehold.co/600x750/1a1a1a/2e2e2e?text=+" alt="Studio shoot">
+      </div>
+      <div class="exp-list">
+        <div class="exp-list-item">
+          <h3 class="exp-list-name">Brand Identity<br>Design</h3>
+        </div>
+        <div class="exp-list-item">
+          <h3 class="exp-list-name">Creative<br>Direction</h3>
+        </div>
+        <div class="exp-list-item">
+          <h3 class="exp-list-name">Production</h3>
+        </div>
+        <div class="exp-list-item">
+          <h3 class="exp-list-name">Post<br>Production</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ CTA -->
+  <section class="cta-section" id="contact">
+    <div class="cta-bg-img">
+      <img src="https://placehold.co/1440x700/0d0d0d/1a1a1a?text=+" alt="">
+    </div>
+    <div class="cta-dark-overlay"></div>
+    <p class="cta-eyebrow">Get In Touch</p>
+    <h2 class="cta-heading">Let's</h2>
+    <h2 class="cta-heading">Collaborate</h2>
+    <div class="cta-actions">
+      <a href="mailto:hello@ourselves.tv" class="btn-ghost">Connect With Us &nbsp;→</a>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-left">
+        <a href="#" class="footer-logo-text">OUR.</a>
+        <div class="footer-socials">
+          <!-- Instagram -->
+          <a href="#" class="social-btn" aria-label="Instagram">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/>
+            </svg>
+          </a>
+          <!-- YouTube -->
+          <a href="#" class="social-btn" aria-label="YouTube">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+              <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+        </div>
+        <p class="footer-tagline">Created By ourselves,<br>for ourselves.</p>
+      </div>
+      <nav class="footer-nav-right">
+        <a href="#" class="footer-active">Home</a>
+        <a href="#cases">Case Studies</a>
+        <a href="#work">Work</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 OURSELVES. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
