@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OUR. — Founders by Ourselves</title>
+  <title>Built with Intent. Defined by Detail. — Rafhin Visuals</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" href="assets/favicon/rv-favicon.svg" type="image/svg+xml">
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,75..125,100..900;1,75..125,100..900&family=Azeret+Mono:wght@400;500&family=IvyPresto+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 
   <style>
@@ -39,6 +41,9 @@
     .page-loader.hidden {
       opacity: 0;
       pointer-events: none;
+    }
+    #pageContent {
+      transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .page-loader img {
       height: 84px;
@@ -99,6 +104,7 @@
       text-decoration: none;
       display: flex;
       align-items: center;
+      margin-left: 20px;
     }
     .nav-logo img {
       height: 48px;
@@ -113,7 +119,7 @@
     }
     .nav-links a {
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 800;
       letter-spacing: .12em;
       text-transform: uppercase;
       color: rgba(245,245,245,.55);
@@ -142,7 +148,7 @@
     .hero-content {
       position: absolute;
       bottom: 380px;
-      left: 100px;
+      left: 220px;
       z-index: 20;
       max-width: 680px;
     }
@@ -152,14 +158,14 @@
       font-family: 'IvyPresto Display', serif;
       font-style: italic;
       font-weight: 400;
-      font-size: clamp(36px, 4vw, 64px);
+      font-size: clamp(44px, 5vw, 80px);
       letter-spacing: -.02em;
       line-height: .95;
       margin: 0;
     }
     .hero-bold-by {
       font-weight: 900;
-      font-size: clamp(34px, 4vw, 64px);
+      font-size: clamp(44px, 5.5vw, 88px);
       letter-spacing: -.04em;
       line-height: .92;
       text-transform: uppercase;
@@ -167,10 +173,11 @@
     }
     .hero-bold-main {
       font-weight: 900;
-      font-size: clamp(52px, 6.5vw, 104px);
-      letter-spacing: -.05em;
+      font-size: clamp(36px, 4vw, 64px);
+      letter-spacing: -.04em;
       line-height: .87;
       text-transform: uppercase;
+      white-space: nowrap;
       margin: 0 0 24px;
     }
     /* ── scroll indicator ── */
@@ -339,7 +346,7 @@
       text-align: center;
     }
     .brands-eyebrow {
-      font-size: clamp(14px, 1.5vw, 22px);
+      font-size: clamp(18px, 2vw, 32px);
       font-weight: 900;
       letter-spacing: -.03em;
       text-transform: uppercase;
@@ -426,16 +433,19 @@
     }
     .exp-layout {
       display: grid;
-      grid-template-columns: 28% 44%;
-      gap: 100px;
+      grid-template-columns: minmax(220px, 340px) minmax(300px, 560px);
+      gap: clamp(40px, 6vw, 100px);
       align-items: start;
       justify-content: center;
+      max-width: 1100px;
+      margin: 0 auto;
     }
     .exp-photo {
       border-radius: 14px;
       overflow: hidden;
       aspect-ratio: 2/3;
       width: 100%;
+      max-width: 340px;
     }
     .exp-photo img {
       width: 100%;
@@ -443,7 +453,7 @@
       object-fit: cover;
       display: block;
     }
-    .exp-list { display: flex; flex-direction: column; }
+    .exp-list { display: flex; flex-direction: column; max-width: 420px; }
     .exp-list-item {
       padding: 24px 0;
       border-bottom: 1px solid rgba(245,245,245,.5);
@@ -571,7 +581,7 @@
     /* ── 3D carousel ── */
     .hero-carousel {
       position: absolute;
-      right: 4%;
+      right: -4%;
       top: 0;
       width: 54%;
       height: 100%;
@@ -585,18 +595,31 @@
 
     .carousel-tilt {
       transform-style: preserve-3d;
-      animation: carouselTilt 9s ease-in-out infinite alternate;
+      animation: carouselTilt 16s ease-in-out infinite alternate;
     }
     @keyframes carouselTilt {
-      0%   { transform: rotateX(4deg) rotateZ(-0.5deg); }
-      100% { transform: rotateX(-4deg) rotateZ(0.5deg); }
+      0%   { transform: rotateX(15deg) rotateY(-8deg) rotateZ(-8deg); }
+      100% { transform: rotateX(-15deg) rotateY(8deg) rotateZ(8deg); }
     }
+    /* carousel sizing tokens — adjust per breakpoint */
+    :root {
+      --c-w: 235px;
+      --c-h: 280px;
+      --c-r: 382px;
+    }
+    @media (max-width: 1600px) {
+      :root { --c-w: 196px; --c-h: 233px; --c-r: 318px; }
+    }
+    @media (max-width: 1280px) {
+      :root { --c-w: 165px; --c-h: 196px; --c-r: 268px; }
+    }
+
     .carousel-track {
       position: relative;
-      width: 170px;
-      height: 280px;
+      width: var(--c-w);
+      height: var(--c-h);
       transform-style: preserve-3d;
-      animation: carouselSpin 100s linear infinite;
+      animation: carouselSpin 70s linear infinite;
     }
 
     @keyframes carouselSpin {
@@ -604,12 +627,11 @@
       to   { transform: rotateY(360deg); }
     }
 
-
     .carousel-card {
       position: absolute;
       inset: 0;
-      width: 170px;
-      height: 280px;
+      width: var(--c-w);
+      height: var(--c-h);
       border-radius: 14px;
       overflow: hidden;
       border: 1px solid rgba(255,255,255,.1);
@@ -619,15 +641,16 @@
       backface-visibility: visible;
     }
 
-    .carousel-card:nth-child(1) { transform: rotateY(0deg)   translateZ(255px); }
-    .carousel-card:nth-child(2) { transform: rotateY(40deg)  translateZ(255px); }
-    .carousel-card:nth-child(3) { transform: rotateY(80deg)  translateZ(255px); }
-    .carousel-card:nth-child(4) { transform: rotateY(120deg) translateZ(255px); }
-    .carousel-card:nth-child(5) { transform: rotateY(160deg) translateZ(255px); }
-    .carousel-card:nth-child(6) { transform: rotateY(200deg) translateZ(255px); }
-    .carousel-card:nth-child(7) { transform: rotateY(240deg) translateZ(255px); }
-    .carousel-card:nth-child(8) { transform: rotateY(280deg) translateZ(255px); }
-    .carousel-card:nth-child(9) { transform: rotateY(320deg) translateZ(255px); }
+    .carousel-card:nth-child(1)  { transform: rotateY(0deg)   translateZ(var(--c-r)); }
+    .carousel-card:nth-child(2)  { transform: rotateY(36deg)  translateZ(var(--c-r)); }
+    .carousel-card:nth-child(3)  { transform: rotateY(72deg)  translateZ(var(--c-r)); }
+    .carousel-card:nth-child(4)  { transform: rotateY(108deg) translateZ(var(--c-r)); }
+    .carousel-card:nth-child(5)  { transform: rotateY(144deg) translateZ(var(--c-r)); }
+    .carousel-card:nth-child(6)  { transform: rotateY(180deg) translateZ(var(--c-r)); }
+    .carousel-card:nth-child(7)  { transform: rotateY(216deg) translateZ(var(--c-r)); }
+    .carousel-card:nth-child(8)  { transform: rotateY(252deg) translateZ(var(--c-r)); }
+    .carousel-card:nth-child(9)  { transform: rotateY(288deg) translateZ(var(--c-r)); }
+    .carousel-card:nth-child(10) { transform: rotateY(324deg) translateZ(var(--c-r)); }
 
     .carousel-card img,
     .carousel-card video {
@@ -740,6 +763,120 @@
       color: #ffffff;
       margin: 0;
     }
+
+    /* ── hamburger + mobile overlay ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      z-index: 300;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--white);
+      transition: transform .3s ease, opacity .3s ease;
+    }
+    .nav-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 250;
+      background: #050505;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .nav-overlay-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: none;
+      border: none;
+      color: rgba(245,245,245,.5);
+      font-size: 28px;
+      cursor: pointer;
+      line-height: 1;
+      transition: color .2s ease;
+    }
+    .nav-overlay-close:hover { color: var(--white); }
+    .nav-overlay-links {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .nav-overlay-links a {
+      font-size: 36px;
+      font-weight: 900;
+      letter-spacing: -.04em;
+      text-transform: uppercase;
+      color: rgba(245,245,245,.55);
+      text-decoration: none;
+      transition: color .2s ease;
+    }
+    .nav-overlay-links a:hover { color: var(--white); }
+
+    /* ── mobile ── */
+    @media (max-width: 768px) {
+      .nav-hamburger { display: flex; }
+      .nav-links { display: none; }
+      .site-nav { padding: 18px 24px; }
+      .nav-logo img { height: 38px; }
+
+      :root { --c-w: 148px; --c-h: 176px; --c-r: 240px; }
+
+      .hero-content {
+        bottom: 80px;
+        left: 24px;
+        right: 24px;
+        max-width: none;
+      }
+      .hero-carousel {
+        right: 0;
+        width: 100%;
+      }
+
+      .section { padding: 56px 24px; }
+      .divider { margin: 0 24px; }
+
+      .brands-section { padding: 48px 24px 56px; }
+      .brands-grid { grid-template-columns: repeat(3, 1fr); }
+
+      .exp-layout { grid-template-columns: 1fr; gap: 36px; }
+      .exp-photo { aspect-ratio: 4/3; }
+      .exp-list { max-width: 320px; margin: 0 auto; }
+      .exp-list-item { padding: 16px 0; }
+
+      .mission-section { padding: 40px 24px 56px; }
+      .mission-text { font-size: 16px; line-height: 1.75; }
+
+      .cta-section { padding: 80px 24px 70px; }
+      .cta-heading { font-size: clamp(28px, 8vw, 60px); }
+      .cta-actions { flex-direction: column; align-items: center; }
+
+      .site-footer { padding: 40px 24px 24px; }
+      .footer-top { flex-direction: column; gap: 32px; }
+      .footer-nav-right { justify-content: flex-start; gap: 16px; }
+    }
+
+    @media (max-width: 480px) {
+      .brands-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-italic { font-size: clamp(40px, 10vw, 60px); }
+      .hero-bold-by { font-size: clamp(40px, 10vw, 60px); }
+      .hero-bold-main { font-size: clamp(28px, 7vw, 44px); }
+    }
   </style>
 </head>
 <body>
@@ -748,6 +885,8 @@
   <div class="page-loader" id="pageLoader">
     <img src="assets/brand_assets/RV-Logo-White-Transparent.png" alt="Rafhin Visuals">
   </div>
+
+  <div id="pageContent" style="opacity:0">
 
   <!-- ══════════════════════════════════ NAV -->
   <nav class="site-nav">
@@ -760,7 +899,23 @@
       <li><a href="#about">About</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
+    <button class="nav-hamburger" id="navToggle" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <!-- mobile menu overlay -->
+  <div class="nav-overlay" id="navOverlay">
+    <button class="nav-overlay-close" id="navClose" aria-label="Close menu">✕</button>
+    <ul class="nav-overlay-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#cases">Automotive</a></li>
+      <li><a href="work.html">Work</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
 
   <!-- ══════════════════════════════════ HERO -->
   <section class="hero">
@@ -770,15 +925,16 @@
     <div class="hero-carousel">
       <div class="carousel-tilt">
       <div class="carousel-track">
-        <div class="carousel-card"><img src="https://placehold.co/170x280/2a2a2a/3a3a3a?text=+" alt=""></div>
-        <div class="carousel-card"><img src="https://placehold.co/170x280/1e1e1e/2e2e2e?text=+" alt=""></div>
-        <div class="carousel-card"><img src="https://placehold.co/170x280/252525/353535?text=+" alt=""></div>
-        <div class="carousel-card"><img src="https://placehold.co/170x280/1a1a1a/2a2a2a?text=+" alt=""></div>
-        <div class="carousel-card"><img src="https://placehold.co/170x280/222222/323232?text=+" alt=""></div>
-        <div class="carousel-card"><img src="https://placehold.co/170x280/2e2e2e/3e3e3e?text=+" alt=""></div>
-        <div class="carousel-card"><img src="https://placehold.co/170x280/202020/303030?text=+" alt=""></div>
-        <div class="carousel-card"><img src="https://placehold.co/170x280/282828/383838?text=+" alt=""></div>
-        <div class="carousel-card"><img src="https://placehold.co/170x280/1c1c1c/2c2c2c?text=+" alt=""></div>
+        <div class="carousel-card"><img src="https://placehold.co/240x285/2a2a2a/3a3a3a?text=+" alt=""></div>
+        <div class="carousel-card"><img src="https://placehold.co/240x285/1e1e1e/2e2e2e?text=+" alt=""></div>
+        <div class="carousel-card"><img src="https://placehold.co/240x285/252525/353535?text=+" alt=""></div>
+        <div class="carousel-card"><img src="https://placehold.co/240x285/1a1a1a/2a2a2a?text=+" alt=""></div>
+        <div class="carousel-card"><img src="https://placehold.co/240x285/222222/323232?text=+" alt=""></div>
+        <div class="carousel-card"><img src="https://placehold.co/240x285/2e2e2e/3e3e3e?text=+" alt=""></div>
+        <div class="carousel-card"><img src="https://placehold.co/240x285/202020/303030?text=+" alt=""></div>
+        <div class="carousel-card"><img src="https://placehold.co/240x285/282828/383838?text=+" alt=""></div>
+        <div class="carousel-card"><img src="https://placehold.co/240x285/1c1c1c/2c2c2c?text=+" alt=""></div>
+        <div class="carousel-card"><img src="https://placehold.co/240x285/242424/343434?text=+" alt=""></div>
       </div>
       </div>
     </div>
@@ -786,10 +942,8 @@
     <!-- text block -->
     <div class="hero-content">
       <div class="hero-stripe"></div>
-      <p class="hero-italic">for those who build different
-      </p>
-      <p class="hero-bold-by">BY</p>
-      <p class="hero-bold-main">OURSELVES</p>
+      <p class="hero-italic">built with intent</p>
+      <p class="hero-bold-main">DEFINED BY DETAIL</p>
     </div>
 
     <!-- scroll hint -->
@@ -970,6 +1124,8 @@ Our focus is on refined visuals and considered execution, creating work that is 
     </div>
   </footer>
 
+  </div><!-- /#pageContent -->
+
   <script>
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
@@ -981,8 +1137,37 @@ Our focus is on refined visuals and considered execution, creating work that is 
     }, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
 
     // loader
+    // GSAP hamburger nav
+    const navToggle = document.getElementById('navToggle');
+    const navOverlay = document.getElementById('navOverlay');
+    const navClose = document.getElementById('navClose');
+    const overlayLinks = navOverlay.querySelectorAll('.nav-overlay-links li');
+
+    gsap.set(overlayLinks, { y: 30, opacity: 0 });
+
+    function openMenu() {
+      navOverlay.style.pointerEvents = 'all';
+      gsap.timeline()
+        .to(navOverlay, { opacity: 1, duration: 0.45, ease: 'power2.out' })
+        .to(overlayLinks, { y: 0, opacity: 1, duration: 0.5, stagger: 0.07, ease: 'power3.out' }, '-=0.2');
+    }
+
+    function closeMenu() {
+      gsap.timeline({ onComplete: () => { navOverlay.style.pointerEvents = 'none'; } })
+        .to(overlayLinks, { y: -20, opacity: 0, duration: 0.25, stagger: 0.04, ease: 'power2.in' })
+        .to(navOverlay, { opacity: 0, duration: 0.35, ease: 'power2.out' }, '-=0.1');
+    }
+
+    navToggle.addEventListener('click', openMenu);
+    navClose.addEventListener('click', closeMenu);
+    navOverlay.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
     const loader = document.getElementById('pageLoader');
-    setTimeout(() => loader.classList.add('hidden'), 900);
+    const pageContent = document.getElementById('pageContent');
+    setTimeout(() => {
+      loader.classList.add('hidden');
+      pageContent.style.opacity = '1';
+    }, 900);
     setTimeout(() => loader.remove(), 2100);
 
     document.querySelectorAll('section, .divider, .brands-section, .mission-section, .clients-row').forEach(el => {
