@@ -16,8 +16,8 @@
 }
 .hero-content {
   position: absolute;
-  bottom: 410px;
-  left: 220px;
+  bottom: 38vh;
+  left: 15vw;
   z-index: 20;
   max-width: 680px;
 }
@@ -82,15 +82,9 @@
 
 /* ── 3D carousel ── */
 :root {
-  --c-w: 235px;
-  --c-h: 280px;
-  --c-r: 382px;
-}
-@media (max-width: 1600px) {
-  :root { --c-w: 196px; --c-h: 233px; --c-r: 318px; }
-}
-@media (max-width: 1280px) {
-  :root { --c-w: 165px; --c-h: 196px; --c-r: 268px; }
+  --c-w: 14.5vw;
+  --c-h: 17.3vw;
+  --c-r: 23.5vw;
 }
 
 .hero-carousel {
