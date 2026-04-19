@@ -82,9 +82,9 @@
 
 /* ── 3D carousel ── */
 :root {
-  --c-w: 11.5vw;
-  --c-h: 13.7vw;
-  --c-r: 18.6vw;
+  --c-w: clamp(140px, 16vw, 280px);
+  --c-h: clamp(122px, 14vw, 245px);
+  --c-r: clamp(227px, 26vw, 455px);
 }
 
 .hero-carousel {
@@ -98,7 +98,6 @@
   justify-content: center;
   perspective: 1000px;
   perspective-origin: 50% 50%;
-  pointer-events: none;
 }
 
 .carousel-tilt {
@@ -129,7 +128,6 @@
   height: var(--c-h);
   border-radius: 14px;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,.1);
   box-shadow:
     0 4px 12px rgba(0,0,0,.6),
     0 20px 60px rgba(0,0,0,.5);
@@ -153,15 +151,18 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: grayscale(100%) brightness(.75) contrast(1.1);
+  filter: grayscale(100%) brightness(.85) contrast(1.05);
+  transition: filter .4s ease;
+}
+
+.carousel-card:hover video {
+  filter: grayscale(0%) brightness(.95) contrast(1.05);
 }
 
 .hero-carousel::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, var(--black) 0%, transparent 18%);
-  z-index: 10;
   pointer-events: none;
 }
 .hero-carousel::after {
@@ -491,8 +492,6 @@
 
 /* ── mobile ── */
 @media (max-width: 768px) {
-  :root { --c-w: 148px; --c-h: 176px; --c-r: 240px; }
-
   .hero-content { bottom: 140px; left: 24px; right: 24px; max-width: none; }
   .hero-carousel { right: 0; width: 100%; transform: translateY(-60px); }
 
