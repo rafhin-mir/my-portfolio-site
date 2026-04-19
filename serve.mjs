@@ -1,6 +1,6 @@
 import { spawn } from 'child_process';
 
-const proc = spawn('npx', ['@11ty/eleventy', '--serve', '--port', '3000'], {
+const proc = spawn('npx', ['@11ty/eleventy', '--serve', '--port', '3001'], {
   stdio: 'inherit',
   shell: true,
 });
