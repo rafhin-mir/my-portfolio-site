@@ -522,6 +522,8 @@
 }
 
 @media (max-width: 480px) {
+  :root { --c-w: 80px; --c-h: 96px; --c-r: 130px; }
+
   .brands-grid { grid-template-columns: repeat(2, 1fr); }
   .hero-italic   { font-size: clamp(40px, 10vw, 60px); }
   .hero-bold-by  { font-size: clamp(40px, 10vw, 60px); }
