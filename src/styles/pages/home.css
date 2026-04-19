@@ -82,9 +82,9 @@
 
 /* ── 3D carousel ── */
 :root {
-  --c-w: 14.5vw;
-  --c-h: 17.3vw;
-  --c-r: 23.5vw;
+  --c-w: 10vw;
+  --c-h: 11.9vw;
+  --c-r: 16.2vw;
 }
 
 .hero-carousel {
