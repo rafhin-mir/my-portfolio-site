@@ -3,7 +3,7 @@
   align-items: center;
   gap: 8px;
   background: var(--primary);
-  color: var(--black);
+  color: var(--white);
   font-family: 'Archivo', sans-serif;
   font-size: 11px;
   font-weight: 800;
@@ -16,7 +16,7 @@
   cursor: pointer;
   transition: background .2s ease, transform .2s cubic-bezier(.25,.46,.45,.94);
 }
-.btn-primary:hover { background: #20c0ee; transform: translateY(-2px); }
+.btn-primary:hover { background: #dd3366; transform: translateY(-2px); }
 .btn-primary:active { transform: translateY(0); }
 .btn-primary:focus-visible { outline: 2px solid var(--white); outline-offset: 4px; }
 
