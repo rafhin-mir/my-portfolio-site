@@ -86,12 +86,12 @@
 
     carousel.addEventListener('mousemove', function (e) {
       var mx = e.clientX, my = e.clientY;
-      var best = null, bestArea = Infinity;
+      var best = null, bestArea = 0;
       cards.forEach(function (card) {
         var r = card.getBoundingClientRect();
         if (mx >= r.left && mx <= r.right && my >= r.top && my <= r.bottom) {
           var area = r.width * r.height;
-          if (area < bestArea) { bestArea = area; best = card; }
+          if (area > bestArea) { bestArea = area; best = card; }
         }
       });
       cards.forEach(function (card) {
