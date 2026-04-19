@@ -17,7 +17,7 @@
 .hero-content {
   position: absolute;
   bottom: 38vh;
-  left: 15vw;
+  left: 10vw;
   z-index: 20;
   max-width: 680px;
 }
@@ -82,9 +82,9 @@
 
 /* ── 3D carousel ── */
 :root {
-  --c-w: 10vw;
-  --c-h: 11.9vw;
-  --c-r: 16.2vw;
+  --c-w: 11.5vw;
+  --c-h: 13.7vw;
+  --c-r: 18.6vw;
 }
 
 .hero-carousel {
