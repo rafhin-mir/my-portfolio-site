@@ -509,7 +509,7 @@
   .brands-grid { grid-template-columns: repeat(3, 1fr); }
 
   .exp-layout { grid-template-columns: 1fr; gap: 36px; }
-  .exp-photo { aspect-ratio: 4/3; }
+  .exp-photo { aspect-ratio: 4/3; margin: 0 auto; }
   .exp-list { max-width: 320px; margin: 0 auto; }
   .exp-list-item { padding: 16px 0; }
 
