@@ -1,5 +1,6 @@
 export default function(eleventyConfig) {
-  eleventyConfig.addPassthroughCopy({ "assets": "assets" });
+  // Static passthrough — copy to _site/ preserving directory structure
+  eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPassthroughCopy("src/styles");
   eleventyConfig.addPassthroughCopy("src/scripts");
 
@@ -8,6 +9,7 @@ export default function(eleventyConfig) {
       input: "src",
       output: "_site",
       includes: "_includes",
+      data: "_data",
     },
     htmlTemplateEngine: "njk",
     markdownTemplateEngine: "njk",

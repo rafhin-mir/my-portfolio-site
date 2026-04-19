@@ -3,15 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ title }}</title>
+
+  {# ── SEO / meta ── #}
+  <title>{{ title if title else site.name + " — " + site.tagline }}</title>
+  <meta name="description" content="{{ description if description else site.description }}">
+  <meta name="author" content="{{ site.name }}">
+  <meta property="og:title"       content="{{ title if title else site.name }}">
+  <meta property="og:description" content="{{ description if description else site.description }}">
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="{{ site.url }}">
+
+  {# ── favicon ── #}
+  <link rel="icon" href="{{ site.favicon }}" type="image/svg+xml">
+
+  {# ── external dependencies ── #}
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <link rel="icon" href="/assets/favicon/rv-favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,75..125,100..900;1,75..125,100..900&family=Azeret+Mono:wght@400;500&family=IvyPresto+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles/globals.css">
-  {% if pageCSS %}<link rel="stylesheet" href="/styles/{{ pageCSS }}">{% endif %}
+
+  {# ── base styles ── #}
+  <link rel="stylesheet" href="/styles/base/tokens.css">
+  <link rel="stylesheet" href="/styles/base/reset.css">
+  <link rel="stylesheet" href="/styles/base/typography.css">
+
+  {# ── component styles ── #}
+  <link rel="stylesheet" href="/styles/components/loader.css">
+  <link rel="stylesheet" href="/styles/components/nav.css">
+  <link rel="stylesheet" href="/styles/components/footer.css">
+  <link rel="stylesheet" href="/styles/components/buttons.css">
+  <link rel="stylesheet" href="/styles/components/layout.css">
+
+  {# ── page styles ── #}
+  {% if pageCSS %}
+  <link rel="stylesheet" href="/styles/pages/{{ pageCSS }}">
+  {% endif %}
 </head>
 <body>
 
@@ -28,12 +55,15 @@
 
   </div>
 
-  <script src="/scripts/nav.js"></script>
-  <script src="/scripts/loader.js"></script>
+  {# ── core scripts (every page) ── #}
+  <script src="/scripts/core/nav.js"></script>
+  <script src="/scripts/core/loader.js"></script>
+
+  {# ── page scripts (opt-in via frontmatter) ── #}
   {% if pageScripts %}
-    {% for script in pageScripts %}
-    <script src="/scripts/{{ script }}"></script>
-    {% endfor %}
+  {% for script in pageScripts %}
+  <script src="/scripts/pages/{{ script }}"></script>
+  {% endfor %}
   {% endif %}
 
 </body>

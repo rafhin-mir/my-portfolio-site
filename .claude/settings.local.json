@@ -15,7 +15,30 @@
       "Bash(node screenshot-scroll.mjs http://localhost:3000 2710 expertise)",
       "Bash(node screenshot-scroll.mjs http://localhost:3000 3220 cta)",
       "Bash(node screenshot.mjs http://localhost:3000 hero4)",
-      "Bash(node screenshot.mjs http://localhost:3000 hero5)"
+      "Bash(node screenshot.mjs http://localhost:3000 hero5)",
+      "Bash(git -C \"/Users/rafhin/Documents/Rafhin Visuals/Website/portfolio-site\" status)",
+      "Bash(git -C \"/Users/rafhin/Documents/Rafhin Visuals/Website/portfolio-site\" remote -v)",
+      "Bash(git -C \"/Users/rafhin/Documents/Rafhin Visuals/Website/portfolio-site\" log --oneline -5)",
+      "Bash(git -C \"/Users/rafhin/Documents/Rafhin Visuals/Website/portfolio-site\" add index.html contact.html services.html work.html assets/favicon/)",
+      "Bash(git -C \"/Users/rafhin/Documents/Rafhin Visuals/Website/portfolio-site\" diff --staged --stat)",
+      "Bash(git -C '/Users/rafhin/Documents/Rafhin Visuals/Website/portfolio-site' commit -m ' *)",
+      "Bash(git -C \"/Users/rafhin/Documents/Rafhin Visuals/Website/portfolio-site\" push)",
+      "Bash(git -C \"/Users/rafhin/Documents/Rafhin Visuals/Website/portfolio-site\" remote add origin https://github.com/rafhin-mir/my-portfolio-site.git)",
+      "Bash(git -C \"/Users/rafhin/Documents/Rafhin Visuals/Website/portfolio-site\" push -u origin main)",
+      "Bash(git -C \"/Users/rafhin/Documents/Rafhin Visuals/Website/portfolio-site\" remote add origin git@github.com:rafhin-mir/my-portfolio-site.git)",
+      "Bash(git -C \"/Users/rafhin/Documents/Rafhin Visuals/Website/portfolio-site\" remote set-url origin git@github.com:rafhin-mir/my-portfolio-site.git)",
+      "Bash(brew install *)",
+      "Bash(gh auth *)",
+      "Bash(git push *)",
+      "Bash(git remote *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(npm init *)",
+      "Bash(npm install *)",
+      "Bash(node -e ' *)",
+      "Bash(npx @11ty/eleventy)",
+      "Bash(rm src/styles/globals.css src/styles/home.css src/styles/work.css src/styles/services.css src/styles/contact.css)",
+      "Bash(rm src/scripts/nav.js src/scripts/loader.js src/scripts/accordion.js src/scripts/work-filter.js)"
     ]
   }
 }

@@ -1,14 +1,13 @@
 <nav class="site-nav">
   <a href="/" class="nav-logo">
-    <img src="/assets/brand_assets/RV-Logo-White-Transparent.png" alt="Rafhin Visuals">
+    <img src="{{ site.logo }}" alt="{{ site.name }}">
   </a>
   <ul class="nav-links">
-    <li><a href="/" {% if pageKey == 'home' %}class="active"{% endif %}>Home</a></li>
-    <li><a href="/#cases" {% if pageKey == 'automotive' %}class="active"{% endif %}>Automotive</a></li>
-    <li><a href="/work.html" {% if pageKey == 'work' %}class="active"{% endif %}>Work</a></li>
-    <li><a href="/services.html" {% if pageKey == 'services' %}class="active"{% endif %}>Services</a></li>
-    <li><a href="/#about" {% if pageKey == 'about' %}class="active"{% endif %}>About</a></li>
-    <li><a href="/contact.html" {% if pageKey == 'contact' %}class="active"{% endif %}>Contact</a></li>
+    {% for item in nav %}
+    <li>
+      <a href="{{ item.href }}" {% if pageKey == item.key %}class="active"{% endif %}>{{ item.label }}</a>
+    </li>
+    {% endfor %}
   </ul>
   <button class="nav-hamburger" id="navToggle" aria-label="Open menu">
     <span></span><span></span><span></span>

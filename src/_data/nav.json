@@ -1,0 +1,8 @@
+[
+  { "label": "Home",       "href": "/",             "key": "home" },
+  { "label": "Automotive", "href": "/#cases",        "key": "automotive" },
+  { "label": "Work",       "href": "/work.html",     "key": "work" },
+  { "label": "Services",   "href": "/services.html", "key": "services" },
+  { "label": "About",      "href": "/#about",        "key": "about" },
+  { "label": "Contact",    "href": "/contact.html",  "key": "contact" }
+]
