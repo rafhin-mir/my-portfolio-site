@@ -155,7 +155,7 @@
   transition: filter .4s ease;
 }
 
-.carousel-card:hover video {
+.carousel-card.is-hovered video {
   filter: grayscale(0%) brightness(.95) contrast(1.05);
 }
 

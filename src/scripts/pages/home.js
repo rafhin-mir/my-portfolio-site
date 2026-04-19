@@ -78,10 +78,37 @@
     });
   }
 
+  // ── Carousel card hover (rect-based for reliable 3D hit-testing)
+  function initCarouselHover() {
+    var cards = Array.from(document.querySelectorAll('.carousel-card'));
+    var carousel = document.querySelector('.hero-carousel');
+    if (!carousel) return;
+
+    carousel.addEventListener('mousemove', function (e) {
+      var mx = e.clientX, my = e.clientY;
+      var best = null, bestArea = Infinity;
+      cards.forEach(function (card) {
+        var r = card.getBoundingClientRect();
+        if (mx >= r.left && mx <= r.right && my >= r.top && my <= r.bottom) {
+          var area = r.width * r.height;
+          if (area < bestArea) { bestArea = area; best = card; }
+        }
+      });
+      cards.forEach(function (card) {
+        card.classList.toggle('is-hovered', card === best);
+      });
+    });
+
+    carousel.addEventListener('mouseleave', function () {
+      cards.forEach(function (card) { card.classList.remove('is-hovered'); });
+    });
+  }
+
   // Wait for loader to finish before registering ScrollTrigger animations
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', function () { init(); initCarouselHover(); });
   } else {
     init();
+    initCarouselHover();
   }
 })();
