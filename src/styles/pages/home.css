@@ -499,8 +499,8 @@
 @media (max-width: 768px) {
   :root { --c-w: 148px; --c-h: 176px; --c-r: 240px; }
 
-  .hero-content { bottom: 80px; left: 24px; right: 24px; max-width: none; }
-  .hero-carousel { right: 0; width: 100%; }
+  .hero-content { bottom: 140px; left: 24px; right: 24px; max-width: none; }
+  .hero-carousel { right: 0; width: 100%; transform: translateY(-60px); }
 
   .section { padding: 56px 24px; }
   .divider { margin: 0 24px; }
