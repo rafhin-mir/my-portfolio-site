@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <link rel="icon" href="/assets/favicon/rv-favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,75..125,100..900;1,75..125,100..900&family=Azeret+Mono:wght@400;500&family=IvyPresto+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/globals.css">
+  {% if pageCSS %}<link rel="stylesheet" href="/styles/{{ pageCSS }}">{% endif %}
+</head>
+<body>
+
+  {% include "components/loader.njk" %}
+
+  <div id="pageContent" style="opacity:0">
+
+    {% include "components/nav.njk" %}
+    {% include "components/nav-overlay.njk" %}
+
+    {{ content | safe }}
+
+    {% include "components/footer.njk" %}
+
+  </div>
+
+  <script src="/scripts/nav.js"></script>
+  <script src="/scripts/loader.js"></script>
+  {% if pageScripts %}
+    {% for script in pageScripts %}
+    <script src="/scripts/{{ script }}"></script>
+    {% endfor %}
+  {% endif %}
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "name": "portfolio-site",
+  "version": "1.0.0",
+  "description": "Personal portfolio website for **Rafhin Visuals**, a video and photo production studio based in Canada.",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx @11ty/eleventy --serve --port 3000",
+    "build": "npx @11ty/eleventy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafhin-mir/my-portfolio-site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/rafhin-mir/my-portfolio-site/issues"
+  },
+  "homepage": "https://github.com/rafhin-mir/my-portfolio-site#readme",
+  "dependencies": {
+    "@11ty/eleventy": "^3.1.5"
+  }
+}

@@ -1,0 +1,107 @@
+/* ── page header ── */
+.work-header {
+  padding: 160px 40px 0;
+  text-align: center;
+}
+.work-title {
+  font-weight: 900;
+  font-size: clamp(52px, 8vw, 110px);
+  letter-spacing: -.05em;
+  line-height: .88;
+  text-transform: uppercase;
+  color: var(--white);
+  margin: 0;
+}
+
+/* ── filter tabs ── */
+.work-filters {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  padding: 48px 40px 40px;
+}
+.filter-btn {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(245,245,245,.35);
+  background: none;
+  border: none;
+  padding: 8px 20px;
+  cursor: pointer;
+  transition: color .2s ease;
+  position: relative;
+}
+.filter-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 20px;
+  right: 20px;
+  height: 1px;
+  background: var(--primary);
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+.filter-btn:hover { color: rgba(245,245,245,.7); }
+.filter-btn.active { color: var(--primary); }
+.filter-btn.active::after { opacity: 1; }
+
+/* ── work grid ── */
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 0 40px 100px;
+}
+.work-item {
+  position: relative;
+  cursor: pointer;
+}
+.work-item.hidden { display: none; }
+
+.work-item-thumb {
+  width: 100%;
+  aspect-ratio: 16/10;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+  transition:
+    transform .5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    opacity .3s ease;
+  opacity: .88;
+}
+.work-item:hover .work-item-thumb {
+  transform: scale(1.03);
+  opacity: 1;
+}
+.work-item-info { padding: 10px 2px 18px; }
+.work-item-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin: 0 0 3px;
+}
+.work-item-credit {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: .03em;
+  color: rgba(245,245,245,.35);
+  margin: 0;
+}
+.work-item.solo { grid-column: 2; }
+
+/* ── mobile ── */
+@media (max-width: 768px) {
+  .work-header { padding: 120px 24px 0; }
+  .work-filters { padding: 32px 24px; flex-wrap: wrap; gap: 4px 0; }
+  .work-grid { grid-template-columns: repeat(2, 1fr); padding: 0 24px 60px; gap: 8px; }
+  .work-item.solo { grid-column: auto; }
+}
+
+@media (max-width: 480px) {
+  .work-grid { grid-template-columns: 1fr; }
+}
