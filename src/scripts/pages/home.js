@@ -11,6 +11,24 @@
       .from('.hero-carousel',  { opacity: 0, x: 40, duration: 0.75, ease: 'power2.out' }, '-=0.4')
       .from('.scroll-hint',    { opacity: 0, duration: 0.5, ease: 'power1.out' }, '-=0.1');
 
+    // Dramatic initial tilt — settles into CSS animation's 0% state, then hands off
+    var tiltEl = document.querySelector('.carousel-tilt');
+    if (tiltEl) {
+      gsap.fromTo(tiltEl,
+        { rotateX: 35, rotateY: -75, rotateZ: -40 },
+        {
+          rotateX: 15, rotateY: -8, rotateZ: -8,
+          duration: 2.2,
+          ease: 'power3.out',
+          delay: 1.2,
+          onComplete: function () {
+            gsap.set(tiltEl, { clearProps: 'transform' });
+            tiltEl.style.animationPlayState = 'running';
+          }
+        }
+      );
+    }
+
     // ── Mission
     gsap.from('.mission-text', {
       scrollTrigger: { trigger: '.mission-section', start: 'top 80%' },

@@ -103,6 +103,7 @@
 .carousel-tilt {
   transform-style: preserve-3d;
   animation: carouselTilt 16s ease-in-out infinite alternate;
+  animation-play-state: paused;
 }
 @keyframes carouselTilt {
   0%   { transform: rotateX(15deg) rotateY(-8deg) rotateZ(-8deg); }
