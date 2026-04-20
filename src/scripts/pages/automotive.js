@@ -51,8 +51,10 @@
     if (!v) return;
     v.muted = true;
     v.setAttribute('muted', '');
-    var p = v.play();
-    if (p !== undefined) p.catch(function () {});
+    if (v.paused) {
+      var p = v.play();
+      if (p !== undefined) p.catch(function () {});
+    }
   }
 
   if (document.readyState === 'loading') {
