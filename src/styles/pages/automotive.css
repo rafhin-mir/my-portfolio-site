@@ -242,7 +242,6 @@
   line-height: 1.85;
   color: rgba(245,245,245,.5);
   font-family: 'Archivo', sans-serif;
-  max-width: 380px;
   margin: 0 0 16px;
 }
 .auto-cap-body:last-of-type {
@@ -500,6 +499,14 @@
   gap: 14px;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+/* ── LARGE SCREENS (≥1600px) */
+@media (min-width: 1600px) {
+  .auto-cap-grid { height: 1000px; }
+}
+@media (min-width: 1900px) {
+  .auto-cap-grid { height: 1200px; }
 }
 
 /* ── TABLET (769px–1024px) */
