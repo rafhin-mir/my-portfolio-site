@@ -499,8 +499,8 @@
     transition: none !important;
   }
 
-  .hero-content { bottom: 140px; left: 24px; right: 24px; max-width: none; }
-  .hero-carousel { right: 0; width: 100%; transform: translateY(-60px); }
+  .hero-content { bottom: 80px; left: 24px; right: 24px; max-width: none; }
+  .hero-carousel { right: 0; width: 100%; transform: translateY(0px); }
 
   .section { padding: 56px 24px; }
   .divider { margin: 0 24px; }
