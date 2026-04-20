@@ -50,9 +50,18 @@
     var v = document.querySelector('.auto-hero-video');
     if (!v) return;
     v.muted = true;
-    var p = v.play();
-    if (p !== undefined) {
-      p.catch(function () {});
+    v.setAttribute('muted', '');
+    var tryPlay = function () {
+      var p = v.play();
+      if (p !== undefined) p.catch(function () {});
+    };
+    if ('IntersectionObserver' in window) {
+      var obs = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { tryPlay(); obs.disconnect(); }
+      }, { threshold: 0.1 });
+      obs.observe(v);
+    } else {
+      tryPlay();
     }
   }
 
