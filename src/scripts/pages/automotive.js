@@ -24,9 +24,13 @@
     });
 
     // Video cards stagger
-    gsap.from('.auto-video-card', {
-      scrollTrigger: { trigger: '.auto-video-grid', start: 'top 78%' },
-      opacity: 0, y: 40, duration: 0.7, stagger: 0.12, ease: 'power2.out'
+    gsap.from('.auto-video-grid .auto-video-card', {
+      scrollTrigger: { trigger: '.auto-video-grid', start: 'top 82%', once: true },
+      autoAlpha: 0, y: 40, duration: 0.7, stagger: 0.1, ease: 'power2.out'
+    });
+    gsap.from('.auto-video-stack .auto-video-card', {
+      scrollTrigger: { trigger: '.auto-video-stack', start: 'top 82%', once: true },
+      autoAlpha: 0, y: 30, duration: 0.7, stagger: 0.1, ease: 'power2.out'
     });
 
     // Photo masonry
