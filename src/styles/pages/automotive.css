@@ -50,6 +50,7 @@
   overflow: hidden;
   text-align: center;
   padding: 0 40px;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
 }
 .auto-hero-video {
   position: absolute;
