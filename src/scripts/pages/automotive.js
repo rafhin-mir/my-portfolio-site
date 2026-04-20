@@ -49,34 +49,60 @@
   function initFilmstrip() {
     var wrap = document.querySelector('.auto-filmstrip-wrap');
     if (!wrap) return;
-    var loaded = false;
 
-    // Skip videos on very slow connections — show placeholder frames only
+    // Skip on very slow connections
     var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
     if (conn && (conn.effectiveType === 'slow-2g' || conn.effectiveType === '2g')) return;
 
-    // Load unique videos in staggered batches of 3 to avoid network congestion
+    var loaded = false;
+
+    // Clone each column's frames to make the seamless loop.
+    // For video clones, use captureStream() to share the decode context (Chrome/Firefox).
+    // Safari falls back to same src (browser cache handles it).
+    function cloneColumns() {
+      wrap.querySelectorAll('.auto-strip-col').forEach(function (col) {
+        Array.from(col.querySelectorAll('.auto-frame')).forEach(function (frame) {
+          var clone = frame.cloneNode(true);
+          var origVid = frame.querySelector('video');
+          var cloneVid = clone.querySelector('video');
+          if (origVid && cloneVid) {
+            if (typeof origVid.captureStream === 'function') {
+              cloneVid.removeAttribute('src');
+              cloneVid.srcObject = origVid.captureStream();
+              cloneVid.muted = true;
+              cloneVid.play().catch(function () {});
+            } else {
+              cloneVid.src = origVid.src;
+              cloneVid.muted = true;
+              cloneVid.play().catch(function () {});
+            }
+          }
+          col.appendChild(clone);
+        });
+      });
+    }
+
+    // Load videos in staggered batches of 3, then clone for loop
     var loadObs = new IntersectionObserver(function (entries) {
       if (!entries[0].isIntersecting || loaded) return;
       loaded = true;
       loadObs.disconnect();
       var videos = Array.from(wrap.querySelectorAll('video[data-src]'));
-      // Deduplicate by src so identical loop copies share one load
-      var seen = {};
+      var batch = 0;
       videos.forEach(function (v, i) {
-        var s = v.dataset.src;
-        var delay = seen[s] !== undefined ? 0 : Math.floor(Object.keys(seen).length / 3) * 200;
-        seen[s] = true;
         setTimeout(function () {
-          v.src = s;
+          v.src = v.dataset.src;
           v.removeAttribute('data-src');
           v.play().catch(function () {});
-        }, delay);
+          // Clone after last video in first batch starts loading
+          if (i === videos.length - 1) setTimeout(cloneColumns, 300);
+        }, Math.floor(i / 3) * 150);
+        batch++;
       });
     }, { threshold: 0.05 });
 
-    // Pause all filmstrip videos when scrolled away, resume on return
-    var pauseObs = new IntersectionObserver(function (entries) {
+    // Pause entire filmstrip when off-screen
+    var sectionObs = new IntersectionObserver(function (entries) {
       if (!loaded) return;
       var visible = entries[0].isIntersecting;
       wrap.querySelectorAll('video').forEach(function (v) {
@@ -85,8 +111,26 @@
       });
     }, { threshold: 0 });
 
+    // Per-video observer within the filmstrip — pause videos hidden by overflow
+    var perVideoObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var v = e.target;
+        if (!v.src) return;
+        if (e.isIntersecting && v.paused) v.play().catch(function () {});
+        else if (!e.isIntersecting && !v.paused) v.pause();
+      });
+    }, { root: wrap, threshold: 0, rootMargin: '100px 0px' });
+
     loadObs.observe(wrap);
-    pauseObs.observe(wrap);
+    sectionObs.observe(wrap);
+
+    // Attach per-video observer after load
+    var attachPerVideo = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting || !loaded) return;
+      wrap.querySelectorAll('video').forEach(function (v) { perVideoObs.observe(v); });
+      attachPerVideo.disconnect();
+    }, { threshold: 0 });
+    attachPerVideo.observe(wrap);
   }
 
   function initHeroVideo() {
