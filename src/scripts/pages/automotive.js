@@ -50,17 +50,43 @@
     var wrap = document.querySelector('.auto-filmstrip-wrap');
     if (!wrap) return;
     var loaded = false;
-    var obs = new IntersectionObserver(function (entries) {
+
+    // Skip videos on very slow connections — show placeholder frames only
+    var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    if (conn && (conn.effectiveType === 'slow-2g' || conn.effectiveType === '2g')) return;
+
+    // Load unique videos in staggered batches of 3 to avoid network congestion
+    var loadObs = new IntersectionObserver(function (entries) {
       if (!entries[0].isIntersecting || loaded) return;
       loaded = true;
-      obs.disconnect();
-      wrap.querySelectorAll('video[data-src]').forEach(function (v) {
-        v.src = v.dataset.src;
-        v.removeAttribute('data-src');
-        v.play().catch(function () {});
+      loadObs.disconnect();
+      var videos = Array.from(wrap.querySelectorAll('video[data-src]'));
+      // Deduplicate by src so identical loop copies share one load
+      var seen = {};
+      videos.forEach(function (v, i) {
+        var s = v.dataset.src;
+        var delay = seen[s] !== undefined ? 0 : Math.floor(Object.keys(seen).length / 3) * 200;
+        seen[s] = true;
+        setTimeout(function () {
+          v.src = s;
+          v.removeAttribute('data-src');
+          v.play().catch(function () {});
+        }, delay);
       });
-    }, { threshold: 0.1 });
-    obs.observe(wrap);
+    }, { threshold: 0.05 });
+
+    // Pause all filmstrip videos when scrolled away, resume on return
+    var pauseObs = new IntersectionObserver(function (entries) {
+      if (!loaded) return;
+      var visible = entries[0].isIntersecting;
+      wrap.querySelectorAll('video').forEach(function (v) {
+        if (visible && v.paused && v.src) v.play().catch(function () {});
+        else if (!visible && !v.paused) v.pause();
+      });
+    }, { threshold: 0 });
+
+    loadObs.observe(wrap);
+    pauseObs.observe(wrap);
   }
 
   function initHeroVideo() {

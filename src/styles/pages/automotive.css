@@ -144,6 +144,7 @@
   overflow: hidden;
   background: #050505;
   height: 100%;
+  contain: layout style;
 }
 .auto-filmstrip-fade {
   position: absolute;
