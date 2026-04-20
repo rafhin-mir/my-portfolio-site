@@ -502,10 +502,23 @@
   flex-wrap: wrap;
 }
 
-/* ── MOBILE */
+/* ── TABLET (769px–1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .auto-cap-grid { height: auto; min-height: 600px; }
+  .auto-filmstrip-cols { grid-template-columns: 1fr 1fr; padding: 30px 16px 30px 28px; }
+  .auto-filmstrip-cols .auto-strip-col:last-child { display: none; }
+  .auto-cap-copy { padding: 56px 36px 56px 44px; }
+  .auto-cap-body { font-size: 14px; }
+  .auto-video-grid { gap: 10px; }
+  .auto-video-card--vertical { min-height: 380px; }
+  .auto-video-card--horizontal { height: 300px; }
+  .auto-photo-section { padding: 0 32px 80px; }
+}
+
+/* ── MOBILE (≤768px) */
 @media (max-width: 768px) {
   /* Hero */
-  .auto-hero { padding: 0 24px; }
+  .auto-hero { min-height: 100svh; padding: 0 24px; }
   .auto-scroll-hint { right: 24px; }
 
   /* Capabilities */
@@ -519,11 +532,12 @@
   .auto-cap-lists { grid-template-columns: 1fr 1fr; gap: 20px; }
 
   /* Video section */
-  .auto-video-section { padding: 56px 24px 56px; }
+  .auto-video-section { padding: 56px 24px; }
   .auto-section-header { margin-bottom: 36px; }
   .auto-video-grid { grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  .auto-video-grid .auto-video-card:last-child:nth-child(odd) { grid-column: 1 / -1; min-height: 220px; }
   .auto-video-card--vertical { min-height: 280px; }
-  .auto-video-card--horizontal { height: 220px; }
+  .auto-video-card--horizontal { height: 200px; }
   .auto-card-title { font-size: 16px; }
   .auto-card-meta { font-size: 9px; }
 
@@ -534,4 +548,15 @@
 
   /* CTA */
   .auto-cta { padding: 80px 24px; }
+}
+
+/* ── SMALL MOBILE (≤480px) */
+@media (max-width: 480px) {
+  .auto-video-grid { grid-template-columns: 1fr; }
+  .auto-video-grid .auto-video-card:last-child:nth-child(odd) { grid-column: auto; }
+  .auto-video-card--vertical { min-height: 300px; }
+  .auto-video-card--horizontal { height: 220px; }
+  .auto-cap-lists { grid-template-columns: 1fr; gap: 16px; }
+  .auto-masonry { column-count: 1; }
+  .auto-photo-header .btn-ghost { align-self: flex-start; }
 }
