@@ -495,8 +495,8 @@
 @media (max-width: 768px) {
   .carousel-card video,
   .carousel-card.is-hovered video {
-    filter: grayscale(100%) brightness(.85) contrast(1.05) !important;
-    transition: none !important;
+    filter: grayscale(100%) brightness(.85) contrast(1.05);
+    transition: none;
   }
 
   .hero-content { bottom: 110px; left: 24px; right: 24px; max-width: none; }

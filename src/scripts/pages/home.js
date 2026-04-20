@@ -96,11 +96,12 @@
     });
   }
 
-  // ── Carousel card hover (rect-based for reliable 3D hit-testing)
   function initCarouselHover() {
     var cards = Array.from(document.querySelectorAll('.carousel-card'));
     var carousel = document.querySelector('.hero-carousel');
-    if (!carousel) return;
+    if (!carousel || !cards.length) return;
+
+    var active = null;
 
     carousel.addEventListener('mousemove', function (e) {
       var mx = e.clientX, my = e.clientY;
@@ -112,13 +113,14 @@
           if (area > bestArea) { bestArea = area; best = card; }
         }
       });
-      cards.forEach(function (card) {
-        card.classList.toggle('is-hovered', card === best);
-      });
+      if (best === active) return;
+      if (active) active.classList.remove('is-hovered');
+      active = best;
+      if (active) active.classList.add('is-hovered');
     });
 
     carousel.addEventListener('mouseleave', function () {
-      cards.forEach(function (card) { card.classList.remove('is-hovered'); });
+      if (active) { active.classList.remove('is-hovered'); active = null; }
     });
   }
 
