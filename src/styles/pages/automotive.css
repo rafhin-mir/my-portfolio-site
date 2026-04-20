@@ -539,7 +539,8 @@
   .auto-capabilities { padding: 0 0 64px; }
   .auto-cap-grid { height: auto; grid-template-columns: 1fr; }
   .auto-filmstrip-wrap { height: 100svh; }
-  .auto-filmstrip-cols { padding: 20px 16px; }
+  .auto-filmstrip-cols { grid-template-columns: 1fr 1fr; padding: 20px 16px; }
+  .auto-filmstrip-cols .auto-strip-col:last-child { display: none; }
   .auto-filmstrip-fade--right { display: none; }
   .auto-cap-copy { padding: 48px 24px; height: auto; }
   .auto-cap-body { max-width: none; font-size: 14px; }
