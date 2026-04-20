@@ -3,7 +3,6 @@ const pageContent = document.getElementById('pageContent');
 
 setTimeout(() => {
   loader.classList.add('hidden');
-  pageContent.style.opacity = '1';
 }, 900);
 
 setTimeout(() => loader.remove(), 2100);
