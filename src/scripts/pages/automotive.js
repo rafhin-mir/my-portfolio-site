@@ -88,17 +88,12 @@
       loaded = true;
       loadObs.disconnect();
       var videos = Array.from(wrap.querySelectorAll('video[data-src]'));
-      var batch = 0;
-      videos.forEach(function (v, i) {
-        setTimeout(function () {
-          v.src = v.dataset.src;
-          v.removeAttribute('data-src');
-          v.play().catch(function () {});
-          // Clone after last video in first batch starts loading
-          if (i === videos.length - 1) setTimeout(cloneColumns, 300);
-        }, Math.floor(i / 3) * 150);
-        batch++;
+      videos.forEach(function (v) {
+        v.src = v.dataset.src;
+        v.removeAttribute('data-src');
+        v.play().catch(function () {});
       });
+      setTimeout(cloneColumns, 300);
     }, { threshold: 0.05 });
 
     // Pause entire filmstrip when off-screen
