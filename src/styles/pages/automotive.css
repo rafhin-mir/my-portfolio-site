@@ -178,8 +178,8 @@
   gap: 10px;
   will-change: transform;
 }
-.auto-strip-up { animation: autoStripUp 30s linear infinite; }
-.auto-strip-down { animation: autoStripDown 36s linear infinite; }
+.auto-strip-up { animation: autoStripUp 55s linear infinite; }
+.auto-strip-down { animation: autoStripDown 65s linear infinite; }
 
 @keyframes autoStripUp {
   0%   { transform: translateY(0); }
