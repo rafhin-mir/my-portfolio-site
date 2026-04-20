@@ -56,33 +56,45 @@
 
     var loaded = false;
 
-    // Clone each column's frames to make the seamless loop.
-    // For video clones, use captureStream() to share the decode context (Chrome/Firefox).
-    // Safari falls back to same src (browser cache handles it).
-    function cloneColumns() {
+    // Clone column structure immediately so -50% translateY is calculated correctly.
+    // Video clones start empty and get their src filled after originals load.
+    function cloneStructure() {
       wrap.querySelectorAll('.auto-strip-col').forEach(function (col) {
         Array.from(col.querySelectorAll('.auto-frame')).forEach(function (frame) {
           var clone = frame.cloneNode(true);
-          var origVid = frame.querySelector('video');
           var cloneVid = clone.querySelector('video');
-          if (origVid && cloneVid) {
-            if (typeof origVid.captureStream === 'function') {
-              cloneVid.removeAttribute('src');
-              cloneVid.srcObject = origVid.captureStream();
-              cloneVid.muted = true;
-              cloneVid.play().catch(function () {});
-            } else {
-              cloneVid.src = origVid.src;
-              cloneVid.muted = true;
-              cloneVid.play().catch(function () {});
-            }
+          if (cloneVid) {
+            cloneVid.removeAttribute('data-src');
+            cloneVid.removeAttribute('src');
           }
           col.appendChild(clone);
         });
       });
     }
 
-    // Load videos in staggered batches of 3, then clone for loop
+    // After originals are playing, fill cloned videos using captureStream (Chrome/Firefox)
+    // or same src via browser cache (Safari).
+    function fillClones() {
+      wrap.querySelectorAll('.auto-strip-col').forEach(function (col) {
+        var originals = Array.from(col.querySelectorAll('.auto-frame video[src]'));
+        var clones = Array.from(col.querySelectorAll('.auto-frame video:not([src])'));
+        originals.forEach(function (orig, i) {
+          var clone = clones[i];
+          if (!clone) return;
+          if (typeof orig.captureStream === 'function') {
+            clone.srcObject = orig.captureStream();
+          } else {
+            clone.src = orig.src;
+          }
+          clone.muted = true;
+          clone.play().catch(function () {});
+        });
+      });
+    }
+
+    // Clone structure immediately, then load + fill on scroll into view
+    cloneStructure();
+
     var loadObs = new IntersectionObserver(function (entries) {
       if (!entries[0].isIntersecting || loaded) return;
       loaded = true;
@@ -93,7 +105,7 @@
         v.removeAttribute('data-src');
         v.play().catch(function () {});
       });
-      setTimeout(cloneColumns, 300);
+      setTimeout(fillClones, 400);
     }, { threshold: 0.05 });
 
     // Pause entire filmstrip when off-screen
