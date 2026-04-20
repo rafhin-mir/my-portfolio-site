@@ -165,17 +165,18 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  will-change: transform;
 }
-.auto-strip-up { animation: autoStripUp 18s linear infinite; }
-.auto-strip-down { margin-top: -80px; animation: autoStripDown 22s linear infinite; }
+.auto-strip-up { animation: autoStripUp 30s linear infinite; }
+.auto-strip-down { animation: autoStripDown 36s linear infinite; }
 
 @keyframes autoStripUp {
   0%   { transform: translateY(0); }
   100% { transform: translateY(-50%); }
 }
 @keyframes autoStripDown {
-  0%   { transform: translateY(-30%); }
-  100% { transform: translateY(20%); }
+  0%   { transform: translateY(-50%); }
+  100% { transform: translateY(0); }
 }
 .auto-frame {
   border-radius: 8px;
@@ -460,14 +461,17 @@
 .auto-cta-bg {
   position: absolute;
   inset: 0;
-  background: linear-gradient(160deg, #0a0e14, #050505, #08100a);
+  background-image: url('/assets/images/automotive/footer.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 .auto-cta-glow {
   position: absolute;
   inset: 0;
   background:
     radial-gradient(ellipse 50% 55% at 50% 50%, rgba(102,0,51,.06) 0%, transparent 70%),
-    linear-gradient(to bottom, rgba(5,5,5,.5) 0%, rgba(5,5,5,.1) 50%, rgba(5,5,5,.6) 100%);
+    linear-gradient(to bottom, rgba(5,5,5,.8) 0%, rgba(5,5,5,.5) 50%, rgba(5,5,5,.85) 100%);
 }
 .auto-cta-content { position: relative; z-index: 2; }
 .auto-cta-bold {
