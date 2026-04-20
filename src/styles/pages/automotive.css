@@ -563,7 +563,6 @@
   .auto-video-grid .auto-video-card:last-child:nth-child(odd) { grid-column: auto; }
   .auto-video-card--vertical { min-height: 300px; }
   .auto-video-card--horizontal { height: 220px; }
-  .auto-cap-lists { grid-template-columns: 1fr; gap: 16px; }
   .auto-masonry { column-count: 1; }
   .auto-photo-header .btn-ghost { align-self: flex-start; }
 }
