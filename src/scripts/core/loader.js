@@ -7,6 +7,14 @@ setTimeout(() => {
 
 setTimeout(() => loader.remove(), 2100);
 
+document.addEventListener('visibilitychange', function () {
+  if (document.visibilityState === 'visible') {
+    document.querySelectorAll('video').forEach(function (v) {
+      if (v.paused) v.play().catch(function () {});
+    });
+  }
+});
+
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
