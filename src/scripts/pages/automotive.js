@@ -46,9 +46,20 @@
     });
   }
 
+  function initHeroVideo() {
+    var v = document.querySelector('.auto-hero-video');
+    if (!v) return;
+    v.muted = true;
+    var p = v.play();
+    if (p !== undefined) {
+      p.catch(function () {});
+    }
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', function () { init(); initHeroVideo(); });
   } else {
     init();
+    initHeroVideo();
   }
 })();
