@@ -1,17 +1,14 @@
 (function () {
   gsap.registerPlugin(ScrollTrigger);
 
-  // Let loader.js handle #pageContent fade-in, then run our animations
   function init() {
-    // ── Hero entrance (fires after loader fades in ~900ms)
     var tl = gsap.timeline({ delay: 1.0 });
-    tl.from('.hero-stripe',    { scaleX: 0, transformOrigin: 'left center', duration: 0.6, ease: 'power3.out' })
-      .from('.hero-italic',    { opacity: 0, y: 18, duration: 0.55, ease: 'power2.out' }, '-=0.2')
-      .from('.hero-bold-main', { opacity: 0, y: 22, duration: 0.6,  ease: 'power3.out' }, '-=0.3')
-      .from('.hero-carousel',  { opacity: 0, x: 40, duration: 0.75, ease: 'power2.out' }, '-=0.4')
-      .from('.scroll-hint',    { opacity: 0, duration: 0.5, ease: 'power1.out' }, '-=0.1');
+    tl.from('.hero-stripe',    { scaleX: 0, transformOrigin: 'left center', duration: 0.35, ease: 'power3.out' })
+      .from('.hero-italic',    { opacity: 0, y: 12, duration: 0.3, ease: 'power2.out' }, '-=0.1')
+      .from('.hero-bold-main', { opacity: 0, y: 16, duration: 0.32, ease: 'power3.out' }, '-=0.18')
+      .from('.hero-carousel',  { opacity: 0, x: 30, duration: 0.4, ease: 'power2.out' }, '-=0.22')
+      .from('.scroll-hint',    { opacity: 0, duration: 0.3, ease: 'power1.out' }, '-=0.05');
 
-    // Dramatic initial tilt — settles into CSS animation's 0% state, then hands off
     var tiltEl = document.querySelector('.carousel-tilt');
     if (tiltEl) {
       gsap.fromTo(tiltEl,
@@ -29,57 +26,51 @@
       );
     }
 
-    // ── Mission
     gsap.from('.mission-text', {
       scrollTrigger: { trigger: '.mission-section', start: 'top 80%' },
-      opacity: 0, y: 30, duration: 0.8, ease: 'power2.out'
+      opacity: 0, y: 20, duration: 0.45, ease: 'power2.out'
     });
     gsap.from('.mission-section .btn-ghost', {
       scrollTrigger: { trigger: '.mission-section', start: 'top 75%' },
-      opacity: 0, y: 16, duration: 0.6, delay: 0.25, ease: 'power2.out'
+      opacity: 0, y: 12, duration: 0.35, delay: 0.15, ease: 'power2.out'
     });
 
-    // ── Creations header
     gsap.from('.creations-eyebrow', {
       scrollTrigger: { trigger: '.creations-header', start: 'top 82%' },
-      opacity: 0, y: 14, duration: 0.5, ease: 'power2.out'
+      opacity: 0, y: 10, duration: 0.3, ease: 'power2.out'
     });
     gsap.from(['.creations-italic', '.creations-title'], {
       scrollTrigger: { trigger: '.creations-header', start: 'top 80%' },
-      opacity: 0, y: 22, duration: 0.65, stagger: 0.08, ease: 'power3.out'
+      opacity: 0, y: 16, duration: 0.38, stagger: 0.07, ease: 'power3.out'
     });
 
-    // ── Creation cards stagger
     gsap.from('.creation-card', {
       scrollTrigger: { trigger: '.creations-stack', start: 'top 78%' },
-      opacity: 0, y: 40, duration: 0.7, stagger: 0.12, ease: 'power2.out'
+      opacity: 0, y: 28, duration: 0.4, stagger: 0.08, ease: 'power2.out'
     });
 
-    // ── Brands
     gsap.from('.brands-eyebrow', {
       scrollTrigger: { trigger: '.brands-section', start: 'top 82%' },
-      opacity: 0, y: 14, duration: 0.5, ease: 'power2.out'
+      opacity: 0, y: 10, duration: 0.3, ease: 'power2.out'
     });
     gsap.from('.brand-item', {
       scrollTrigger: { trigger: '.brands-grid', start: 'top 80%' },
-      opacity: 0, y: 10, duration: 0.5, stagger: { each: 0.04, from: 'start' }, ease: 'power1.out'
+      opacity: 0, y: 8, duration: 0.3, stagger: { each: 0.03, from: 'start' }, ease: 'power1.out'
     });
 
-    // ── Expertise
     gsap.from(['.exp-italic-heading', '.exp-bold-heading'], {
       scrollTrigger: { trigger: '.exp-header', start: 'top 82%' },
-      opacity: 0, y: 20, duration: 0.6, stagger: 0.08, ease: 'power2.out'
+      opacity: 0, y: 14, duration: 0.35, stagger: 0.07, ease: 'power2.out'
     });
     gsap.from('.exp-photo', {
       scrollTrigger: { trigger: '.exp-layout', start: 'top 78%' },
-      opacity: 0, x: -40, duration: 0.8, ease: 'power2.out'
+      opacity: 0, x: -30, duration: 0.45, ease: 'power2.out'
     });
     gsap.from('.exp-list-item', {
       scrollTrigger: { trigger: '.exp-layout', start: 'top 75%' },
-      opacity: 0, x: 30, duration: 0.6, stagger: 0.1, ease: 'power2.out'
+      opacity: 0, x: 20, duration: 0.35, stagger: 0.07, ease: 'power2.out'
     });
 
-    // ── CTA parallax
     gsap.to('.cta-bg-img img', {
       scrollTrigger: {
         trigger: '.cta-section',
@@ -92,7 +83,7 @@
     });
     gsap.from('.cta-inner', {
       scrollTrigger: { trigger: '.cta-section', start: 'top 80%' },
-      opacity: 0, y: 28, duration: 0.75, ease: 'power2.out'
+      opacity: 0, y: 20, duration: 0.4, ease: 'power2.out'
     });
   }
 
@@ -124,7 +115,6 @@
     });
   }
 
-  // Wait for loader to finish before registering ScrollTrigger animations
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () { init(); initCarouselHover(); });
   } else {

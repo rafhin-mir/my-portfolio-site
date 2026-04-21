@@ -2,15 +2,9 @@
   gsap.registerPlugin(ScrollTrigger);
 
   function init() {
-    gsap.from('.contact-heading', {
-      scrollTrigger: { trigger: '.contact-main', start: 'top 82%' },
-      opacity: 0, y: 28, duration: 0.7, ease: 'power3.out'
-    });
-
-    gsap.from('.contact-card', {
-      scrollTrigger: { trigger: '.contact-cards', start: 'top 80%' },
-      opacity: 0, y: 32, duration: 0.6, stagger: 0.12, ease: 'power2.out'
-    });
+    var tl = gsap.timeline({ delay: 1.0 });
+    tl.from('.contact-heading', { opacity: 0, y: 20, duration: 0.35, ease: 'power3.out' })
+      .from('.contact-card',    { opacity: 0, y: 22, duration: 0.32, stagger: 0.08, ease: 'power2.out' }, '-=0.1');
   }
 
   if (document.readyState === 'loading') {
