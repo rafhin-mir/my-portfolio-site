@@ -180,7 +180,7 @@
   will-change: transform;
 }
 .auto-strip-up { animation: autoStripUp 55s linear infinite; }
-.auto-strip-down { animation: autoStripDown 65s linear infinite; }
+.auto-strip-down { animation: autoStripDown 65s linear infinite; animation-delay: -22s; }
 
 @keyframes autoStripUp {
   0%   { transform: translateY(0); }
