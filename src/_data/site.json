@@ -1,9 +1,11 @@
 {
   "name": "Rafhin Visuals",
   "tagline": "Built with Intent. Defined by Detail.",
-  "description": "A video and photo production studio built with intent and defined by detail.",
+  "description": "A premium video and photo production studio based in Canada — automotive films, music videos, commercial content, and documentary storytelling, built with intent and defined by detail.",
   "email": "media@rafhin.com",
   "url": "https://rafhin-mir.github.io/my-portfolio-site",
   "logo": "/assets/logos/RV-Logo-White-Transparent.png",
-  "favicon": "/assets/icons/rv-favicon.svg"
+  "favicon": "/assets/icons/rv-favicon.svg",
+  "ogImage": "/assets/images/automotive/footer.jpg",
+  "twitterHandle": "@_rafhin"
 }
