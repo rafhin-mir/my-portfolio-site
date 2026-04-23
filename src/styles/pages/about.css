@@ -210,7 +210,7 @@
 
   .abt-intro-inner {
     grid-template-columns: 1fr;
-    gap: 48px;
+    gap: 40px;
   }
 
   .abt-photo-wrap {
@@ -224,20 +224,44 @@
 
   .abt-divider { margin: 0 40px; }
 
-  .abt-location {
-    padding: 60px 40px;
-  }
+  .abt-location { padding: 60px 40px; }
 }
 
 /* ── MOBILE */
 @media (max-width: 600px) {
-  .abt-intro { padding: 80px 24px 60px; }
-  .abt-divider { margin: 0 24px; }
-  .abt-location { padding: 50px 24px; }
-  .abt-bio { font-size: 15px; }
-
-  .abt-photo-wrap {
-    aspect-ratio: 4/3;
-    max-height: 320px;
+  .abt-intro {
+    padding: 90px 24px 56px;
+    min-height: auto;
   }
+
+  .abt-intro-inner { gap: 32px; }
+
+  /* Portrait crop so the person + car are both visible */
+  .abt-photo-wrap {
+    aspect-ratio: 3/4;
+    max-height: 480px;
+    border-radius: 12px;
+  }
+
+  .abt-photo { object-position: center 18%; }
+
+  .abt-heading-italic,
+  .abt-heading-bold {
+    font-size: clamp(42px, 11vw, 58px);
+  }
+
+  .abt-bio {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .abt-divider { margin: 0 24px; }
+
+  .abt-location { padding: 48px 24px; }
+
+  .abt-location-city { font-size: clamp(28px, 8vw, 44px); }
+
+  .abt-cta-content { padding: 64px 24px; }
+
+  .abt-cta-heading { font-size: clamp(28px, 8vw, 40px); }
 }
