@@ -21,7 +21,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #660033;
+  background: #cc2659;
   color: #f5f5f5;
   font-family: 'Archivo', sans-serif;
   font-size: 11px;
@@ -35,7 +35,7 @@
   cursor: pointer;
   transition: background .2s ease, transform .2s cubic-bezier(.25,.46,.45,.94);
 }
-.auto-btn-primary:hover { background: #880044; transform: translateY(-2px); }
+.auto-btn-primary:hover { background: #a81e48; transform: translateY(-2px); }
 .auto-btn-primary:active { transform: translateY(0); }
 .auto-btn-primary:focus-visible { outline: 2px solid #f5f5f5; outline-offset: 4px; }
 
@@ -242,6 +242,7 @@
   letter-spacing: -.048em;
   line-height: .86;
   text-transform: uppercase;
+  color: #cc2659;
   margin: 0 0 28px;
 }
 .auto-cap-body {
@@ -264,7 +265,7 @@
   font-weight: 800;
   letter-spacing: .16em;
   text-transform: uppercase;
-  color: #6a0736;
+  color: #cc2659;
   margin: 0 0 12px;
   font-family: 'Archivo', sans-serif;
 }
