@@ -6,7 +6,7 @@
     gsap.from('.abt-intro', { opacity: 0, duration: 0.5, ease: 'power2.out', delay: 0.85 });
 
     var tl = gsap.timeline({ delay: 1.1 });
-    tl.from('.abt-eyebrow',          { opacity: 0, y: 10, duration: 0.3, ease: 'power2.out' })
+    tl.from('.abt-intro .abt-eyebrow', { opacity: 0, y: 10, duration: 0.3, ease: 'power2.out' })
       .from('.abt-stripe',           { scaleX: 0, transformOrigin: 'left center', duration: 0.35, ease: 'power3.out' }, '-=0.1')
       .from('.abt-heading-italic',   { opacity: 0, y: 14, duration: 0.32, ease: 'power3.out' }, '-=0.15')
       .from('.abt-heading-bold',     { opacity: 0, y: 14, duration: 0.32, ease: 'power3.out' }, '-=0.2')
