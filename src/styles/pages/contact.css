@@ -51,7 +51,7 @@ body {
   font-weight: 700;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: rgba(245,245,245,.45);
+  color: #f5f5f5;
   margin: 0 0 6px;
 }
 .contact-card-value {

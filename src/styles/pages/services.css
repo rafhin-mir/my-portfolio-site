@@ -8,7 +8,7 @@
   font-weight: 700;
   letter-spacing: .22em;
   text-transform: uppercase;
-  color: rgba(245,245,245,.38);
+  color: #f5f5f5;
   display: block;
   margin: 0 0 14px;
 }
@@ -70,7 +70,7 @@
   font-weight: 700;
   letter-spacing: .16em;
   text-transform: uppercase;
-  color: rgba(245,245,245,.25);
+  color: #f5f5f5;
   margin: 0 0 20px;
   display: block;
 }
@@ -78,7 +78,7 @@
   width: 36px;
   height: 36px;
   margin-bottom: 20px;
-  color: rgba(245,245,245,.25);
+  color: #f5f5f5;
   transition: color .25s ease;
   display: block;
 }
@@ -97,7 +97,7 @@
 .svc-desc {
   font-size: 13px;
   line-height: 1.75;
-  color: rgba(245,245,245,.45);
+  color: #f5f5f5;
   margin: 0 0 24px;
 }
 .svc-tags {
@@ -113,7 +113,7 @@
   padding: 3px 9px;
   border-radius: 100px;
   background: rgba(245,245,245,.05);
-  color: rgba(245,245,245,.4);
+  color: #f5f5f5;
   border: 1px solid rgba(245,245,245,.08);
 }
 .svc-card.svc-web .svc-name { color: #cc2255; }
@@ -136,7 +136,7 @@
   font-weight: 700;
   letter-spacing: .22em;
   text-transform: uppercase;
-  color: rgba(245,245,245,.38);
+  color: #f5f5f5;
   display: block;
   margin: 0 0 12px;
 }
@@ -162,7 +162,7 @@
 .how-body {
   font-size: 14px;
   line-height: 1.8;
-  color: rgba(245,245,245,.45);
+  color: #f5f5f5;
   max-width: 280px;
 }
 
@@ -192,7 +192,7 @@ details.acc-item summary::-webkit-details-marker { display: none; }
   font-size: 9px;
   font-weight: 700;
   letter-spacing: .12em;
-  color: rgba(245,245,245,.25);
+  color: #f5f5f5;
   width: 20px;
   flex-shrink: 0;
 }
@@ -208,7 +208,7 @@ details[open] .acc-name { color: #cc2255; }
 .acc-icon {
   font-size: 18px;
   font-weight: 300;
-  color: rgba(245,245,245,.35);
+  color: #f5f5f5;
   transition: transform .25s ease, color .25s ease;
   line-height: 1;
   flex-shrink: 0;
@@ -224,7 +224,7 @@ details .acc-body { display: block !important; }
 .acc-body p {
   font-size: 14px;
   line-height: 1.75;
-  color: rgba(245,245,245,.45);
+  color: #f5f5f5;
   margin: 0 0 12px;
   max-width: 480px;
 }
@@ -239,7 +239,7 @@ details .acc-body { display: block !important; }
 .acc-body ul li {
   font-size: 13px;
   font-weight: 500;
-  color: rgba(245,245,245,.45);
+  color: #f5f5f5;
   letter-spacing: .01em;
   padding-left: 18px;
   position: relative;
@@ -287,7 +287,7 @@ details .acc-body { display: block !important; }
   font-weight: 700;
   letter-spacing: .22em;
   text-transform: uppercase;
-  color: rgba(245,245,245,.45);
+  color: #f5f5f5;
   display: block;
   margin: 0 0 18px;
 }
