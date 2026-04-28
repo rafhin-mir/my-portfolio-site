@@ -12,98 +12,196 @@ pageScripts:
 
 <!-- ══════════════════════════════════ HEADER -->
 <header class="work-header">
-  <h1 class="work-title">Our Work</h1>
+  <span class="work-eyebrow">portfolio</span>
+  <h1 class="work-title">Work</h1>
 </header>
 
 <!-- ══════════════════════════════════ FILTERS -->
-<div class="work-filters">
-  <button class="filter-btn active" data-filter="all">Featured</button>
-  <button class="filter-btn" data-filter="commercial">Commercial</button>
-  <button class="filter-btn" data-filter="music-video">Music Video</button>
-  <button class="filter-btn" data-filter="film">Film</button>
-  <button class="filter-btn" data-filter="photography">Photography</button>
+<div class="work-filters" id="filters">
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="real-estate">Real Estate</button>
+  <button class="filter-btn" data-filter="weddings">Weddings</button>
+  <button class="filter-btn" data-filter="events">Events</button>
+  <button class="filter-btn" data-filter="cafe">Café</button>
 </div>
 
 <!-- ══════════════════════════════════ GRID -->
 <div class="work-grid" id="workGrid">
 
-  <div class="work-item" data-category="music-video">
-    <img class="work-item-thumb" src="https://placehold.co/800x500/0d0d0d/1a1a1a?text=+" alt="Snoop x Snoop Dogg">
+  <div class="work-item featured" data-category="real-estate">
+    <div class="work-thumb-wrap">
+      <div class="work-item-thumb" style="background:linear-gradient(135deg,#141c14,#1e2a1e,#0e160e);"></div>
+      <span class="work-cat-pill">Real Estate</span>
+    </div>
     <div class="work-item-info">
-      <p class="work-item-title">Snoop x Snoop Dogg</p>
-      <p class="work-item-credit">Music Video</p>
+      <p class="work-item-title">Exterior Showcase</p>
+      <p class="work-item-credit">Photography</p>
     </div>
   </div>
 
-  <div class="work-item" data-category="music-video">
-    <img class="work-item-thumb" src="https://placehold.co/800x500/060d12/0d1a22?text=+" alt="Borrowed Light">
+  <div class="work-item" data-category="real-estate">
+    <div class="work-thumb-wrap">
+      <div class="work-item-thumb" style="background:linear-gradient(135deg,#181c14,#222a1c,#121810);"></div>
+      <span class="work-cat-pill">Real Estate</span>
+    </div>
     <div class="work-item-info">
-      <p class="work-item-title">Borrowed Light</p>
-      <p class="work-item-credit">Music Video</p>
+      <p class="work-item-title">Interior Editorial</p>
+      <p class="work-item-credit">Photography</p>
     </div>
   </div>
 
-  <div class="work-item" data-category="film">
-    <img class="work-item-thumb" src="https://placehold.co/800x500/0a0a08/181810?text=+" alt="Man With Nature">
+  <div class="work-item" data-category="real-estate">
+    <div class="work-thumb-wrap">
+      <div class="work-item-thumb" style="background:linear-gradient(135deg,#161a12,#202614,#100e0a);"></div>
+      <span class="work-cat-pill">Real Estate</span>
+    </div>
     <div class="work-item-info">
-      <p class="work-item-title">Man With Nature</p>
-      <p class="work-item-credit">Short Film</p>
+      <p class="work-item-title">Twilight Shoot</p>
+      <p class="work-item-credit">Photography</p>
     </div>
   </div>
 
-  <div class="work-item" data-category="music-video">
-    <img class="work-item-thumb" src="https://placehold.co/800x500/120608/220d10?text=+" alt="What Do I Know">
+  <div class="work-item" data-category="real-estate">
+    <div class="work-thumb-wrap">
+      <div class="work-item-thumb" style="background:linear-gradient(135deg,#141810,#1e2418,#0e1008);"></div>
+      <span class="work-cat-pill">Real Estate</span>
+    </div>
     <div class="work-item-info">
-      <p class="work-item-title">What Do I Know</p>
-      <p class="work-item-credit">Music Video</p>
+      <p class="work-item-title">Condo Listing</p>
+      <p class="work-item-credit">Photography</p>
     </div>
   </div>
 
-  <div class="work-item" data-category="commercial">
-    <img class="work-item-thumb" src="https://placehold.co/800x500/080d08/101810?text=+" alt="Album Commercial">
+  <div class="work-item featured" data-category="weddings">
+    <div class="work-thumb-wrap">
+      <div class="work-item-thumb" style="background:linear-gradient(135deg,#1a1414,#261c1c,#120e0e);"></div>
+      <div class="work-play">
+        <svg viewBox="0 0 12 14" fill="#f5f5f5"><path d="M1 1l10 6-10 6V1z"/></svg>
+      </div>
+      <span class="work-cat-pill">Weddings</span>
+    </div>
     <div class="work-item-info">
-      <p class="work-item-title">Album Commercial</p>
-      <p class="work-item-credit">Commercial</p>
+      <p class="work-item-title">Wedding Film</p>
+      <p class="work-item-credit">Videography</p>
     </div>
   </div>
 
-  <div class="work-item" data-category="music-video">
-    <img class="work-item-thumb" src="https://placehold.co/800x500/120408/200810?text=+" alt="Rose: Alright">
+  <div class="work-item" data-category="weddings">
+    <div class="work-thumb-wrap">
+      <div class="work-item-thumb" style="background:linear-gradient(135deg,#1c1616,#281e1e,#14100e);"></div>
+      <span class="work-cat-pill">Weddings</span>
+    </div>
     <div class="work-item-info">
-      <p class="work-item-title">Rose: Alright</p>
-      <p class="work-item-credit">Music Video</p>
+      <p class="work-item-title">Ceremony Coverage</p>
+      <p class="work-item-credit">Photography</p>
     </div>
   </div>
 
-  <div class="work-item" data-category="photography">
-    <img class="work-item-thumb" src="https://placehold.co/800x500/0d0d0d/1a1a1a?text=+" alt="The Kardashians">
+  <div class="work-item" data-category="weddings">
+    <div class="work-thumb-wrap">
+      <div class="work-item-thumb" style="background:linear-gradient(135deg,#181414,#221c1c,#100c0c);"></div>
+      <div class="work-play">
+        <svg viewBox="0 0 12 14" fill="#f5f5f5"><path d="M1 1l10 6-10 6V1z"/></svg>
+      </div>
+      <span class="work-cat-pill">Weddings</span>
+    </div>
     <div class="work-item-info">
-      <p class="work-item-title">The Kardashians</p>
-      <p class="work-item-credit">Bridal — Dress &amp; Photography</p>
+      <p class="work-item-title">Reception Highlights</p>
+      <p class="work-item-credit">Videography</p>
     </div>
   </div>
 
-  <div class="work-item" data-category="music-video">
-    <img class="work-item-thumb" src="https://placehold.co/800x500/0d0c08/1a1810?text=+" alt="Old Man">
+  <div class="work-item" data-category="weddings">
+    <div class="work-thumb-wrap">
+      <div class="work-item-thumb" style="background:linear-gradient(135deg,#1a1616,#241c1c,#12100e);"></div>
+      <span class="work-cat-pill">Weddings</span>
+    </div>
     <div class="work-item-info">
-      <p class="work-item-title">Old Man</p>
-      <p class="work-item-credit">James Phillips</p>
+      <p class="work-item-title">Couple Portraits</p>
+      <p class="work-item-credit">Photography</p>
     </div>
   </div>
 
-  <div class="work-item" data-category="commercial">
-    <img class="work-item-thumb" src="https://placehold.co/800x500/0d0d0d/1a1a1a?text=+" alt="Made by Surecloud">
+  <div class="work-item" data-category="events">
+    <div class="work-thumb-wrap">
+      <div class="work-item-thumb" style="background:linear-gradient(135deg,#0e1018,#141824,#0a0c10);"></div>
+      <div class="work-play">
+        <svg viewBox="0 0 12 14" fill="#f5f5f5"><path d="M1 1l10 6-10 6V1z"/></svg>
+      </div>
+      <span class="work-cat-pill">Events</span>
+    </div>
     <div class="work-item-info">
-      <p class="work-item-title">Made by Surecloud</p>
-      <p class="work-item-credit">Featuring Lisa Monroe &amp; Kayla Miles</p>
+      <p class="work-item-title">Event Recap Film</p>
+      <p class="work-item-credit">Videography</p>
     </div>
   </div>
 
-  <div class="work-item solo" data-category="film">
-    <img class="work-item-thumb" src="https://placehold.co/800x500/0a0c10/141820?text=+" alt="Lioness">
+  <div class="work-item featured" data-category="events">
+    <div class="work-thumb-wrap">
+      <div class="work-item-thumb" style="background:linear-gradient(135deg,#100e18,#16141e,#0c0a10);"></div>
+      <span class="work-cat-pill">Events</span>
+    </div>
     <div class="work-item-info">
-      <p class="work-item-title">Lioness</p>
-      <p class="work-item-credit">Short Film</p>
+      <p class="work-item-title">Live Event Coverage</p>
+      <p class="work-item-credit">Photography</p>
+    </div>
+  </div>
+
+  <div class="work-item" data-category="events">
+    <div class="work-thumb-wrap">
+      <div class="work-item-thumb" style="background:linear-gradient(135deg,#0c1018,#121820,#080c10);"></div>
+      <div class="work-play">
+        <svg viewBox="0 0 12 14" fill="#f5f5f5"><path d="M1 1l10 6-10 6V1z"/></svg>
+      </div>
+      <span class="work-cat-pill">Events</span>
+    </div>
+    <div class="work-item-info">
+      <p class="work-item-title">Corporate Event</p>
+      <p class="work-item-credit">Videography</p>
+    </div>
+  </div>
+
+  <div class="work-item" data-category="events">
+    <div class="work-thumb-wrap">
+      <div class="work-item-thumb" style="background:linear-gradient(135deg,#0e0c18,#14121e,#0a0810);"></div>
+      <span class="work-cat-pill">Events</span>
+    </div>
+    <div class="work-item-info">
+      <p class="work-item-title">Night Event Portraits</p>
+      <p class="work-item-credit">Photography</p>
+    </div>
+  </div>
+
+  <div class="work-item" data-category="cafe">
+    <div class="work-thumb-wrap">
+      <div class="work-item-thumb" style="background:linear-gradient(135deg,#1c1610,#261e16,#14100a);"></div>
+      <span class="work-cat-pill">Café</span>
+    </div>
+    <div class="work-item-info">
+      <p class="work-item-title">Café Editorial</p>
+      <p class="work-item-credit">Photography</p>
+    </div>
+  </div>
+
+  <div class="work-item" data-category="cafe">
+    <div class="work-thumb-wrap">
+      <div class="work-item-thumb" style="background:linear-gradient(135deg,#1a1612,#221e16,#120e0a);"></div>
+      <span class="work-cat-pill">Café</span>
+    </div>
+    <div class="work-item-info">
+      <p class="work-item-title">Product Shots</p>
+      <p class="work-item-credit">Photography</p>
+    </div>
+  </div>
+
+  <div class="work-item featured" data-category="cafe">
+    <div class="work-thumb-wrap">
+      <div class="work-item-thumb" style="background:linear-gradient(135deg,#1c1810,#261e14,#140e08);"></div>
+      <span class="work-cat-pill">Café</span>
+    </div>
+    <div class="work-item-info">
+      <p class="work-item-title">Ambient Interior</p>
+      <p class="work-item-credit">Photography</p>
     </div>
   </div>
 

@@ -2,24 +2,14 @@
   gsap.registerPlugin(ScrollTrigger);
 
   function init() {
-    var sections = document.querySelectorAll('.production-section');
+    var tl = gsap.timeline({ delay: 1.0 });
+    tl.from('.services-eyebrow',      { opacity: 0, y: 10, duration: 0.28, ease: 'power2.out' })
+      .from('.services-title-italic', { opacity: 0, y: 14, duration: 0.32, ease: 'power3.out' }, '-=0.1')
+      .from('.services-title-bold',   { opacity: 0, y: 14, duration: 0.32, ease: 'power3.out' }, '-=0.18');
 
-    var firstHeading = sections[0] && sections[0].querySelector('.section-heading-group');
-    if (firstHeading) {
-      var tl = gsap.timeline({ delay: 1.0 });
-      tl.from(firstHeading.querySelectorAll('.section-label, .section-title'), {
-        opacity: 0, y: 16, duration: 0.35, stagger: 0.08, ease: 'power3.out'
-      });
-    }
-
-    Array.from(sections).slice(1).forEach(function (section) {
-      var header = section.querySelector('.section-heading-group');
-      if (header) {
-        gsap.from(header.querySelectorAll('.section-label, .section-title'), {
-          scrollTrigger: { trigger: header, start: 'top 82%' },
-          opacity: 0, y: 16, duration: 0.35, stagger: 0.08, ease: 'power3.out'
-        });
-      }
+    gsap.from('.svc-card', {
+      scrollTrigger: { trigger: '.services-grid', start: 'top 80%' },
+      opacity: 0, y: 20, duration: 0.35, stagger: 0.07, ease: 'power2.out'
     });
 
     gsap.from('.acc-item', {
