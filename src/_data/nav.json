@@ -1,7 +1,7 @@
 [
   { "label": "Home",       "href": "/",             "key": "home" },
-  { "label": "Automotive", "href": "/automotive.html", "key": "automotive" },
-  { "label": "Services",   "href": "/services.html",  "key": "services" },
-  { "label": "About",      "href": "/about.html",    "key": "about" },
-  { "label": "Contact",    "href": "/contact.html",  "key": "contact" }
+  { "label": "Automotive", "href": "/automotive/", "key": "automotive" },
+  { "label": "Services",   "href": "/services/",   "key": "services" },
+  { "label": "About",      "href": "/about/",      "key": "about" },
+  { "label": "Contact",    "href": "/contact/",    "key": "contact" }
 ]
