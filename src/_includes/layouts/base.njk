@@ -53,10 +53,7 @@
   {# ── favicon ── #}
   <link rel="icon" href="{{ site.favicon }}" type="image/jpeg">
 
-  {# ── external dependencies ── #}
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  {# ── fonts ── #}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,75..125,100..900;1,75..125,100..900&family=Azeret+Mono:wght@400;500&family=IvyPresto+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
@@ -92,6 +89,10 @@
     {% include "components/footer.njk" %}
 
   </div>
+
+  {# ── animation library ── #}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   {# ── core scripts (every page) ── #}
   <script src="/scripts/core/nav.js"></script>

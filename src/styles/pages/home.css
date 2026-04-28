@@ -31,14 +31,6 @@
   line-height: .95;
   margin: 0;
 }
-.hero-bold-by {
-  font-weight: 900;
-  font-size: clamp(44px, 5.5vw, 88px);
-  letter-spacing: -.04em;
-  line-height: .92;
-  text-transform: uppercase;
-  margin: 0;
-}
 .hero-bold-main {
   font-weight: 900;
   font-size: clamp(40px, 4.5vw, 72px);
