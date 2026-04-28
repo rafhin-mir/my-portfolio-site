@@ -314,7 +314,7 @@ details .acc-body { display: block !important; }
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #cc2659;
+  background: #a81e48;
   color: #f5f5f5;
   font-size: 11px;
   font-weight: 800;
@@ -326,7 +326,7 @@ details .acc-body { display: block !important; }
   transition: background .2s ease, transform .2s cubic-bezier(.25,.46,.45,.94);
 }
 .collab-btn--crimson:hover {
-  background: #a81e48;
+  background: #8c1a3d;
   transform: translateY(-2px);
 }
 .collab-btn--crimson:focus-visible {
