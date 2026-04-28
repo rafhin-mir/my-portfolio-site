@@ -1,5 +1,6 @@
 {
   "outputDirectory": "_site",
+  "trailingSlash": false,
   "headers": [
     {
       "source": "/assets/video/(.*)",
