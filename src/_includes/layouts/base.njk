@@ -50,6 +50,9 @@
   }
   </script>
 
+  {# ── preview gate ── #}
+  <script>if (!localStorage.getItem('rv_preview_auth')) { window.location.replace('/wip'); }</script>
+
   {# ── favicon ── #}
   <link rel="icon" href="{{ site.favicon }}" type="image/jpeg">
 
