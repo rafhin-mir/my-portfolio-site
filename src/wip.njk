@@ -29,6 +29,17 @@ permalink: /wip/
     <p class="wip-italic">work in progress</p>
     <p class="wip-title">RAFHIN VISUALS</p>
     <p class="wip-desc">Something great is taking shape.</p>
+    <div class="wip-socials">
+      {% for item in social %}
+      <a href="{{ item.href }}" class="wip-social-btn" aria-label="{{ item.label }}" target="_blank" rel="noopener">
+        {% if item.icon == 'instagram' %}{% include "icons/instagram.njk" %}
+        {% elif item.icon == 'tiktok' %}{% include "icons/tiktok.njk" %}
+        {% elif item.icon == 'youtube' %}{% include "icons/youtube.njk" %}
+        {% endif %}
+      </a>
+      {% endfor %}
+    </div>
+
     <form class="wip-form" id="wipForm" novalidate>
       <div class="wip-input-row">
         <input
