@@ -36,6 +36,7 @@ permalink: /wip/
         {% elif item.icon == 'tiktok' %}{% include "icons/tiktok.njk" %}
         {% elif item.icon == 'youtube' %}{% include "icons/youtube.njk" %}
         {% endif %}
+        <span>{{ item.label }}</span>
       </a>
       {% endfor %}
     </div>

@@ -152,33 +152,37 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 12px;
   margin: 0 0 28px;
 }
 
 .wip-social-btn {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid rgba(245,245,245,.15);
-  background: rgba(5,5,5,.35);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: rgba(245,245,245,.55);
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 100px;
+  border: 1px solid rgba(245,245,245,.28);
+  background: rgba(5,5,5,.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: rgba(245,245,245,.85);
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-decoration: none;
   transition:
     border-color .2s ease,
     color .2s ease,
     background .2s ease;
-  text-decoration: none;
 }
 
 .wip-social-btn:hover {
-  border-color: rgba(245,245,245,.4);
+  border-color: rgba(245,245,245,.6);
   color: var(--white);
-  background: rgba(245,245,245,.08);
+  background: rgba(245,245,245,.1);
 }
 
 .wip-social-btn:focus-visible {
@@ -187,9 +191,10 @@
 }
 
 .wip-social-btn svg {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   fill: currentColor;
+  flex-shrink: 0;
 }
 
 /* ── password form ── */
