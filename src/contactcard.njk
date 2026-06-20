@@ -183,6 +183,27 @@ eleventyExcludeFromCollections: true
   .toast.show { opacity:1; transform:translate(-50%, 0); }
   .toast svg { width:15px; height:15px; color:var(--accent); }
 
+  /* desktop */
+  @media (min-width: 640px) {
+    body { padding:40px 24px; }
+    .card { max-width:620px; padding:44px 40px 36px; border-radius:28px; }
+    .logo { width:136px; height:136px; margin-top:16px; }
+    .stripe { margin-top:16px; width:56px; }
+    .name { margin-top:16px; font-size:48px; }
+    .role { margin-top:8px; font-size:24px; }
+    .meta { margin-top:10px; font-size:13px; }
+    .save { margin-top:24px; padding:18px 32px; font-size:14px; }
+    .rows { margin-top:14px; gap:8px; }
+    .row { padding:14px 20px; border-radius:16px; gap:16px; }
+    .row .ic { width:48px; height:48px; border-radius:13px; }
+    .row .ic svg { width:22px; height:22px; }
+    .row .lbl { font-size:11px; }
+    .row .val { font-size:18px; }
+    .footer { margin-top:20px; }
+    .footer .tag { font-size:17px; }
+    .footer .url { font-size:11px; margin-top:12px; }
+  }
+
   /* entrance */
   @keyframes rise { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
   @media (prefers-reduced-motion: no-preference) {
