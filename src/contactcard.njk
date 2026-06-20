@@ -51,7 +51,7 @@ eleventyExcludeFromCollections: true
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:32px 18px calc(32px + env(safe-area-inset-bottom));
+    padding:12px 14px calc(12px + env(safe-area-inset-bottom));
     position:relative;
     overflow-x:hidden;
   }
@@ -75,7 +75,7 @@ eleventyExcludeFromCollections: true
     background:linear-gradient(180deg, rgba(245,245,245,0.09), rgba(245,245,245,0.035));
     border:1px solid rgba(245,245,245,0.15);
     border-radius:22px;
-    padding:38px 26px 26px;
+    padding:22px 20px 18px;
     box-shadow:inset 0 1px 0 rgba(245,245,245,0.12), 0 4px 16px rgba(0,0,0,0.6), 0 44px 96px rgba(0,0,0,0.72);
     backdrop-filter:blur(3px);
   }
@@ -88,30 +88,30 @@ eleventyExcludeFromCollections: true
   }
 
   .logo {
-    display:block; width:128px; height:128px; margin:18px auto 0;
+    display:block; width:84px; height:84px; margin:10px auto 0;
     border-radius:50%; object-fit:cover;
     border:1px solid rgba(245,245,245,0.16);
     box-shadow:0 12px 34px rgba(0,0,0,0.55), inset 0 1px 0 rgba(245,245,245,0.08);
   }
 
   .stripe {
-    width:46px; height:2px; border-radius:999px; margin:18px auto 0;
+    width:46px; height:2px; border-radius:999px; margin:10px auto 0;
     background:linear-gradient(to right, var(--gold-start), var(--gold-mid), var(--gold-end));
   }
 
   .name {
-    margin:18px 0 0; text-align:center;
+    margin:10px 0 0; text-align:center;
     font-family:var(--font-sans); font-weight:900;
-    font-size:clamp(30px,9vw,38px); letter-spacing:-0.035em;
+    font-size:clamp(26px,7vw,32px); letter-spacing:-0.035em;
     text-transform:uppercase; line-height:0.95;
   }
   .role {
-    margin:9px 0 0; text-align:center;
+    margin:5px 0 0; text-align:center;
     font-family:var(--font-serif); font-style:italic; font-weight:400;
-    font-size:21px; letter-spacing:-0.01em; color:rgba(245,245,245,0.92);
+    font-size:17px; letter-spacing:-0.01em; color:rgba(245,245,245,0.92);
   }
   .meta {
-    margin:12px 0 0; text-align:center;
+    margin:6px 0 0; text-align:center;
     font-family:var(--font-mono); font-size:12px; letter-spacing:0.02em;
     color:var(--muted);
     display:flex; align-items:center; justify-content:center; gap:9px;
@@ -121,11 +121,11 @@ eleventyExcludeFromCollections: true
   /* primary */
   .save {
     display:flex; align-items:center; justify-content:center; gap:9px;
-    width:100%; margin:26px 0 0;
+    width:100%; margin:14px 0 0;
     background:var(--accent); color:#0a0306;
-    font-family:var(--font-sans); font-weight:800; font-size:13.5px;
+    font-family:var(--font-sans); font-weight:800; font-size:12.5px;
     letter-spacing:0.13em; text-transform:uppercase;
-    padding:17px 24px; border-radius:100px; border:none; cursor:pointer;
+    padding:13px 24px; border-radius:100px; border:none; cursor:pointer;
     text-decoration:none;
     transition:background 0.2s ease, transform 0.2s var(--ease-btn), box-shadow 0.2s ease;
     box-shadow:0 8px 28px rgba(204,34,85,0.28);
@@ -135,33 +135,33 @@ eleventyExcludeFromCollections: true
   .save svg { width:16px; height:16px; }
 
   /* contact rows */
-  .rows { margin:14px 0 0; display:flex; flex-direction:column; gap:8px; }
+  .rows { margin:10px 0 0; display:flex; flex-direction:column; gap:5px; }
   .row {
-    display:flex; align-items:center; gap:14px;
+    display:flex; align-items:center; gap:12px;
     background:rgba(5,5,5,0.32);
     border:1px solid rgba(245,245,245,0.07);
-    border-radius:14px; padding:14px 16px;
+    border-radius:12px; padding:9px 14px;
     text-decoration:none; color:var(--white); cursor:pointer;
     transition:background 0.2s ease, border-color 0.2s ease, transform 0.18s var(--ease-btn);
   }
   .row:hover { background:rgba(5,5,5,0.5); border-color:var(--border-mid); transform:translateY(-1px); }
   .row:active { transform:translateY(0); }
   .row .ic {
-    width:40px; height:40px; flex:none; border-radius:11px;
+    width:34px; height:34px; flex:none; border-radius:9px;
     display:grid; place-items:center;
     background:rgba(204,34,85,0.10); border:1px solid rgba(204,34,85,0.18);
     color:var(--accent);
   }
-  .row .ic svg { width:19px; height:19px; }
+  .row .ic svg { width:16px; height:16px; }
   .row .txt { display:flex; flex-direction:column; gap:2px; min-width:0; }
   .row .lbl { font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--dim); }
-  .row .val { font-size:16.5px; font-weight:600; letter-spacing:-0.01em; color:var(--white); white-space:nowrap; }
+  .row .val { font-size:14px; font-weight:600; letter-spacing:-0.01em; color:var(--white); white-space:nowrap; }
   .row .arrow { margin-left:auto; flex:none; color:var(--ghost); transition:color 0.2s ease, transform 0.2s var(--ease-btn); }
   .row:hover .arrow { color:var(--muted); transform:translateX(2px); }
   .row .arrow svg { width:15px; height:15px; display:block; }
 
   /* footer */
-  .footer { margin:24px 0 4px; text-align:center; }
+  .footer { margin:12px 0 2px; text-align:center; }
   .footer .tag {
     font-family:var(--font-serif); font-style:italic; font-size:15px;
     color:var(--muted); letter-spacing:-0.01em;
@@ -216,7 +216,7 @@ eleventyExcludeFromCollections: true
 
     <h1 class="name">Rafhin Mir</h1>
 
-    <p class="role">Director &amp; Founder</p>
+    <p class="role">Creative Director &amp; Filmmaker</p>
 
     <div class="meta">
       <span>Toronto, ON</span>
@@ -284,7 +284,7 @@ eleventyExcludeFromCollections: true
         'N:Mir;Rafhin;;;',
         'FN:Rafhin Mir',
         'ORG:Rafhin Visuals',
-        'TITLE:Director & Founder',
+        'TITLE:Creative Director & Filmmaker',
         'TEL;TYPE=CELL,VOICE:+16395600919',
         'EMAIL;TYPE=WORK,INTERNET:media@rafhin.com',
         'URL:https://rafhin.com',
