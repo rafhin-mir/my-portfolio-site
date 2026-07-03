@@ -576,7 +576,7 @@
   .divider { margin: 0 24px; }
 
   .brands-section { padding: 48px 24px 56px; }
-  .brands-grid { grid-template-columns: repeat(3, 1fr); }
+  .brands-grid { grid-template-columns: repeat(2, 1fr); }
 
   .exp-layout { grid-template-columns: 1fr; gap: 36px; }
   .exp-photo { aspect-ratio: 4/3; margin: 0 auto; }

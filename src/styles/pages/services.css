@@ -273,7 +273,7 @@ details .acc-body { display: block !important; }
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: brightness(.38) saturate(.6);
+  filter: brightness(.52) saturate(.6);
 }
 .collab-overlay {
   position: absolute;
