@@ -35,18 +35,13 @@
       opacity: 0, y: 12, duration: 0.35, delay: 0.15, ease: 'power2.out'
     });
 
-    gsap.from('.creations-eyebrow', {
-      scrollTrigger: { trigger: '.creations-header', start: 'top 82%' },
-      opacity: 0, y: 10, duration: 0.3, ease: 'power2.out'
+    gsap.from('.story-photo', {
+      scrollTrigger: { trigger: '.story-section', start: 'top 80%' },
+      opacity: 0, x: -30, duration: 0.6, ease: 'power2.out'
     });
-    gsap.from(['.creations-italic', '.creations-title'], {
-      scrollTrigger: { trigger: '.creations-header', start: 'top 80%' },
-      opacity: 0, y: 16, duration: 0.38, stagger: 0.07, ease: 'power3.out'
-    });
-
-    gsap.from('.creation-card', {
-      scrollTrigger: { trigger: '.creations-stack', start: 'top 78%' },
-      opacity: 0, y: 28, duration: 0.4, stagger: 0.08, ease: 'power2.out'
+    gsap.from(['.story-eyebrow', '.story-italic', '.story-heading', '.story-body', '.story-content .btn-ghost'], {
+      scrollTrigger: { trigger: '.story-section', start: 'top 75%' },
+      opacity: 0, y: 18, duration: 0.45, stagger: 0.06, ease: 'power2.out'
     });
 
     gsap.from('.brands-eyebrow', {
@@ -58,18 +53,15 @@
       opacity: 0, y: 8, duration: 0.3, stagger: { each: 0.03, from: 'start' }, ease: 'power1.out'
     });
 
-    gsap.from(['.exp-italic-heading', '.exp-bold-heading'], {
+    gsap.from(['.exp-eyebrow', '.exp-italic-heading', '.exp-bold-heading'], {
       scrollTrigger: { trigger: '.exp-header', start: 'top 82%' },
       opacity: 0, y: 14, duration: 0.35, stagger: 0.07, ease: 'power2.out'
     });
-    gsap.from('.exp-photo', {
-      scrollTrigger: { trigger: '.exp-layout', start: 'top 78%' },
-      opacity: 0, x: -30, duration: 0.45, ease: 'power2.out'
-    });
-    gsap.from('.exp-list-item', {
-      scrollTrigger: { trigger: '.exp-layout', start: 'top 75%' },
-      opacity: 0, x: 20, duration: 0.35, stagger: 0.07, ease: 'power2.out'
-    });
+    gsap.fromTo('.exp-item',
+      { opacity: 0, y: 20 },
+      { opacity: 0.8, y: 0, duration: 0.5, ease: 'power2.out',
+        scrollTrigger: { trigger: '.exp-grid', start: 'top 80%' } }
+    );
 
     gsap.to('.cta-bg-img img', {
       scrollTrigger: {
