@@ -125,39 +125,53 @@
       }
     }
 
-    function loadVideos() {
+    function loadOthers() {
+      videos.forEach(function (v, i) {
+        if (!v || i === activeIndex) return;
+        if (v.getAttribute('preload') === 'none') {
+          v.setAttribute('preload', 'metadata');
+          v.load();
+        }
+      });
+    }
+
+    function loadActive() {
       if (loaded) return;
       loaded = true;
-      videos.forEach(function (v, i) {
-        if (!v) return;
-        v.setAttribute('preload', i === activeIndex ? 'auto' : 'metadata');
-        v.load();
-      });
-      playVideo(videos[activeIndex]);
+      var av = videos[activeIndex];
+      if (!av) return;
+      av.setAttribute('preload', 'auto');
+      av.load();
+      playVideo(av);
+      // Load other panels' metadata once active starts playing
+      av.addEventListener('playing', loadOthers, { once: true });
+      setTimeout(loadOthers, 2500); // fallback if playing never fires
     }
 
     if (window.IntersectionObserver) {
       var io = new IntersectionObserver(function (entries) {
-        if (entries[0].isIntersecting) { loadVideos(); io.disconnect(); }
-      }, { rootMargin: '300px' });
+        if (entries[0].isIntersecting) { loadActive(); io.disconnect(); }
+      }, { rootMargin: '0px 0px 1000px 0px' });
       io.observe(rail);
     } else {
-      loadVideos();
+      loadActive();
     }
 
     function changeItem(index) {
       if (index === activeIndex) return;
-      loadVideos();
+      loadActive();
       videos[activeIndex].pause();
       items[activeIndex].classList.remove('is-active');
       activeIndex = index;
       items[activeIndex].classList.add('is-active');
       var nv = videos[activeIndex];
-      if (nv && nv.getAttribute('preload') === 'none') {
-        nv.setAttribute('preload', 'auto');
-        nv.load();
+      if (nv) {
+        if (nv.getAttribute('preload') !== 'auto') {
+          nv.setAttribute('preload', 'auto');
+          nv.load();
+        }
+        playVideo(nv);
       }
-      playVideo(nv);
     }
 
     items.forEach(function (item, i) {
