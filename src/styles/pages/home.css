@@ -445,7 +445,7 @@
 
 /* ── showcase ── */
 .showcase-section { padding-bottom: 60px; }
-.showcase-header { padding: 64px 48px 36px; }
+.showcase-header { padding: 64px 48px 36px; text-align: center; }
 .showcase-eyebrow {
   font-size: 10px;
   font-weight: 700;
