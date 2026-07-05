@@ -193,11 +193,10 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: grayscale(100%) brightness(.8);
-  transition: filter .8s cubic-bezier(0.22, 1, 0.36, 1);
+  filter: brightness(.95);
 }
 .story-photo:hover img {
-  filter: grayscale(0%) brightness(.95);
+  filter: brightness(1);
 }
 .story-photo-overlay {
   position: absolute;
