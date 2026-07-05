@@ -79,6 +79,18 @@
     });
   }
 
+  function initHeroVideos() {
+    var videos = Array.from(document.querySelectorAll('.carousel-card video'));
+    if (!videos.length) return;
+    videos.forEach(function (v, i) {
+      setTimeout(function () {
+        v.setAttribute('preload', 'auto');
+        v.load();
+        v.play().catch(function () {});
+      }, i * 180);
+    });
+  }
+
   function initCarouselHover() {
     var cards = Array.from(document.querySelectorAll('.carousel-card'));
     var carousel = document.querySelector('.hero-carousel');
@@ -151,7 +163,7 @@
     if (window.IntersectionObserver) {
       var io = new IntersectionObserver(function (entries) {
         if (entries[0].isIntersecting) { loadActive(); io.disconnect(); }
-      }, { rootMargin: '0px 0px 1000px 0px' });
+      }, { rootMargin: '0px 0px 400px 0px' });
       io.observe(rail);
     } else {
       loadActive();
@@ -254,10 +266,11 @@
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () { init(); initCarouselHover(); initShowcase(); });
+    document.addEventListener('DOMContentLoaded', function () { init(); initCarouselHover(); initShowcase(); initHeroVideos(); });
   } else {
     init();
     initCarouselHover();
     initShowcase();
+    initHeroVideos();
   }
 })();
