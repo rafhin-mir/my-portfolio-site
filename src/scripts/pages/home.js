@@ -107,10 +107,125 @@
     });
   }
 
+  function initShowcaseRail(railId) {
+    var rail = document.getElementById(railId);
+    if (!rail) return;
+    var items = Array.from(rail.querySelectorAll('.showcase-item'));
+    var videos = items.map(function (item) { return item.querySelector('.showcase-video'); });
+    var activeIndex = 0;
+    var hoverTimer = null;
+    var loaded = false;
+
+    function loadVideos() {
+      if (loaded) return;
+      loaded = true;
+      videos.forEach(function (v) { if (v) v.setAttribute('preload', 'metadata'); });
+      if (videos[0]) videos[0].play().catch(function () {});
+    }
+
+    if (window.IntersectionObserver) {
+      var io = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { loadVideos(); io.disconnect(); }
+      }, { rootMargin: '300px' });
+      io.observe(rail);
+    } else {
+      loadVideos();
+    }
+
+    function changeItem(index) {
+      if (index === activeIndex) return;
+      loadVideos();
+      videos[activeIndex].pause();
+      items[activeIndex].classList.remove('is-active');
+      activeIndex = index;
+      items[activeIndex].classList.add('is-active');
+      if (loaded) videos[activeIndex].play().catch(function () {});
+    }
+
+    items.forEach(function (item, i) {
+      item.addEventListener('pointerenter', function () {
+        clearTimeout(hoverTimer);
+        hoverTimer = setTimeout(function () { changeItem(i); }, 50);
+      });
+      item.addEventListener('click', function () { changeItem(i); });
+    });
+  }
+
+  function initClientShowcaseInfinite() {
+    if (window.innerWidth > 768) return;
+    var rail = document.getElementById('clientShowcaseRail');
+    if (!rail) return;
+
+    // Build a track element and move items into it
+    var track = document.createElement('div');
+    track.className = 'showcase-rail--vert-track';
+
+    var origItems = Array.from(rail.querySelectorAll('.showcase-item'));
+    origItems.forEach(function (item) { track.appendChild(item); });
+    origItems.forEach(function (item) {
+      var clone = item.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      track.appendChild(clone);
+    });
+    rail.appendChild(track);
+
+    var SPEED = 0.3;
+    var offset = 0;
+    var loopW = 0;
+    var isPaused = false;
+    var resumeTimer = null;
+    var touchLastX = 0;
+
+    function setOffset(x) {
+      offset = ((x % loopW) + loopW) % loopW;
+      track.style.transform = 'translateX(' + (-offset) + 'px)';
+    }
+
+    function tick() {
+      if (!isPaused) setOffset(offset + SPEED);
+      requestAnimationFrame(tick);
+    }
+
+    function start() {
+      loopW = track.scrollWidth / 2;
+      requestAnimationFrame(tick);
+    }
+
+    rail.addEventListener('touchstart', function (e) {
+      isPaused = true;
+      clearTimeout(resumeTimer);
+      touchLastX = e.touches[0].clientX;
+    }, { passive: true });
+
+    rail.addEventListener('touchmove', function (e) {
+      var dx = touchLastX - e.touches[0].clientX;
+      touchLastX = e.touches[0].clientX;
+      setOffset(offset + dx);
+    }, { passive: true });
+
+    rail.addEventListener('touchend', function () {
+      resumeTimer = setTimeout(function () { isPaused = false; }, 2000);
+    }, { passive: true });
+
+    rail.addEventListener('touchcancel', function () {
+      resumeTimer = setTimeout(function () { isPaused = false; }, 2000);
+    }, { passive: true });
+
+    // Start after layout is painted
+    setTimeout(start, 100);
+  }
+
+  function initShowcase() {
+    initShowcaseRail('showcaseRail');
+    initShowcaseRail('clientShowcaseRail');
+    initClientShowcaseInfinite();
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () { init(); initCarouselHover(); });
+    document.addEventListener('DOMContentLoaded', function () { init(); initCarouselHover(); initShowcase(); });
   } else {
     init();
     initCarouselHover();
+    initShowcase();
   }
 })();

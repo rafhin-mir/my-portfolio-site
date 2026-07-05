@@ -9,7 +9,18 @@ Live at: [rafhinvisuals.com](https://rafhinvisuals.com)
 ## Pages
 
 ### Home (`/`)
-Full-viewport hero with a 3D rotating card carousel featuring 10 real video assets. Cards are rendered in grayscale and switch to full colour on hover (desktop only — permanently grayscale on mobile). The carousel enters with a GSAP tilt animation that settles into a continuous CSS float. Below the fold: mission statement (Azeret Mono), featured creation cards (large featured card + 2-col supporting grid), brand partner grid, expertise list with descriptions, and a full-bleed CTA.
+Full-viewport hero with a 3D rotating card carousel featuring 10 real video assets. Cards are rendered in grayscale and switch to full colour on hover (desktop only — permanently grayscale on mobile). The carousel enters with a GSAP tilt animation that settles into a continuous CSS float.
+
+**Section order (top → bottom):**
+1. **Hero** — 3D carousel + "DEFINED BY DETAIL" lockup
+2. **Mission** — centered Azeret Mono paragraph + "Learn More →" ghost button
+3. **Trusted By** — static 5-column logo grid (10 brand partners); 2-column on mobile. All logos `preload="none"` with `loading="lazy"`.
+4. **Featured Showcase** — kmixc-style horizontal flex accordion, 5 videos. Inactive panels collapse to ~90px; active panel expands to fill remaining width via `flex: 1 1 auto`. On mobile: vertical stacked accordion (active panel 210px, inactive 80px). All videos lazy-loaded via IntersectionObserver at 300px rootMargin.
+5. **Client Work Showcase** — 9:16 vertical video accordion, 6 client videos (Mercedes-Benz, McLaren, Honda, RWB, Pfaff, ECC). Desktop: active panel locks to exact 9:16 ratio (`flex: 0 0 360px`, rail height 640px). On mobile: transform-driven infinite horizontal scroll gallery — auto-drifts at 0.3px/frame via `requestAnimationFrame`, pauses on `touchstart`, resumes 2s after `touchend`; `touchmove` drives the offset directly for manual drag. Items duplicated in JS for seamless loop (`translateX` wraps at `scrollWidth / 2`).
+6. **About the Studio** — split grid (photo left / copy right); photo is grayscale → full colour on hover. Photo capped at 220px height on mobile.
+7. **Creations** — hidden (`display:none`), preserved for future activation
+8. **Key Expertise** — 4-item numbered grid; description text 15px / `rgba(245,245,245,.9)`
+9. **CTA** — full-bleed footer image, "COLLABORATE" heading with `clamp()` sizing for mobile, crimson pill button
 
 ### Automotive (`/automotive.html`)
 Dedicated automotive filmmaking page. Features:
@@ -87,7 +98,7 @@ src/
 │   │   ├── loader.js       # Fades out loader overlay after 900ms
 │   │   └── nav.js          # Hamburger toggle, overlay open/close
 │   └── pages/
-│       ├── home.js         # Hero tilt entrance, carousel hover (b&w ↔ colour), scroll reveals
+│       ├── home.js         # Hero tilt, carousel hover (b&w ↔ colour), showcase accordions, infinite client scroll
 │       ├── automotive.js   # Hero video play, entrance + stripe reveal, scroll reveals
 │       ├── about-gsap.js   # About page entrance + location/CTA scroll reveals
 │       ├── work-filter.js  # Client-side grid filtering with GSAP stagger on switch
@@ -108,7 +119,7 @@ src/
     │   ├── loader.css
     │   └── layout.css      # Shared section and divider utilities
     └── pages/
-        ├── home.css        # Hero, carousel, creations, brands, expertise, CTA
+        ├── home.css        # Hero, carousel, brands, showcases, story, expertise, CTA; full mobile breakpoints
         ├── automotive.css  # Hero video, filmstrip, cards, masonry, CTA
         ├── about.css       # Intro grid, location, CTA
         ├── work.css        # Header, filter tabs, card grid, featured spans
@@ -126,6 +137,19 @@ src/
 - Grayscale ↔ colour hover: JS `getBoundingClientRect()` detects the front-facing card — CSS `pointer-events` is unreliable in 3D space
 - Entrance: GSAP tilt animation hands off to CSS `animation` via `clearProps: 'transform'` + `animationPlayState: running`
 - Mobile: hover colour switching disabled; carousel stays permanently grayscale
+
+### Showcase Accordions (Home)
+- **Desktop flex accordion:** inactive panels use `flex: 0 0 clamp(72px, 6vw, 110px)`; active panel uses `flex: 1 1 auto`. Transition on `flex-basis` and `flex-grow` with `cubic-bezier(0.25, 1, 0.5, 1)` for a spring feel.
+- **9:16 client showcase:** active panel fixed at `flex: 0 0 360px` with rail `height: 640px` — integer 9:16 ratio. Inactive panels use `flex: 1 1 0` to fill remaining width. CSS specificity note: `.showcase-rail--vert .showcase-item.is-active` must be declared after the inactive rule to win.
+- **Video loading:** all 11 showcase videos start `preload="none"`. An `IntersectionObserver` at `rootMargin: '300px'` sets `preload="metadata"` and plays the active video once the rail enters the near-viewport zone.
+- **Interaction:** 50ms `pointerenter` debounce prevents flickering at panel borders; `click` events added for touch device support.
+
+### Infinite Scroll Gallery (Mobile Client Showcase)
+- On `window.innerWidth ≤ 768`, the 9:16 accordion is replaced with an infinite horizontal scroll gallery.
+- JS creates a `.showcase-rail--vert-track` wrapper, moves the 6 original items in, then appends 6 clones (`aria-hidden="true"`) for seamless looping.
+- Animation runs via `requestAnimationFrame`: each frame adds `0.3px` to an `offset` variable; `track.style.transform = translateX(-offset)` is set directly — no `scrollLeft` manipulation (unreliable on iOS Safari with touch-scroll elements).
+- Loop wrap: `offset = ((offset % loopW) + loopW) % loopW` where `loopW = track.scrollWidth / 2`.
+- Touch: `touchstart` pauses auto-scroll; `touchmove` computes `dx = lastX - currentX` and applies it to offset for direct drag; `touchend` schedules resume after 2000ms.
 
 ### Automotive Filmstrip
 - 3 columns, each with 2 identical sets of 6 frames for a seamless `translateY(-50%)` loop
@@ -158,7 +182,7 @@ npm install
 node serve.mjs
 ```
 
-Eleventy builds to `_site/`, watches for changes, serves at `http://localhost:3000`.
+Eleventy builds to `_site/`, watches for changes, serves at `http://localhost:3001`.
 
 ---
 
