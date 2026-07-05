@@ -1,11 +1,14 @@
 const loader      = document.getElementById('pageLoader');
 const pageContent = document.getElementById('pageContent');
 
+const loaderVariant = loader ? loader.dataset.variant : 'default';
+const loaderDelay   = loaderVariant === 'contact' ? 1900 : 900;
+
 setTimeout(() => {
   loader.classList.add('hidden');
-}, 900);
+}, loaderDelay);
 
-setTimeout(() => loader.remove(), 2100);
+setTimeout(() => loader.remove(), loaderDelay + 1200);
 
 document.addEventListener('visibilitychange', function () {
   if (document.visibilityState === 'visible') {
