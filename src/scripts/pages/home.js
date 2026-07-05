@@ -107,12 +107,12 @@
     });
   }
 
-  function initShowcaseRail(railId) {
+  function initShowcaseRail(railId, initialIndex) {
     var rail = document.getElementById(railId);
     if (!rail) return;
     var items = Array.from(rail.querySelectorAll('.showcase-item'));
     var videos = items.map(function (item) { return item.querySelector('.showcase-video'); });
-    var activeIndex = 0;
+    var activeIndex = initialIndex || 0;
     var hoverTimer = null;
     var loaded = false;
 
@@ -248,8 +248,8 @@
   }
 
   function initShowcase() {
-    initShowcaseRail('showcaseRail');
-    initShowcaseRail('clientShowcaseRail');
+    initShowcaseRail('showcaseRail', 2);
+    initShowcaseRail('clientShowcaseRail', 0);
     initClientShowcaseInfinite();
   }
 
