@@ -564,7 +564,7 @@
 
 /* ── brands ── */
 .brands-section {
-  padding: 36px 48px 0;
+  padding: 36px 48px 96px;
   text-align: center;
 }
 .brands-eyebrow {
@@ -804,7 +804,7 @@
   .story-photo { aspect-ratio: unset; height: 220px; min-height: 0; }
   .story-content { padding: 28px 24px; }
 
-  .brands-section { padding: 24px 24px 20px; }
+  .brands-section { padding: 24px 24px 96px; }
   .brands-grid { grid-template-columns: repeat(2, 1fr); gap: 4px; }
   .brand-item { padding: 14px 12px; }
   .brand-item img { max-height: 44px; }
