@@ -116,11 +116,24 @@
     var hoverTimer = null;
     var loaded = false;
 
+    function playVideo(v) {
+      if (!v) return;
+      if (v.readyState >= 3) {
+        v.play().catch(function () {});
+      } else {
+        v.addEventListener('canplay', function () { v.play().catch(function () {}); }, { once: true });
+      }
+    }
+
     function loadVideos() {
       if (loaded) return;
       loaded = true;
-      videos.forEach(function (v) { if (v) v.setAttribute('preload', 'metadata'); });
-      if (videos[0]) videos[0].play().catch(function () {});
+      videos.forEach(function (v, i) {
+        if (!v) return;
+        v.setAttribute('preload', i === activeIndex ? 'auto' : 'metadata');
+        v.load();
+      });
+      playVideo(videos[activeIndex]);
     }
 
     if (window.IntersectionObserver) {
@@ -139,7 +152,12 @@
       items[activeIndex].classList.remove('is-active');
       activeIndex = index;
       items[activeIndex].classList.add('is-active');
-      if (loaded) videos[activeIndex].play().catch(function () {});
+      var nv = videos[activeIndex];
+      if (nv && nv.getAttribute('preload') === 'none') {
+        nv.setAttribute('preload', 'auto');
+        nv.load();
+      }
+      playVideo(nv);
     }
 
     items.forEach(function (item, i) {
