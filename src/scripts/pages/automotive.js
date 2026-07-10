@@ -35,8 +35,8 @@
       autoAlpha: 0, y: 22, duration: 0.4, stagger: 0.08, ease: 'power2.out'
     });
 
-    // Photo masonry
-    gsap.from('.auto-masonry-item', {
+    // Photo masonry — animate inner div, not the column item itself (transform on column children breaks CSS columns in Chrome)
+    gsap.from('.auto-masonry-item .auto-photo', {
       scrollTrigger: { trigger: '.auto-masonry', start: 'top 80%' },
       opacity: 0, y: 18, duration: 0.35, stagger: { each: 0.05, from: 'start' }, ease: 'power2.out'
     });
@@ -153,11 +153,56 @@
     }
   }
 
+  function initLightbox() {
+    var lb      = document.getElementById('lb');
+    var lbImg   = document.getElementById('lbImg');
+    var lbClose = document.getElementById('lbClose');
+    var lbPrev  = document.getElementById('lbPrev');
+    var lbNext  = document.getElementById('lbNext');
+    if (!lb) return;
+
+    var imgs = Array.from(document.querySelectorAll('.auto-masonry .auto-photo img'));
+    var current = 0;
+
+    function open(idx) {
+      current = idx;
+      lbImg.src = imgs[current].src;
+      lbImg.alt = imgs[current].alt;
+      lb.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function close() {
+      lb.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    function prev() { open((current - 1 + imgs.length) % imgs.length); }
+    function next() { open((current + 1) % imgs.length); }
+
+    imgs.forEach(function (img, i) {
+      img.parentElement.addEventListener('click', function () { open(i); });
+    });
+
+    lbClose.addEventListener('click', close);
+    lbPrev.addEventListener('click', function (e) { e.stopPropagation(); prev(); });
+    lbNext.addEventListener('click', function (e) { e.stopPropagation(); next(); });
+    lb.addEventListener('click', function (e) { if (e.target === lb || e.target === document.querySelector('.lb-img-wrap')) close(); });
+
+    document.addEventListener('keydown', function (e) {
+      if (!lb.classList.contains('is-open')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') prev();
+      if (e.key === 'ArrowRight') next();
+    });
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () { init(); initHeroVideo(); initFilmstrip(); });
+    document.addEventListener('DOMContentLoaded', function () { init(); initHeroVideo(); initFilmstrip(); initLightbox(); });
   } else {
     init();
     initHeroVideo();
     initFilmstrip();
+    initLightbox();
   }
 })();
