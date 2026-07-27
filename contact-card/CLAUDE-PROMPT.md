@@ -1,7 +1,84 @@
+# Prompt: Add a hidden "Contact Card" page to the Rafhin Visuals site
+
+Copy everything below the line into Claude Code (run it from the repo root of your
+Eleventy site). It also expects two files alongside it — `Contact Card.html` and
+`rv-logo.png` — which are included in this folder. Drag those into the chat too, or
+point Claude at them.
+
 ---
-permalink: /contactcard/index.html
-eleventyExcludeFromCollections: true
----
+
+## Task
+
+Add a **hidden, standalone contact-card page** to my website at the route
+**`/contactcard`** (so the final URL is `https://rafhin.com/contactcard`). It is a
+digital business card I'll link to from a QR code and send to clients. It must NOT be
+linked anywhere on the site and must NOT appear in any nav, footer, sitemap, or search
+index — it's only reachable by typing/scanning the URL.
+
+## My stack
+
+- **Eleventy (11ty) v3** with **Nunjucks** templates, vanilla CSS, GSAP, hosted on **Vercel**.
+- Logos live in `src/assets/logos/`. Existing brand tokens are in `src/styles/base/tokens.css`.
+
+## Requirements
+
+1. **Standalone page — do NOT extend the site's base layout.** This page has its own
+   `<head>`, its own fonts, and its own full-screen dark design. It must not include the
+   normal site nav, footer, grain layer, or global scripts. The cleanest approach in
+   Eleventy: create a template that sets its own `permalink` and renders the full HTML
+   document verbatim (no `layout:` front matter), e.g.:
+
+   ```
+   ---
+   permalink: /contactcard/index.html
+   eleventyExcludeFromCollections: true
+   ---
+   <!DOCTYPE html> ... (full document below) ...
+   ```
+
+   Put it at `src/contactcard.njk` (or wherever standalone pages live in this repo —
+   match the existing convention if there is one).
+
+2. **Keep it hidden.**
+   - `eleventyExcludeFromCollections: true` so it never shows up in any `collections.*` loop (nav, sitemap, etc.).
+   - Add `<meta name="robots" content="noindex, nofollow" />` in its `<head>`.
+   - If there's a generated `sitemap.xml`, make sure this URL is excluded (it will be if it's out of collections, but double-check).
+   - Do not add any `<a>` link to it from any other page.
+
+3. **Use my real logo.** Copy the included `rv-logo.png` into `src/assets/logos/` (keep
+   or rename to `RV-PFP-Burgundy.png`) and update the `<img class="logo" src="...">` to
+   the correct built path (e.g. `/assets/logos/RV-PFP-Burgundy.png`). It's a circular
+   avatar in the design.
+
+4. **Save Contact must work.** The page generates a vCard (`.vcf`) on the fly and
+   downloads it when the "Save contact" button is tapped — this is what lets someone add
+   me to their phone in one tap. Keep the inline `<script>` exactly as provided (it has a
+   data-URI fallback for browsers that block Blob downloads). vCard details:
+   - Name: Rafhin Mir · Org: Rafhin Visuals · Title: Director & Founder
+   - Tel: +1 639 560 0919 · Email: media@rafhin.com · URL: https://rafhin.com · Toronto, ON
+
+5. **Mobile-first.** It's designed for phones (QR scans). It's already responsive
+   (`width:100%`, `max-width:430px`, safe-area insets, ≥44px tap targets). Don't add
+   desktop chrome — centered card on a dark backdrop is the intended look on every size.
+
+6. **Fonts.** It loads Archivo, IvyPresto Display, and Azeret Mono from Google Fonts via
+   the `<link>` in its head. If the site already self-hosts these, you may swap to the
+   local `@font-face` instead — otherwise leave the Google Fonts link.
+
+7. **Reduced motion.** The entrance animation is already gated behind
+   `prefers-reduced-motion: no-preference`; content is visible by default. Don't change this.
+
+## Acceptance criteria
+
+- Visiting `/contactcard` renders the card; no other page links to it.
+- `view-source` shows `noindex, nofollow`; the URL is absent from `sitemap.xml` and nav/footer.
+- Tapping "Save contact" downloads `Rafhin-Mir.vcf` and it imports cleanly on iOS and Android.
+- All rows work: Call (`tel:`), Text (`sms:`), Email (`mailto:`), Website, Instagram, TikTok.
+- Looks correct on a 360–430px phone width with no overflow or clipped text.
+
+## The page (drop in verbatim, then wire the logo path + permalink as above)
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,14 +88,12 @@ eleventyExcludeFromCollections: true
 <title>Rafhin Mir · Rafhin Visuals</title>
 <meta name="description" content="Director & Founder, Rafhin Visuals — cinematic production studio. Save my contact, get in touch." />
 <meta name="theme-color" content="#050505" />
-<link rel="icon" href="/assets/icons/rv-black.jpg" type="image/jpeg" />
 <meta property="og:title" content="Rafhin Mir · Rafhin Visuals" />
 <meta property="og:description" content="Director & Founder — cinematic production studio. Built with intent. Made to last." />
 <meta property="og:type" content="profile" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,700;0,900;1,400&family=Azeret+Mono:wght@400;500&family=IvyPresto+Display:ital,wght@0,400;1,400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,700;0,900;1,400&family=Azeret+Mono:wght@400;500&family=IvyPresto+Display:ital,wght@0,400;1,400&display=swap"></noscript>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Azeret+Mono:wght@400;500&family=IvyPresto+Display:ital@0;1&display=swap" rel="stylesheet" />
 <style>
   :root {
     --black:#050505; --black-2:#0a0a0a; --secondary:#141414;
@@ -53,7 +128,7 @@ eleventyExcludeFromCollections: true
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:12px 14px calc(12px + env(safe-area-inset-bottom));
+    padding:32px 18px calc(32px + env(safe-area-inset-bottom));
     position:relative;
     overflow-x:hidden;
   }
@@ -77,12 +152,12 @@ eleventyExcludeFromCollections: true
     background:linear-gradient(180deg, rgba(245,245,245,0.09), rgba(245,245,245,0.035));
     border:1px solid rgba(245,245,245,0.15);
     border-radius:22px;
-    padding:22px 20px 18px;
+    padding:38px 26px 26px;
     box-shadow:inset 0 1px 0 rgba(245,245,245,0.12), 0 4px 16px rgba(0,0,0,0.6), 0 44px 96px rgba(0,0,0,0.72);
     backdrop-filter:blur(3px);
   }
 
-  /* header */
+  /* ── header ── */
   .eyebrow {
     font-size:10px; font-weight:600; letter-spacing:0.24em;
     text-transform:uppercase; color:var(--dim);
@@ -90,44 +165,44 @@ eleventyExcludeFromCollections: true
   }
 
   .logo {
-    display:block; width:84px; height:84px; margin:10px auto 0;
+    display:block; width:128px; height:128px; margin:18px auto 0;
     border-radius:50%; object-fit:cover;
     border:1px solid rgba(245,245,245,0.16);
     box-shadow:0 12px 34px rgba(0,0,0,0.55), inset 0 1px 0 rgba(245,245,245,0.08);
   }
 
   .stripe {
-    width:46px; height:2px; border-radius:999px; margin:10px auto 0;
+    width:46px; height:2px; border-radius:999px; margin:18px auto 0;
     background:linear-gradient(to right, var(--gold-start), var(--gold-mid), var(--gold-end));
   }
 
   .name {
-    margin:10px 0 0; text-align:center;
+    margin:18px 0 0; text-align:center;
     font-family:var(--font-sans); font-weight:900;
-    font-size:clamp(26px,7vw,32px); letter-spacing:-0.035em;
+    font-size:clamp(30px,9vw,38px); letter-spacing:-0.035em;
     text-transform:uppercase; line-height:0.95;
   }
   .role {
-    margin:5px 0 0; text-align:center;
+    margin:9px 0 0; text-align:center;
     font-family:var(--font-serif); font-style:italic; font-weight:400;
-    font-size:17px; letter-spacing:-0.01em; color:rgba(245,245,245,0.92);
+    font-size:21px; letter-spacing:-0.01em; color:rgba(245,245,245,0.92);
   }
   .meta {
-    margin:6px 0 0; text-align:center;
+    margin:12px 0 0; text-align:center;
     font-family:var(--font-mono); font-size:12px; letter-spacing:0.02em;
     color:var(--muted);
     display:flex; align-items:center; justify-content:center; gap:9px;
   }
   .meta .dot { width:3px; height:3px; border-radius:50%; background:var(--ghost); }
 
-  /* primary */
+  /* ── primary ── */
   .save {
     display:flex; align-items:center; justify-content:center; gap:9px;
-    width:100%; margin:14px 0 0;
+    width:100%; margin:26px 0 0;
     background:var(--accent); color:#0a0306;
-    font-family:var(--font-sans); font-weight:800; font-size:12.5px;
+    font-family:var(--font-sans); font-weight:800; font-size:13.5px;
     letter-spacing:0.13em; text-transform:uppercase;
-    padding:13px 24px; border-radius:100px; border:none; cursor:pointer;
+    padding:17px 24px; border-radius:100px; border:none; cursor:pointer;
     text-decoration:none;
     transition:background 0.2s ease, transform 0.2s var(--ease-btn), box-shadow 0.2s ease;
     box-shadow:0 8px 28px rgba(204,34,85,0.28);
@@ -136,31 +211,36 @@ eleventyExcludeFromCollections: true
   .save:active { transform:translateY(0); }
   .save svg { width:16px; height:16px; }
 
-  /* contact rows */
-  .rows { margin:10px 0 0; display:flex; flex-direction:column; gap:5px; }
+  /* ── contact rows ── */
+  .rows { margin:14px 0 0; display:flex; flex-direction:column; gap:8px; }
   .row {
-    display:flex; align-items:center; gap:12px;
+    display:flex; align-items:center; gap:14px;
     background:rgba(5,5,5,0.32);
     border:1px solid rgba(245,245,245,0.07);
-    border-radius:12px; padding:9px 14px;
+    border-radius:14px; padding:14px 16px;
     text-decoration:none; color:var(--white); cursor:pointer;
     transition:background 0.2s ease, border-color 0.2s ease, transform 0.18s var(--ease-btn);
   }
   .row:hover { background:rgba(5,5,5,0.5); border-color:var(--border-mid); transform:translateY(-1px); }
   .row:active { transform:translateY(0); }
   .row .ic {
-    width:34px; height:34px; flex:none; border-radius:9px;
+    width:40px; height:40px; flex:none; border-radius:11px;
     display:grid; place-items:center;
     background:rgba(204,34,85,0.10); border:1px solid rgba(204,34,85,0.18);
     color:var(--accent);
   }
-  .row .ic svg { width:16px; height:16px; }
+  .row .ic svg { width:19px; height:19px; }
   .row .txt { display:flex; flex-direction:column; gap:2px; min-width:0; }
   .row .lbl { font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--dim); }
-  .row .val { font-size:14px; font-weight:600; letter-spacing:-0.01em; color:var(--white); white-space:nowrap; }
+  .row .val { font-size:16.5px; font-weight:600; letter-spacing:-0.01em; color:var(--white); white-space:nowrap; }
+  .row .arrow { margin-left:auto; flex:none; color:var(--ghost); transition:color 0.2s ease, transform 0.2s var(--ease-btn); }
+  .row:hover .arrow { color:var(--muted); transform:translateX(2px); }
+  .row .arrow svg { width:15px; height:15px; display:block; }
 
-  /* footer */
-  .footer { margin:12px 0 2px; text-align:center; }
+  /* social links render as full rows (see .row) — icons use the same burgundy accent */
+
+  /* ── footer ── */
+  .footer { margin:24px 0 4px; text-align:center; }
   .footer .tag {
     font-family:var(--font-serif); font-style:italic; font-size:15px;
     color:var(--muted); letter-spacing:-0.01em;
@@ -185,28 +265,7 @@ eleventyExcludeFromCollections: true
   .toast.show { opacity:1; transform:translate(-50%, 0); }
   .toast svg { width:15px; height:15px; color:var(--accent); }
 
-  /* desktop */
-  @media (min-width: 640px) {
-    body { padding:40px 24px; }
-    .card { max-width:620px; padding:44px 40px 36px; border-radius:28px; }
-    .logo { width:136px; height:136px; margin-top:16px; }
-    .stripe { margin-top:16px; width:56px; }
-    .name { margin-top:16px; font-size:48px; }
-    .role { margin-top:8px; font-size:24px; }
-    .meta { margin-top:10px; font-size:13px; }
-    .save { margin-top:24px; padding:18px 32px; font-size:14px; }
-    .rows { margin-top:14px; gap:8px; }
-    .row { padding:14px 20px; border-radius:16px; gap:16px; }
-    .row .ic { width:48px; height:48px; border-radius:13px; }
-    .row .ic svg { width:22px; height:22px; }
-    .row .lbl { font-size:11px; }
-    .row .val { font-size:18px; }
-    .footer { margin-top:20px; }
-    .footer .tag { font-size:17px; }
-    .footer .url { font-size:11px; margin-top:12px; }
-  }
-
-  /* entrance */
+  /* entrance — content is visible by default; only animates IN when motion is allowed */
   @keyframes rise { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
   @media (prefers-reduced-motion: no-preference) {
     .card > * { animation:rise 0.7s var(--ease-spring) both; }
@@ -236,7 +295,7 @@ eleventyExcludeFromCollections: true
 
     <h1 class="name">Rafhin Mir</h1>
 
-    <p class="role">Creative Director &amp; Filmmaker</p>
+    <p class="role">Director &amp; Founder</p>
 
     <div class="meta">
       <span>Toronto, ON</span>
@@ -251,31 +310,37 @@ eleventyExcludeFromCollections: true
       <a class="row" href="tel:+16395600919">
         <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.7 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.27a2 2 0 0 1 2.11-.45c.74.34 1.53.57 2.34.7A2 2 0 0 1 22 16.92z"/></svg></span>
         <span class="txt"><span class="lbl">Call</span><span class="val">+1 639 560 0919</span></span>
+        <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
       </a>
 
       <a class="row" href="sms:+16395600919">
         <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
         <span class="txt"><span class="lbl">Text</span><span class="val">Send a message</span></span>
+        <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
       </a>
 
-      <a class="row" href="mailto:rafhin.visual@gmail.com">
+      <a class="row" href="mailto:media@rafhin.com">
         <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></span>
-        <span class="txt"><span class="lbl">Email</span><span class="val">rafhin.visual@gmail.com</span></span>
+        <span class="txt"><span class="lbl">Email</span><span class="val">media@rafhin.com</span></span>
+        <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
       </a>
 
       <a class="row" href="https://rafhin.com" target="_blank" rel="noopener">
         <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
         <span class="txt"><span class="lbl">Website</span><span class="val">rafhin.com</span></span>
+        <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
       </a>
 
       <a class="row social-row" href="https://www.instagram.com/_rafhin/" target="_blank" rel="noopener">
         <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
         <span class="txt"><span class="lbl">Instagram</span><span class="val">@_rafhin</span></span>
+        <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
       </a>
 
       <a class="row social-row" href="https://www.tiktok.com/@_rafhin" target="_blank" rel="noopener">
         <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.05-2.82h-3.2v12.3a2.42 2.42 0 0 1-2.42 2.4 2.42 2.42 0 1 1 .66-4.74V7.69a5.65 5.65 0 0 0-.66-.04 5.62 5.62 0 1 0 5.62 5.62V8.97a7.4 7.4 0 0 0 4.3 1.38V7.15a4.28 4.28 0 0 1-3.25-1.33z"/></svg></span>
         <span class="txt"><span class="lbl">TikTok</span><span class="val">@_rafhin</span></span>
+        <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
       </a>
     </div>
 
@@ -298,9 +363,9 @@ eleventyExcludeFromCollections: true
         'N:Mir;Rafhin;;;',
         'FN:Rafhin Mir',
         'ORG:Rafhin Visuals',
-        'TITLE:Creative Director & Filmmaker',
+        'TITLE:Director & Founder',
         'TEL;TYPE=CELL,VOICE:+16395600919',
-        'EMAIL;TYPE=WORK,INTERNET:rafhin.visual@gmail.com',
+        'EMAIL;TYPE=WORK,INTERNET:media@rafhin.com',
         'URL:https://rafhin.com',
         'ADR;TYPE=WORK:;;;Toronto;ON;;Canada',
         'NOTE:Cinematic production studio. Built with intent. Made to last.',
@@ -334,3 +399,4 @@ eleventyExcludeFromCollections: true
   </script>
 </body>
 </html>
+```
