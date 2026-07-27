@@ -258,7 +258,7 @@ eleventyExcludeFromCollections: true
         <span class="txt"><span class="lbl">Text</span><span class="val">Send a message</span></span>
       </a>
 
-      <a class="row" href="mailto:rafhin.visual@gmail.com">
+      <a class="row" id="emailRow" href="mailto:rafhin.visual@gmail.com">
         <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></span>
         <span class="txt"><span class="lbl">Email</span><span class="val">rafhin.visual@gmail.com</span></span>
       </a>
@@ -287,7 +287,7 @@ eleventyExcludeFromCollections: true
 
   <div class="toast" id="toast" role="status" aria-live="polite">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-    <span>Contact downloaded</span>
+    <span id="toastMsg">Contact downloaded</span>
   </div>
 
   <script>
@@ -309,7 +309,31 @@ eleventyExcludeFromCollections: true
 
       var btn = document.getElementById('saveBtn');
       var toast = document.getElementById('toast');
+      var toastMsg = document.getElementById('toastMsg');
       var toastTimer;
+
+      function showToast(msg) {
+        toastMsg.textContent = msg;
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function(){ toast.classList.remove('show'); }, 2600);
+      }
+
+      var emailRow = document.getElementById('emailRow');
+      if (emailRow) {
+        emailRow.addEventListener('click', function(e) {
+          e.preventDefault();
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText('rafhin.visual@gmail.com').then(function() {
+              showToast('Email copied');
+            }).catch(function() {
+              window.location.href = emailRow.href;
+            });
+          } else {
+            window.location.href = emailRow.href;
+          }
+        });
+      }
 
       btn.addEventListener('click', function(){
         try {
@@ -323,9 +347,7 @@ eleventyExcludeFromCollections: true
           document.body.removeChild(a);
           setTimeout(function(){ URL.revokeObjectURL(url); }, 1500);
 
-          toast.classList.add('show');
-          clearTimeout(toastTimer);
-          toastTimer = setTimeout(function(){ toast.classList.remove('show'); }, 2600);
+          showToast('Contact downloaded');
         } catch (e) {
           window.location.href = 'data:text/vcard;charset=utf-8,' + encodeURIComponent(vcard);
         }
