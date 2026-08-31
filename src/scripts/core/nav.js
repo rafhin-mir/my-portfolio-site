@@ -1,7 +1,14 @@
+const siteNav    = document.querySelector('.site-nav');
 const navToggle  = document.getElementById('navToggle');
 const navOverlay = document.getElementById('navOverlay');
 const navClose   = document.getElementById('navClose');
 const overlayLinks = navOverlay.querySelectorAll('.nav-overlay-links li');
+
+function updateNavScrollState() {
+  siteNav.classList.toggle('is-scrolled', window.scrollY > 80);
+}
+updateNavScrollState();
+window.addEventListener('scroll', updateNavScrollState, { passive: true });
 
 gsap.set(overlayLinks, { y: 30, opacity: 0 });
 

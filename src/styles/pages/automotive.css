@@ -531,21 +531,8 @@
   .auto-cap-grid { height: 1200px; }
 }
 
-/* ── TABLET (769px–1024px) */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .auto-cap-grid { height: auto; min-height: 600px; }
-  .auto-filmstrip-cols { grid-template-columns: 1fr 1fr; padding: 30px 16px 30px 28px; }
-  .auto-filmstrip-cols .auto-strip-col:last-child { display: none; }
-  .auto-cap-copy { padding: 56px 36px 56px 44px; }
-  .auto-cap-body { font-size: 14px; }
-  .auto-video-grid { gap: 10px; }
-  .auto-video-card--vertical { min-height: 380px; }
-  .auto-video-card--horizontal { height: 300px; }
-  .auto-photo-section { padding: 0 32px 80px; }
-}
-
-/* ── MOBILE (≤768px) */
-@media (max-width: 768px) {
+/* ── MOBILE (≤1024px) — anything narrower than proper desktop gets the full stacked layout, no half-desktop tablet zone */
+@media (max-width: 1024px) {
   /* Hero */
   .auto-hero { min-height: 100svh; padding: 0 24px; }
   .auto-scroll-hint { right: 24px; }
