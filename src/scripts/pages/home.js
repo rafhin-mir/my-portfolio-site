@@ -83,9 +83,9 @@
     var videos = Array.from(document.querySelectorAll('.carousel-card video'));
     if (!videos.length) return;
 
-    // These are 10 simultaneously-looping videos for the 3D stack effect, expensive to
-    // keep decoding once the hero is scrolled out of view, so track visibility and only
-    // ever play them while the hero is actually on screen (including the staggered start).
+    // All 10 play at once - that's the intended effect for the 3D carousel. They're
+    // expensive to keep decoding once the hero is scrolled out of view though, so
+    // pause/resume the whole set based on visibility instead.
     var heroVisible = true;
     var heroSection = document.querySelector('.hero');
     if (heroSection && window.IntersectionObserver) {
@@ -115,13 +115,20 @@
     if (!carousel || !cards.length) return;
 
     var active = null;
+    var pendingX = 0;
+    var pendingY = 0;
+    var rafScheduled = false;
 
-    carousel.addEventListener('mousemove', function (e) {
-      var mx = e.clientX, my = e.clientY;
+    // The cards are constantly moving (3D spin), so their rects can't be cached -
+    // but mousemove can fire far more often than the screen redraws, so without
+    // throttling this reflows 10 elements on every single event instead of once
+    // per frame.
+    function updateHover() {
+      rafScheduled = false;
       var best = null, bestArea = 0;
       cards.forEach(function (card) {
         var r = card.getBoundingClientRect();
-        if (mx >= r.left && mx <= r.right && my >= r.top && my <= r.bottom) {
+        if (pendingX >= r.left && pendingX <= r.right && pendingY >= r.top && pendingY <= r.bottom) {
           var area = r.width * r.height;
           if (area > bestArea) { bestArea = area; best = card; }
         }
@@ -130,6 +137,15 @@
       if (active) active.classList.remove('is-hovered');
       active = best;
       if (active) active.classList.add('is-hovered');
+    }
+
+    carousel.addEventListener('mousemove', function (e) {
+      pendingX = e.clientX;
+      pendingY = e.clientY;
+      if (!rafScheduled) {
+        rafScheduled = true;
+        requestAnimationFrame(updateHover);
+      }
     });
 
     carousel.addEventListener('mouseleave', function () {
