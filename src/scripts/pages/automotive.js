@@ -25,15 +25,25 @@
       opacity: 0, y: 10, duration: 0.3, stagger: 0.07, ease: 'power2.out'
     });
 
-    // Video cards stagger
-    gsap.from('.auto-video-grid .auto-video-card', {
-      scrollTrigger: { trigger: '.auto-video-grid', start: 'top 82%', once: true },
-      autoAlpha: 0, y: 28, duration: 0.4, stagger: 0.08, ease: 'power2.out'
-    });
-    gsap.from('.auto-video-stack .auto-video-card', {
-      scrollTrigger: { trigger: '.auto-video-stack', start: 'top 82%', once: true },
-      autoAlpha: 0, y: 22, duration: 0.4, stagger: 0.08, ease: 'power2.out'
-    });
+    // Video cards - independent tween per card, explicit fromTo endpoints (not
+    // gsap.from()'s implicit "to" sampling, and not one shared stagger tween).
+    // This used to leave every card but the first permanently stuck invisible;
+    // this pairing is what reliably avoids it.
+    function revealCards(selector, travelY) {
+      var reveal = function () {
+        document.querySelectorAll(selector).forEach(function (card, i) {
+          gsap.fromTo(card,
+            { opacity: 0, y: travelY },
+            { opacity: 1, y: 0, duration: 0.4, delay: i * 0.08, ease: 'power2.out' }
+          );
+        });
+      };
+      var container = document.querySelector(selector.split(' ')[0]);
+      if (!container) return;
+      ScrollTrigger.create({ trigger: container, start: 'top 82%', once: true, onEnter: reveal });
+    }
+    revealCards('.auto-video-grid .auto-video-card', 28);
+    revealCards('.auto-video-stack .auto-video-card', 22);
 
     // Photo masonry — animate inner div, not the column item itself (transform on column children breaks CSS columns in Chrome)
     gsap.from('.auto-masonry-item .auto-photo', {
@@ -107,7 +117,10 @@
         v.removeAttribute('data-src');
         v.play().catch(function () {});
       });
-      setTimeout(fillClones, 400);
+      setTimeout(function () {
+        fillClones();
+        wrap.querySelectorAll('video').forEach(function (v) { perVideoObs.observe(v); });
+      }, 400);
     }, { threshold: 0.05 });
 
     // Pause entire filmstrip when off-screen
@@ -115,16 +128,19 @@
       if (!loaded) return;
       var visible = entries[0].isIntersecting;
       wrap.querySelectorAll('video').forEach(function (v) {
-        if (visible && v.paused && v.src) v.play().catch(function () {});
+        if (!v.src && !v.srcObject) return;
+        if (visible && v.paused) v.play().catch(function () {});
         else if (!visible && !v.paused) v.pause();
       });
     }, { threshold: 0 });
 
-    // Per-video observer within the filmstrip — pause videos hidden by overflow
+    // Per-video observer within the filmstrip — pause videos hidden by overflow.
+    // Clones use srcObject (captureStream), not src, so both must be checked here -
+    // this used to only check v.src, silently skipping every clone forever.
     var perVideoObs = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         var v = e.target;
-        if (!v.src) return;
+        if (!v.src && !v.srcObject) return;
         if (e.isIntersecting && v.paused) v.play().catch(function () {});
         else if (!e.isIntersecting && !v.paused) v.pause();
       });
@@ -132,14 +148,6 @@
 
     loadObs.observe(wrap);
     sectionObs.observe(wrap);
-
-    // Attach per-video observer after load
-    var attachPerVideo = new IntersectionObserver(function (entries) {
-      if (!entries[0].isIntersecting || !loaded) return;
-      wrap.querySelectorAll('video').forEach(function (v) { perVideoObs.observe(v); });
-      attachPerVideo.disconnect();
-    }, { threshold: 0 });
-    attachPerVideo.observe(wrap);
   }
 
   function initHeroVideo() {
@@ -151,6 +159,28 @@
       var p = v.play();
       if (p !== undefined) p.catch(function () {});
     }
+  }
+
+  function initVideoCards() {
+    var cards = Array.from(document.querySelectorAll('.auto-video-card'));
+    if (!cards.length) return;
+
+    cards.forEach(function (card) {
+      var v = card.querySelector('video.auto-card-bg');
+      if (!v) return;
+
+      card.addEventListener('pointerenter', function () {
+        if (v.getAttribute('preload') !== 'auto') {
+          v.setAttribute('preload', 'auto');
+          v.load();
+        }
+        v.play().catch(function () {});
+      });
+      card.addEventListener('pointerleave', function () {
+        v.pause();
+        v.currentTime = 0;
+      });
+    });
   }
 
   function initLightbox() {
@@ -198,11 +228,12 @@
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () { init(); initHeroVideo(); initFilmstrip(); initLightbox(); });
+    document.addEventListener('DOMContentLoaded', function () { init(); initHeroVideo(); initFilmstrip(); initVideoCards(); initLightbox(); });
   } else {
     init();
     initHeroVideo();
     initFilmstrip();
+    initVideoCards();
     initLightbox();
   }
 })();

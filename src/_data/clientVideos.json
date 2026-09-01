@@ -52,5 +52,50 @@
     "aspectRatio": "9 / 16",
     "poster": "https://i.vimeocdn.com/video/2195896903-269f83baae0c73718e41366caa01d81a1badb05ee1b66a37c855360b6cf307d1-d_960?region=us",
     "description": ""
+  },
+  {
+    "slug": "shaynes-gtr",
+    "title": "Shayne's GTR",
+    "category": "Feature Film",
+    "vimeoId": "1222878408",
+    "aspectRatio": "16 / 9",
+    "poster": "/assets/images/posters/showcase/shaynes-gtr.jpg",
+    "description": ""
+  },
+  {
+    "slug": "jaidens-nsx",
+    "title": "Jaiden's NSX",
+    "category": "Feature Film",
+    "vimeoId": "1222878405",
+    "aspectRatio": "16 / 9",
+    "poster": "/assets/images/posters/showcase/jaidens-nsx.jpg",
+    "description": ""
+  },
+  {
+    "slug": "nsx-feature",
+    "title": "NSX Feature",
+    "category": "Feature Film",
+    "vimeoId": "1222878407",
+    "aspectRatio": "16 / 9",
+    "poster": "https://i.vimeocdn.com/video/2195950782-ec2c0b0b747f0dd772a430ca66d088943260f7481dc30f1d1b70b4f4afbd77e3-d_960?region=us",
+    "description": ""
+  },
+  {
+    "slug": "alans-e30",
+    "title": "Alan's E30",
+    "category": "Feature Film",
+    "vimeoId": "1222878406",
+    "aspectRatio": "16 / 9",
+    "poster": "/assets/images/posters/showcase/alans-e30.jpg",
+    "description": ""
+  },
+  {
+    "slug": "matts-e55-amg",
+    "title": "Matt's E55 AMG",
+    "category": "Feature Film",
+    "vimeoId": "1222879296",
+    "aspectRatio": "5 / 4",
+    "poster": "https://i.vimeocdn.com/video/2195952732-4aa5067fe4187c5f8c81634a518a2449cc3d099d4d778395f1ad67fbe6ce9a09-d_960?region=us",
+    "description": ""
   }
 ]

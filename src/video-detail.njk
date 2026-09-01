@@ -22,6 +22,7 @@ pageScripts:
       frameborder="0"
       allow="autoplay; fullscreen; picture-in-picture"
       allowfullscreen
+      {% if video.startAt %}data-start-at="{{ video.startAt }}"{% endif %}
       title="{{ video.title }} client film"></iframe>
   </div>
 
@@ -33,5 +34,18 @@ pageScripts:
     <p class="wd-desc">{{ video.description }}</p>
     {% endif %}
     <a href="/contact/" class="btn-primary">Start a Project &nbsp;&rarr;</a>
+  </div>
+
+  <div class="wd-more">
+    <p class="wd-more-eyebrow">More Work</p>
+    <div class="wd-more-grid" data-shuffle-count="4">
+      {% for other in clientVideos | otherVideos(video.slug) %}
+        <a class="wd-more-item" href="/work/{{ other.slug }}/">
+          <img class="wd-more-poster" src="{{ other.poster }}" alt="" loading="lazy">
+          <div class="wd-more-scrim"></div>
+          <p class="wd-more-title">{{ other.title }}</p>
+        </a>
+      {% endfor %}
+    </div>
   </div>
 </section>
