@@ -3,6 +3,7 @@ export default function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPassthroughCopy("src/styles");
   eleventyConfig.addPassthroughCopy("src/scripts");
+  eleventyConfig.addPassthroughCopy("src/favicon.ico");
 
   // Other entries from a video collection, excluding the current one. Optionally
   // capped at `limit` — omit it to get every other entry (client-side JS then
