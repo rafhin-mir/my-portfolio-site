@@ -1,7 +1,7 @@
 {
   "name": "Rafhin Visuals",
   "tagline": "Built with Intent. Defined by Detail.",
-  "description": "A premium video and photo production studio based in Canada: automotive films, music videos, commercial content, and documentary storytelling, built with intent and defined by detail.",
+  "description": "A premium video and photo production studio based in Toronto and the GTA: automotive films, music videos, commercial content, and documentary storytelling, built with intent and defined by detail.",
   "email": "rafhin.visual@gmail.com",
   "phone": "+16395600919",
   "url": "https://rafhinvisuals.com",
@@ -12,8 +12,10 @@
   "ogImageWidth": "1440",
   "ogImageHeight": "700",
   "twitterHandle": "@_rafhin",
-  "city": "Saskatoon",
-  "region": "SK",
+  "city": "Toronto",
+  "region": "ON",
   "country": "CA",
-  "areaServed": "Canada"
+  "areaServed": "Canada",
+  "geoLat": 43.6532,
+  "geoLng": -79.3832
 }

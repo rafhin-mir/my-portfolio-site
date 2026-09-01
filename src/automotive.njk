@@ -1,10 +1,11 @@
 ---
 layout: layouts/base.njk
-title: "Automotive Filmmaking & Car Photography - Rafhin Visuals | Canada"
-description: "Cinematic car films, luxury automotive photography, and motion-driven brand content by Rafhin Visuals. Trusted by Mercedes-Benz, McLaren, Honda, RWB, and more."
+title: "Automotive Filmmaking & Car Photography - Rafhin Visuals | Toronto & GTA"
+description: "Cinematic car films and luxury automotive photography by Rafhin Visuals, based in Toronto and the GTA. Trusted by Mercedes-Benz, McLaren, Honda, RWB, and more."
 pageKey: automotive
 pageCSS: automotive.css
 permalink: /automotive/
+preloadImage: /assets/images/posters/automotive/hero.jpg
 pageScripts:
   - automotive.js
 ---
@@ -256,24 +257,9 @@ pageScripts:
     <a href="#" class="btn-ghost">View Gallery &nbsp;→</a>
   </div>
   <div class="auto-masonry">
-    <div class="auto-masonry-item auto-masonry-item--land"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/LFA-1.jpg" alt="Lexus LFA" loading="lazy" decoding="async"></div></div>
-    <div class="auto-masonry-item"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/308-4.jpg" alt="Ferrari 308" loading="lazy" decoding="async"></div></div>
-    <div class="auto-masonry-item"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/E30-101.jpg" alt="BMW E30" loading="lazy" decoding="async"></div></div>
-    <div class="auto-masonry-item auto-masonry-item--land"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/Taycan-2.jpg" alt="Porsche Taycan" loading="lazy" decoding="async"></div></div>
-    <div class="auto-masonry-item"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/RWB-1.jpg" alt="RWB Porsche" loading="lazy" decoding="async"></div></div>
-    <div class="auto-masonry-item"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/film-8.jpg" alt="Film photography" loading="lazy" decoding="async"></div></div>
-    <div class="auto-masonry-item auto-masonry-item--land"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/DSC09021.jpg" alt="Mitsubishi Lancer Evolution IX in motion on a closed course" loading="lazy" decoding="async"></div></div>
-    <div class="auto-masonry-item"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/DSC05382.jpg" alt="Classic Italian sports car interior with tan leather and gated manual shifter" loading="lazy" decoding="async"></div></div>
-    <div class="auto-masonry-item"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/240817000098020028.jpg" alt="Widebody McLaren 720S with custom livery at golden hour" loading="lazy" decoding="async"></div></div>
-    <div class="auto-masonry-item auto-masonry-item--land"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/Supra-58.jpg" alt="Toyota Supra" loading="lazy" decoding="async"></div></div>
-    <div class="auto-masonry-item"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/250610000003700012.jpg" alt="Nissan Skyline R34 GT-R parked in the city at night" loading="lazy" decoding="async"></div></div>
-    <div class="auto-masonry-item"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/_DSC2117.jpg" alt="BMW E36 Formula Drift car with driver portrait" loading="lazy" decoding="async"></div></div>
-    <div class="auto-masonry-item auto-masonry-item--land"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/Artura-6.jpg" alt="McLaren Artura" loading="lazy" decoding="async"></div></div>
-    <div class="auto-masonry-item auto-masonry-item--land"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/CN-Tower-3.jpg" alt="CN Tower shoot" loading="lazy" decoding="async"></div></div>
-    <div class="auto-masonry-item auto-masonry-item--land"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/WhatBagz-16.jpg" alt="Close-up of a chrome BBS wheel and brake caliper on a bagged sports car" loading="lazy" decoding="async"></div></div>
-    <div class="auto-masonry-item auto-masonry-item--land"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/DSC05049-Edit.jpg" alt="Nissan Skyline R34 GT-R engine bay with turbocharger setup" loading="lazy" decoding="async"></div></div>
-    <div class="auto-masonry-item auto-masonry-item--land"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/DSC04804-Edit.jpg" alt="Porsche key fob detail on a Gulf-liveried carbon fiber wing" loading="lazy" decoding="async"></div></div>
-    <div class="auto-masonry-item auto-masonry-item--land"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/Portraits-1.jpg" alt="Bagged classic Chevrolet C10 pickup parked by a mountain lake" loading="lazy" decoding="async"></div></div>
+    {%- for photo in automotivePhotos %}
+    <div class="auto-masonry-item{% if photo.land %} auto-masonry-item--land{% endif %}"><div class="auto-photo"><img src="{{ photo.src }}" alt="{{ photo.alt }}" loading="lazy" decoding="async"></div></div>
+    {%- endfor %}
   </div>
 </div>
 

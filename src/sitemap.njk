@@ -3,7 +3,8 @@ permalink: /sitemap.xml
 eleventyExcludeFromCollections: true
 ---<?xml version="1.0" encoding="utf-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>{{ site.url }}/</loc>
     <lastmod>2026-09-01</lastmod>
@@ -15,6 +16,12 @@ eleventyExcludeFromCollections: true
     <lastmod>2026-09-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+{%- for photo in automotivePhotos %}
+    <image:image>
+      <image:loc>{{ photo.src | absoluteUrl(site.url) }}</image:loc>
+      <image:title>{{ photo.alt }}</image:title>
+    </image:image>
+{%- endfor %}
   </url>
   <url>
     <loc>{{ site.url }}/work/</loc>

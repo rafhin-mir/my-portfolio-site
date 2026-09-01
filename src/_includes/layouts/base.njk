@@ -63,6 +63,11 @@
         "addressRegion": "{{ site.region }}",
         "addressCountry": "{{ site.country }}"
       },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": {{ site.geoLat }},
+        "longitude": {{ site.geoLng }}
+      },
       "areaServed": {
         "@type": "Country",
         "name": "{{ site.areaServed }}"
@@ -102,6 +107,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+  {% if preloadImage %}
+  <link rel="preload" as="image" href="{{ preloadImage }}" fetchpriority="high">
+  {% endif %}
 
   {# ── fonts (async — non-blocking) ── #}
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,700;0,900;1,400&family=Azeret+Mono:wght@400;500&family=IvyPresto+Display:ital,wght@0,400;1,400&display=swap" onload="this.onload=null;this.rel='stylesheet'">

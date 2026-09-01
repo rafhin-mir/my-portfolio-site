@@ -1,0 +1,20 @@
+[
+  { "src": "/assets/images/automotive/photography/main/LFA-1.jpg", "alt": "Lexus LFA", "land": true },
+  { "src": "/assets/images/automotive/photography/main/308-4.jpg", "alt": "Ferrari 308", "land": false },
+  { "src": "/assets/images/automotive/photography/main/E30-101.jpg", "alt": "BMW E30", "land": false },
+  { "src": "/assets/images/automotive/photography/main/Taycan-2.jpg", "alt": "Porsche Taycan", "land": true },
+  { "src": "/assets/images/automotive/photography/main/RWB-1.jpg", "alt": "RWB Porsche", "land": false },
+  { "src": "/assets/images/automotive/photography/main/film-8.jpg", "alt": "Film photography", "land": false },
+  { "src": "/assets/images/automotive/photography/main/DSC09021.jpg", "alt": "Mitsubishi Lancer Evolution IX in motion on a closed course", "land": true },
+  { "src": "/assets/images/automotive/photography/main/DSC05382.jpg", "alt": "Classic Italian sports car interior with tan leather and gated manual shifter", "land": false },
+  { "src": "/assets/images/automotive/photography/main/240817000098020028.jpg", "alt": "Widebody McLaren 720S with custom livery at golden hour", "land": false },
+  { "src": "/assets/images/automotive/photography/main/Supra-58.jpg", "alt": "Toyota Supra", "land": true },
+  { "src": "/assets/images/automotive/photography/main/250610000003700012.jpg", "alt": "Nissan Skyline R34 GT-R parked in the city at night", "land": false },
+  { "src": "/assets/images/automotive/photography/main/_DSC2117.jpg", "alt": "BMW E36 Formula Drift car with driver portrait", "land": false },
+  { "src": "/assets/images/automotive/photography/main/Artura-6.jpg", "alt": "McLaren Artura", "land": true },
+  { "src": "/assets/images/automotive/photography/main/CN-Tower-3.jpg", "alt": "CN Tower shoot", "land": true },
+  { "src": "/assets/images/automotive/photography/main/WhatBagz-16.jpg", "alt": "Close-up of a chrome BBS wheel and brake caliper on a bagged sports car", "land": true },
+  { "src": "/assets/images/automotive/photography/main/DSC05049-Edit.jpg", "alt": "Nissan Skyline R34 GT-R engine bay with turbocharger setup", "land": true },
+  { "src": "/assets/images/automotive/photography/main/DSC04804-Edit.jpg", "alt": "Porsche key fob detail on a Gulf-liveried carbon fiber wing", "land": true },
+  { "src": "/assets/images/automotive/photography/main/Portraits-1.jpg", "alt": "Bagged classic Chevrolet C10 pickup parked by a mountain lake", "land": true }
+]
