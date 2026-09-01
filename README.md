@@ -2,7 +2,7 @@
 
 Official portfolio website for **Rafhin Visuals**, a premium video and photo production studio based in Canada. The site showcases the studio's work across automotive, music, commercial, and documentary genres — built with a dark, cinematic aesthetic and refined motion design.
 
-Live at: [rafhinvisuals.com](https://rafhinvisuals.com)
+Live at: [www.rafhin.com](https://www.rafhin.com)
 
 ---
 
