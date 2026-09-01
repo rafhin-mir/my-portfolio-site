@@ -9,6 +9,17 @@ pageScripts:
   - automotive.js
 ---
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/" },
+    { "@type": "ListItem", "position": 2, "name": "Automotive", "item": "{{ site.url }}/automotive/" }
+  ]
+}
+</script>
+
 <!-- ══════════════════════════════════ HERO -->
 <section class="auto-hero">
   <video class="auto-hero-video" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="/assets/images/posters/automotive/hero.jpg">
@@ -19,7 +30,7 @@ pageScripts:
   <div class="auto-hero-content">
     <p class="auto-eyebrow">automotive</p>
     <div class="auto-stripe"></div>
-    <p class="auto-hero-italic">precision in motion</p>
+    <h1 class="auto-hero-italic">precision in motion</h1>
   </div>
   <div class="auto-scroll-hint">
     <div class="auto-scroll-line"></div>
@@ -135,92 +146,47 @@ pageScripts:
   <!-- Vertical cards: 3-col grid -->
   <div class="auto-video-grid">
 
-    <a href="/work/garrett-turbos/" class="auto-video-card auto-video-card--vertical rv-reveal">
-      <video class="auto-card-bg" src="/assets/video/Client%20Section/preview/garrett-turbos.mp4" poster="https://i.vimeocdn.com/video/2195926489-38d6ad3d48521749171d4b1de6a9911b736d32c1e1c5f65b49ff0e4580e12369-d_960?region=us" muted loop playsinline preload="none"></video>
-      <div class="auto-card-accent" style="background:rgba(180,120,20,.15)"></div>
+    <a href="/work/rwb-gt3-cup/" class="auto-video-card auto-video-card--vertical rv-reveal">
+      <video class="auto-card-bg" src="/assets/video/automotive/work/preview/rwb-gt3-cup.mp4" muted loop playsinline preload="none"></video>
+      <img class="auto-card-poster" src="https://i.vimeocdn.com/video/2195983391-653c10dd49a4f76c020676d3a411ca3bb661eb1d037fe26db3d78fe4eab5c954-d_960?region=us" alt="" loading="lazy">
       <div class="auto-card-overlay"></div>
       <div class="auto-card-play">
         <div class="auto-play-btn"><svg viewBox="0 0 12 14" fill="#f5f5f5"><path d="M1 1l10 6-10 6V1z"/></svg></div>
       </div>
-      <div class="auto-card-badge">Garrett</div>
-      <div class="auto-card-bottom">
-        <p class="auto-card-meta">Brand Film · 2026</p>
-        <p class="auto-card-title">Garrett Turbos</p>
-        <span class="auto-card-cta">Watch Film →</span>
-      </div>
-    </a>
-
-    <a href="/work/aston-martin/" class="auto-video-card auto-video-card--vertical rv-reveal">
-      <video class="auto-card-bg" src="/assets/video/Client%20Section/preview/aston-martin.mp4" poster="https://i.vimeocdn.com/video/2195903174-0126d7d8df98a1defa1e01274fa06c9be324b7fef39185c80cbc92a16de6536c-d_960?region=us" muted loop playsinline preload="none"></video>
-      <div class="auto-card-accent" style="background:rgba(160,100,15,.15)"></div>
-      <div class="auto-card-overlay"></div>
-      <div class="auto-card-play">
-        <div class="auto-play-btn"><svg viewBox="0 0 12 14" fill="#f5f5f5"><path d="M1 1l10 6-10 6V1z"/></svg></div>
-      </div>
-      <div class="auto-card-badge">Aston Martin</div>
+      <div class="auto-card-badge">RWB</div>
       <div class="auto-card-bottom">
         <p class="auto-card-meta">Automotive Film · 2026</p>
-        <p class="auto-card-title">Grand Touring</p>
+        <p class="auto-card-title">ASMR - RWB GT3 Cup</p>
         <span class="auto-card-cta">Watch Film →</span>
       </div>
     </a>
 
-    <a href="/work/movmax/" class="auto-video-card auto-video-card--vertical rv-reveal">
-      <video class="auto-card-bg" src="/assets/video/Client%20Section/preview/movmax.mp4" poster="https://i.vimeocdn.com/video/2195936935-e094f0d11345857980ddbb86d4194e3817109a36a6aaedea304dc15b5540c2e5-d_960?region=us" muted loop playsinline preload="none"></video>
-      <div class="auto-card-accent" style="background:rgba(60,80,200,.1)"></div>
+    <a href="/work/the-vaulture/" class="auto-video-card auto-video-card--vertical rv-reveal">
+      <video class="auto-card-bg" src="/assets/video/automotive/work/preview/the-vaulture.mp4" muted loop playsinline preload="none"></video>
+      <img class="auto-card-poster" src="https://i.vimeocdn.com/video/2195894819-bfe73d7ab41cedee291062ad939887aa2535282f0fc0f42d8c55fe85ababd869-d_960?region=us" alt="" loading="lazy">
       <div class="auto-card-overlay"></div>
       <div class="auto-card-play">
         <div class="auto-play-btn"><svg viewBox="0 0 12 14" fill="#f5f5f5"><path d="M1 1l10 6-10 6V1z"/></svg></div>
       </div>
-      <div class="auto-card-badge">MovMax</div>
-      <div class="auto-card-bottom">
-        <p class="auto-card-meta">Brand Film · 2026</p>
-        <p class="auto-card-title">MovMax Ad</p>
-        <span class="auto-card-cta">Watch Film →</span>
-      </div>
-    </a>
-
-    <a href="/work/ecc-tuned/" class="auto-video-card auto-video-card--vertical rv-reveal">
-      <video class="auto-card-bg" src="/assets/video/Client%20Section/preview/ecc-tuned.mp4" poster="https://i.vimeocdn.com/video/2195900717-177406ca9afd244467387db1dca18161a4ef9595d430fd74030ca68545e8c010-d_960?region=us" muted loop playsinline preload="none"></video>
-      <div class="auto-card-accent" style="background:rgba(180,120,20,.12)"></div>
-      <div class="auto-card-overlay"></div>
-      <div class="auto-card-play">
-        <div class="auto-play-btn"><svg viewBox="0 0 12 14" fill="#f5f5f5"><path d="M1 1l10 6-10 6V1z"/></svg></div>
-      </div>
-      <div class="auto-card-badge">ECC</div>
-      <div class="auto-card-bottom">
-        <p class="auto-card-meta">Brand Film · 2026</p>
-        <p class="auto-card-title">ECC Tuned</p>
-        <span class="auto-card-cta">Watch Film →</span>
-      </div>
-    </a>
-
-    <a href="/work/pfaff-reserve/" class="auto-video-card auto-video-card--vertical rv-reveal">
-      <video class="auto-card-bg" src="/assets/video/Client%20Section/preview/pfaff-reserve.mp4" poster="https://i.vimeocdn.com/video/2195896903-269f83baae0c73718e41366caa01d81a1badb05ee1b66a37c855360b6cf307d1-d_960?region=us" muted loop playsinline preload="none"></video>
-      <div class="auto-card-accent" style="background:rgba(180,120,20,.12)"></div>
-      <div class="auto-card-overlay"></div>
-      <div class="auto-card-play">
-        <div class="auto-play-btn"><svg viewBox="0 0 12 14" fill="#f5f5f5"><path d="M1 1l10 6-10 6V1z"/></svg></div>
-      </div>
-      <div class="auto-card-badge">Pfaff</div>
-      <div class="auto-card-bottom">
-        <p class="auto-card-meta">Brand Film · 2026</p>
-        <p class="auto-card-title">Pfaff Reserve</p>
-        <span class="auto-card-cta">Watch Film →</span>
-      </div>
-    </a>
-
-    <a href="/work/morning-meets-secret-shoot/" class="auto-video-card auto-video-card--vertical rv-reveal">
-      <video class="auto-card-bg" src="/assets/video/Client%20Section/preview/morning-meets.mp4" poster="https://i.vimeocdn.com/video/2195902322-0606a6126bccee65e11bf17d7812a3b089d0c4866b003ec627e9994212d6d586-d_960?region=us" muted loop playsinline preload="none"></video>
-      <div class="auto-card-accent" style="background:rgba(60,80,200,.1)"></div>
-      <div class="auto-card-overlay"></div>
-      <div class="auto-card-play">
-        <div class="auto-play-btn"><svg viewBox="0 0 12 14" fill="#f5f5f5"><path d="M1 1l10 6-10 6V1z"/></svg></div>
-      </div>
-      <div class="auto-card-badge">Meet</div>
+      <div class="auto-card-badge">Vaulture</div>
       <div class="auto-card-bottom">
         <p class="auto-card-meta">Automotive Film · 2026</p>
-        <p class="auto-card-title">Morning Meets</p>
+        <p class="auto-card-title">The Vaulture</p>
+        <span class="auto-card-cta">Watch Film →</span>
+      </div>
+    </a>
+
+    <a href="/work/rwb-susuwatari/" class="auto-video-card auto-video-card--vertical rv-reveal">
+      <video class="auto-card-bg" src="/assets/video/automotive/work/preview/rwb-susuwatari.mp4" muted loop playsinline preload="none"></video>
+      <img class="auto-card-poster" src="https://i.vimeocdn.com/video/2195983768-5ff581d794ad937b36dd6b2c8a2780b33e338a7b0acbdfdf03f23f7b2af9d719-d_960?region=us" alt="" loading="lazy">
+      <div class="auto-card-overlay"></div>
+      <div class="auto-card-play">
+        <div class="auto-play-btn"><svg viewBox="0 0 12 14" fill="#f5f5f5"><path d="M1 1l10 6-10 6V1z"/></svg></div>
+      </div>
+      <div class="auto-card-badge">RWB</div>
+      <div class="auto-card-bottom">
+        <p class="auto-card-meta">Automotive Film · 2026</p>
+        <p class="auto-card-title">RWB Susuwatari</p>
         <span class="auto-card-cta">Watch Film →</span>
       </div>
     </a>
@@ -230,32 +196,47 @@ pageScripts:
   <!-- Horizontal cards: stacked -->
   <div class="auto-video-stack">
 
-    <a href="/work/shaynes-gtr/" class="auto-video-card auto-video-card--horizontal rv-reveal">
-      <video class="auto-card-bg" src="/assets/video/Showcase/preview/shaynes-gtr.mp4" poster="/assets/images/posters/showcase/shaynes-gtr.jpg" muted loop playsinline preload="none"></video>
-      <div class="auto-card-accent" style="background:rgba(200,60,20,.08)"></div>
+    <a href="/work/twin-rwbs/" class="auto-video-card auto-video-card--horizontal rv-reveal">
+      <video class="auto-card-bg" src="/assets/video/automotive/work/preview/twin-rwbs.mp4" muted loop playsinline preload="none"></video>
+      <img class="auto-card-poster" src="https://i.vimeocdn.com/video/2195985081-4ca4f85b1c49f8d0625d08b7d2ffced4e2a7d1bc412ff00fb3057faf35d3f60b-d_960?region=us" alt="" loading="lazy">
       <div class="auto-card-overlay"></div>
       <div class="auto-card-play">
         <div class="auto-play-btn"><svg viewBox="0 0 12 14" fill="#f5f5f5"><path d="M1 1l10 6-10 6V1z"/></svg></div>
       </div>
-      <div class="auto-card-badge">GTR</div>
+      <div class="auto-card-badge">RWB</div>
       <div class="auto-card-bottom auto-card-bottom--center">
-        <p class="auto-card-meta">Feature Film · 2026</p>
-        <p class="auto-card-title">Shayne's GTR</p>
+        <p class="auto-card-meta">Automotive Film · 2026</p>
+        <p class="auto-card-title">Twin RWB's</p>
         <span class="auto-card-cta">Watch Film →</span>
       </div>
     </a>
 
-    <a href="/work/nsx-feature/" class="auto-video-card auto-video-card--horizontal rv-reveal">
-      <video class="auto-card-bg" src="/assets/video/Showcase/preview/nsx-feature.mp4" poster="https://i.vimeocdn.com/video/2195950782-ec2c0b0b747f0dd772a430ca66d088943260f7481dc30f1d1b70b4f4afbd77e3-d_960?region=us" muted loop playsinline preload="none"></video>
-      <div class="auto-card-accent" style="background:rgba(180,40,20,.07)"></div>
+    <a href="/work/joshs-lbwk-997/" class="auto-video-card auto-video-card--horizontal rv-reveal">
+      <video class="auto-card-bg" src="/assets/video/automotive/work/preview/joshs-lbwk-997.mp4" muted loop playsinline preload="none"></video>
+      <img class="auto-card-poster" src="https://i.vimeocdn.com/video/2195982356-753f23a042da9b28037b0aa204e23023e50c7f94035d127b3fa2fbab46ce6b68-d_960?region=us" alt="" loading="lazy">
       <div class="auto-card-overlay"></div>
       <div class="auto-card-play">
         <div class="auto-play-btn"><svg viewBox="0 0 12 14" fill="#f5f5f5"><path d="M1 1l10 6-10 6V1z"/></svg></div>
       </div>
-      <div class="auto-card-badge">NSX</div>
+      <div class="auto-card-badge">LBWK</div>
       <div class="auto-card-bottom auto-card-bottom--center">
-        <p class="auto-card-meta">Feature Film · 2026</p>
-        <p class="auto-card-title">NSX Feature</p>
+        <p class="auto-card-meta">Automotive Film · 2026</p>
+        <p class="auto-card-title">Josh's LBWK 997</p>
+        <span class="auto-card-cta">Watch Film →</span>
+      </div>
+    </a>
+
+    <a href="/work/e30-m3-x-e30-m3/" class="auto-video-card auto-video-card--horizontal rv-reveal">
+      <video class="auto-card-bg" src="/assets/video/automotive/work/preview/e30-m3-x-e30-m3.mp4" muted loop playsinline preload="none"></video>
+      <img class="auto-card-poster" src="https://i.vimeocdn.com/video/2195985584-a976f5236ec2f2059576817f8dc7e6ae8eb7ecf5e0719515879aa5c1cf72390e-d_960?region=us" alt="" loading="lazy">
+      <div class="auto-card-overlay"></div>
+      <div class="auto-card-play">
+        <div class="auto-play-btn"><svg viewBox="0 0 12 14" fill="#f5f5f5"><path d="M1 1l10 6-10 6V1z"/></svg></div>
+      </div>
+      <div class="auto-card-badge">E30</div>
+      <div class="auto-card-bottom auto-card-bottom--center">
+        <p class="auto-card-meta">Automotive Film · 2026</p>
+        <p class="auto-card-title">E30 M3 x E30 M3</p>
         <span class="auto-card-cta">Watch Film →</span>
       </div>
     </a>
@@ -281,18 +262,18 @@ pageScripts:
     <div class="auto-masonry-item auto-masonry-item--land"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/Taycan-2.jpg" alt="Porsche Taycan" loading="lazy" decoding="async"></div></div>
     <div class="auto-masonry-item"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/RWB-1.jpg" alt="RWB Porsche" loading="lazy" decoding="async"></div></div>
     <div class="auto-masonry-item"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/film-8.jpg" alt="Film photography" loading="lazy" decoding="async"></div></div>
-    <div class="auto-masonry-item auto-masonry-item--land"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/DSC09021.jpg" alt="Automotive photography" loading="lazy" decoding="async"></div></div>
-    <div class="auto-masonry-item"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/DSC05382.jpg" alt="Automotive photography" loading="lazy" decoding="async"></div></div>
-    <div class="auto-masonry-item"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/240817000098020028.jpg" alt="Automotive photography" loading="lazy" decoding="async"></div></div>
+    <div class="auto-masonry-item auto-masonry-item--land"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/DSC09021.jpg" alt="Mitsubishi Lancer Evolution IX in motion on a closed course" loading="lazy" decoding="async"></div></div>
+    <div class="auto-masonry-item"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/DSC05382.jpg" alt="Classic Italian sports car interior with tan leather and gated manual shifter" loading="lazy" decoding="async"></div></div>
+    <div class="auto-masonry-item"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/240817000098020028.jpg" alt="Widebody McLaren 720S with custom livery at golden hour" loading="lazy" decoding="async"></div></div>
     <div class="auto-masonry-item auto-masonry-item--land"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/Supra-58.jpg" alt="Toyota Supra" loading="lazy" decoding="async"></div></div>
-    <div class="auto-masonry-item"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/250610000003700012.jpg" alt="Automotive photography" loading="lazy" decoding="async"></div></div>
-    <div class="auto-masonry-item"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/_DSC2117.jpg" alt="Automotive photography" loading="lazy" decoding="async"></div></div>
+    <div class="auto-masonry-item"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/250610000003700012.jpg" alt="Nissan Skyline R34 GT-R parked in the city at night" loading="lazy" decoding="async"></div></div>
+    <div class="auto-masonry-item"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/_DSC2117.jpg" alt="BMW E36 Formula Drift car with driver portrait" loading="lazy" decoding="async"></div></div>
     <div class="auto-masonry-item auto-masonry-item--land"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/Artura-6.jpg" alt="McLaren Artura" loading="lazy" decoding="async"></div></div>
     <div class="auto-masonry-item auto-masonry-item--land"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/CN-Tower-3.jpg" alt="CN Tower shoot" loading="lazy" decoding="async"></div></div>
-    <div class="auto-masonry-item auto-masonry-item--land"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/WhatBagz-16.jpg" alt="Automotive photography" loading="lazy" decoding="async"></div></div>
-    <div class="auto-masonry-item auto-masonry-item--land"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/DSC05049-Edit.jpg" alt="Automotive photography" loading="lazy" decoding="async"></div></div>
-    <div class="auto-masonry-item auto-masonry-item--land"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/DSC04804-Edit.jpg" alt="Automotive photography" loading="lazy" decoding="async"></div></div>
-    <div class="auto-masonry-item auto-masonry-item--land"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/Portraits-1.jpg" alt="Automotive portrait" loading="lazy" decoding="async"></div></div>
+    <div class="auto-masonry-item auto-masonry-item--land"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/WhatBagz-16.jpg" alt="Close-up of a chrome BBS wheel and brake caliper on a bagged sports car" loading="lazy" decoding="async"></div></div>
+    <div class="auto-masonry-item auto-masonry-item--land"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/DSC05049-Edit.jpg" alt="Nissan Skyline R34 GT-R engine bay with turbocharger setup" loading="lazy" decoding="async"></div></div>
+    <div class="auto-masonry-item auto-masonry-item--land"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/DSC04804-Edit.jpg" alt="Porsche key fob detail on a Gulf-liveried carbon fiber wing" loading="lazy" decoding="async"></div></div>
+    <div class="auto-masonry-item auto-masonry-item--land"><div class="auto-photo"><img src="/assets/images/automotive/photography/main/Portraits-1.jpg" alt="Bagged classic Chevrolet C10 pickup parked by a mountain lake" loading="lazy" decoding="async"></div></div>
   </div>
 </div>
 

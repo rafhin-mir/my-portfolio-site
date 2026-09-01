@@ -1,7 +1,7 @@
 ---
 layout: layouts/base.njk
-title: "Work - Rafhin Visuals"
-description: "Browse the portfolio of Rafhin Visuals: commercial films, music videos, short films, and photography projects crafted with precision and creative intent."
+title: "Portfolio - Automotive Film, Photography & Video Production Work | Rafhin Visuals"
+description: "Browse the Rafhin Visuals portfolio: automotive films, real estate photography, wedding and event coverage, and brand content produced across Canada."
 pageKey: work
 pageCSS: work.css
 permalink: /work/
@@ -9,6 +9,17 @@ pageScripts:
   - work-filter.js
   - work-gsap.js
 ---
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/" },
+    { "@type": "ListItem", "position": 2, "name": "Work", "item": "{{ site.url }}/work/" }
+  ]
+}
+</script>
 
 <!-- ══════════════════════════════════ HEADER -->
 <header class="work-header">

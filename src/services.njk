@@ -10,11 +10,42 @@ pageScripts:
   - services-gsap.js
 ---
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "{{ site.url }}/services/" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "provider": { "@type": "ProfessionalService", "name": "Rafhin Visuals", "url": "{{ site.url }}" },
+  "areaServed": { "@type": "Country", "name": "Canada" },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Rafhin Visuals Services",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Film & Video", "description": "Cinematic brand films, event and wedding coverage, automotive films, and long-form YouTube content." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Photography & Composites", "description": "Editorial stills across automotive, real estate, events, and brand, plus layered composite work built in post." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Short Form & UGC", "description": "Vertical content built for Instagram, TikTok, and Reels, platform-native and designed to blend into feeds without losing brand quality." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Monthly Retainer", "description": "A structured system for consistent monthly content output, planned, produced, and delivered on schedule." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Content Strategy", "description": "Defining what to shoot, when to post, and how it positions a brand, built for long-term growth." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Website Design & Build", "description": "Custom-designed and coded cinematic websites built to match the quality of the visual work." } }
+    ]
+  }
+}
+</script>
+
 <!-- ══════════════════════════════════ HEADER -->
 <header class="services-header">
   <span class="services-eyebrow">what I offer</span>
   <span class="services-title-italic">built to</span>
-  <span class="services-title-bold">Perform</span>
+  <h1 class="services-title-bold">Perform</h1>
 </header>
 
 <div class="divider"></div>

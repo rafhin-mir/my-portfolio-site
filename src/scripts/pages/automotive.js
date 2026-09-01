@@ -174,9 +174,12 @@
           v.setAttribute('preload', 'auto');
           v.load();
         }
-        v.play().catch(function () {});
+        v.play().then(function () {
+          card.classList.add('is-playing');
+        }).catch(function () {});
       });
       card.addEventListener('pointerleave', function () {
+        card.classList.remove('is-playing');
         v.pause();
         v.currentTime = 0;
       });

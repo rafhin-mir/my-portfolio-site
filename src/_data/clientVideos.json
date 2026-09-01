@@ -6,7 +6,9 @@
     "vimeoId": "1222840504",
     "aspectRatio": "9 / 16",
     "poster": "https://i.vimeocdn.com/video/2195902322-0606a6126bccee65e11bf17d7812a3b089d0c4866b003ec627e9994212d6d586-d_960?region=us",
-    "description": ""
+    "description": "A secret early-morning car meet captured on film, following a curated lineup of builds through a cinematic Rafhin Visuals automotive story.",
+    "durationSeconds": 45,
+    "uploadDate": "2026-08-31"
   },
   {
     "slug": "aston-martin",
@@ -15,7 +17,9 @@
     "vimeoId": "1222841116",
     "aspectRatio": "9 / 16",
     "poster": "https://i.vimeocdn.com/video/2195903174-0126d7d8df98a1defa1e01274fa06c9be324b7fef39185c80cbc92a16de6536c-d_960?region=us",
-    "description": ""
+    "description": "A cinematic automotive film featuring an Aston Martin grand tourer, shot and edited by Rafhin Visuals.",
+    "durationSeconds": 31,
+    "uploadDate": "2026-08-31"
   },
   {
     "slug": "ecc-tuned",
@@ -24,7 +28,9 @@
     "vimeoId": "1222839595",
     "aspectRatio": "9 / 16",
     "poster": "https://i.vimeocdn.com/video/2195900717-177406ca9afd244467387db1dca18161a4ef9595d430fd74030ca68545e8c010-d_960?region=us",
-    "description": ""
+    "description": "A brand film for ECC Tuned showcasing performance upgrades and tuned builds through dynamic automotive cinematography.",
+    "durationSeconds": 29,
+    "uploadDate": "2026-08-31"
   },
   {
     "slug": "movmax",
@@ -33,7 +39,9 @@
     "vimeoId": "1222835530",
     "aspectRatio": "9 / 16",
     "poster": "https://i.vimeocdn.com/video/2195936935-e094f0d11345857980ddbb86d4194e3817109a36a6aaedea304dc15b5540c2e5-d_960?region=us",
-    "description": ""
+    "description": "A MOVMAX brand film blending automotive lifestyle and product storytelling, produced by Rafhin Visuals.",
+    "durationSeconds": 34,
+    "uploadDate": "2026-08-31"
   },
   {
     "slug": "garrett-turbos",
@@ -42,7 +50,9 @@
     "vimeoId": "1222859445",
     "aspectRatio": "9 / 16",
     "poster": "https://i.vimeocdn.com/video/2195926489-38d6ad3d48521749171d4b1de6a9911b736d32c1e1c5f65b49ff0e4580e12369-d_960?region=us",
-    "description": ""
+    "description": "A Garrett Turbos brand film highlighting turbocharger technology through fast-paced automotive visuals.",
+    "durationSeconds": 56,
+    "uploadDate": "2026-08-31"
   },
   {
     "slug": "pfaff-reserve",
@@ -51,7 +61,9 @@
     "vimeoId": "1222835567",
     "aspectRatio": "9 / 16",
     "poster": "https://i.vimeocdn.com/video/2195896903-269f83baae0c73718e41366caa01d81a1badb05ee1b66a37c855360b6cf307d1-d_960?region=us",
-    "description": ""
+    "description": "A PFAFF Reserve brand film capturing a curated collection of luxury and performance vehicles.",
+    "durationSeconds": 34,
+    "uploadDate": "2026-08-31"
   },
   {
     "slug": "shaynes-gtr",
@@ -60,7 +72,9 @@
     "vimeoId": "1222878408",
     "aspectRatio": "16 / 9",
     "poster": "/assets/images/posters/showcase/shaynes-gtr.jpg",
-    "description": ""
+    "description": "A feature film on Shayne's Nissan GT-R, exploring the build and the story behind it on camera.",
+    "durationSeconds": 22,
+    "uploadDate": "2026-08-31"
   },
   {
     "slug": "jaidens-nsx",
@@ -69,7 +83,9 @@
     "vimeoId": "1222878405",
     "aspectRatio": "16 / 9",
     "poster": "/assets/images/posters/showcase/jaidens-nsx.jpg",
-    "description": ""
+    "description": "A feature film on Jaiden's Honda NSX, capturing the build and the drive through cinematic automotive storytelling.",
+    "durationSeconds": 21,
+    "uploadDate": "2026-08-31"
   },
   {
     "slug": "nsx-feature",
@@ -78,7 +94,9 @@
     "vimeoId": "1222878407",
     "aspectRatio": "16 / 9",
     "poster": "https://i.vimeocdn.com/video/2195950782-ec2c0b0b747f0dd772a430ca66d088943260f7481dc30f1d1b70b4f4afbd77e3-d_960?region=us",
-    "description": ""
+    "description": "A feature film on a modified Honda NSX, chronicling the build and the drive on camera.",
+    "durationSeconds": 22,
+    "uploadDate": "2026-08-31"
   },
   {
     "slug": "alans-e30",
@@ -87,7 +105,9 @@
     "vimeoId": "1222878406",
     "aspectRatio": "16 / 9",
     "poster": "/assets/images/posters/showcase/alans-e30.jpg",
-    "description": ""
+    "description": "A feature film on Alan's BMW E30, a classic build brought to life through cinematic automotive photography and film.",
+    "durationSeconds": 34,
+    "uploadDate": "2026-08-31"
   },
   {
     "slug": "matts-e55-amg",
@@ -96,6 +116,74 @@
     "vimeoId": "1222879296",
     "aspectRatio": "5 / 4",
     "poster": "https://i.vimeocdn.com/video/2195952732-4aa5067fe4187c5f8c81634a518a2449cc3d099d4d778395f1ad67fbe6ce9a09-d_960?region=us",
-    "description": ""
+    "description": "A feature film on Matt's Mercedes-Benz E55 AMG, capturing the build and character of the car on camera.",
+    "durationSeconds": 35,
+    "uploadDate": "2026-08-31"
+  },
+  {
+    "slug": "rwb-gt3-cup",
+    "title": "ASMR - RWB GT3 Cup",
+    "category": "Automotive Film",
+    "vimeoId": "1222901001",
+    "aspectRatio": "9 / 16",
+    "poster": "https://i.vimeocdn.com/video/2195983391-653c10dd49a4f76c020676d3a411ca3bb661eb1d037fe26db3d78fe4eab5c954-d_960?region=us",
+    "description": "An ASMR-style automotive film capturing the sound and detail of a Rauh-Welt Begriff (RWB) Porsche GT3 Cup build.",
+    "durationSeconds": 59,
+    "uploadDate": "2026-08-31"
+  },
+  {
+    "slug": "the-vaulture",
+    "title": "The Vaulture - Curated Car Meet",
+    "category": "Automotive Film",
+    "vimeoId": "1222834669",
+    "aspectRatio": "9 / 16",
+    "poster": "https://i.vimeocdn.com/video/2195894819-bfe73d7ab41cedee291062ad939887aa2535282f0fc0f42d8c55fe85ababd869-d_960?region=us",
+    "description": "Cinematic coverage of The Vaulture, a curated car meet bringing together standout builds in one lot.",
+    "durationSeconds": 30,
+    "uploadDate": "2026-08-31"
+  },
+  {
+    "slug": "rwb-susuwatari",
+    "title": "RWB Susuwatari",
+    "category": "Automotive Film",
+    "vimeoId": "1222901003",
+    "aspectRatio": "9 / 16",
+    "poster": "https://i.vimeocdn.com/video/2195983768-5ff581d794ad937b36dd6b2c8a2780b33e338a7b0acbdfdf03f23f7b2af9d719-d_960?region=us",
+    "description": "An automotive film featuring the RWB Susuwatari, a Rauh-Welt Begriff Porsche with a distinctive widebody livery.",
+    "durationSeconds": 21,
+    "uploadDate": "2026-08-31"
+  },
+  {
+    "slug": "twin-rwbs",
+    "title": "Twin RWB's",
+    "category": "Automotive Film",
+    "vimeoId": "1222902378",
+    "aspectRatio": "16 / 9",
+    "poster": "https://i.vimeocdn.com/video/2195985081-4ca4f85b1c49f8d0625d08b7d2ffced4e2a7d1bc412ff00fb3057faf35d3f60b-d_960?region=us",
+    "description": "An automotive film featuring a pair of Rauh-Welt Begriff (RWB) Porsches side by side.",
+    "durationSeconds": 27,
+    "uploadDate": "2026-09-01"
+  },
+  {
+    "slug": "joshs-lbwk-997",
+    "title": "Josh's LBWK 997",
+    "category": "Automotive Film",
+    "vimeoId": "1222900114",
+    "aspectRatio": "16 / 9",
+    "poster": "https://i.vimeocdn.com/video/2195982356-753f23a042da9b28037b0aa204e23023e50c7f94035d127b3fa2fbab46ce6b68-d_960?region=us",
+    "description": "A feature film on Josh's Liberty Walk widebody Porsche 997, captured through cinematic automotive photography and film.",
+    "durationSeconds": 31,
+    "uploadDate": "2026-08-31"
+  },
+  {
+    "slug": "e30-m3-x-e30-m3",
+    "title": "E30 M3 x E30 M3",
+    "category": "Automotive Film",
+    "vimeoId": "1222902543",
+    "aspectRatio": "5 / 4",
+    "poster": "https://i.vimeocdn.com/video/2195985584-a976f5236ec2f2059576817f8dc7e6ae8eb7ecf5e0719515879aa5c1cf72390e-d_960?region=us",
+    "description": "An automotive film featuring two BMW E30 M3s together, celebrating a classic performance icon.",
+    "durationSeconds": 26,
+    "uploadDate": "2026-09-01"
   }
 ]

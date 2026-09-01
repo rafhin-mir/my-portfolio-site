@@ -12,6 +12,16 @@ export default function(eleventyConfig) {
     return limit ? others.slice(0, limit) : others;
   });
 
+  // Resolve a possibly-relative asset path (e.g. a local poster) against the
+  // site's base URL, while leaving already-absolute URLs (e.g. Vimeo CDN
+  // thumbnails) untouched — needed since og:image/twitter:image must always
+  // be a full absolute URL per the Open Graph / Twitter Card spec.
+  eleventyConfig.addFilter("absoluteUrl", function(url, base) {
+    if (!url) return "";
+    if (/^https?:\/\//i.test(url)) return url;
+    return base + url;
+  });
+
   return {
     dir: {
       input: "src",

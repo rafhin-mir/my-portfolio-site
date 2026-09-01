@@ -6,12 +6,45 @@ pagination:
   alias: video
 permalink: "/work/{{ video.slug }}/"
 eleventyComputed:
-  title: "{{ video.title }} - Client Film | Rafhin Visuals"
+  title: "{{ video.title }} - {{ video.category }} | Rafhin Visuals"
   description: "{{ video.description }}"
+  ogImage: "{{ video.poster }}"
+  ogImageAlt: "{{ video.title }} - {{ video.category }} by Rafhin Visuals"
+  ogVideoUrl: "https://player.vimeo.com/video/{{ video.vimeoId }}"
 pageCSS: video-detail.css
 pageScripts:
   - video-detail.js
 ---
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "{{ video.title }}",
+  "description": "{{ video.description }}",
+  "thumbnailUrl": ["{{ video.poster }}"],
+  "uploadDate": "{{ video.uploadDate }}T00:00:00-06:00",
+  "duration": "PT{{ video.durationSeconds }}S",
+  "embedUrl": "https://player.vimeo.com/video/{{ video.vimeoId }}",
+  "contentUrl": "https://vimeo.com/{{ video.vimeoId }}",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Rafhin Visuals",
+    "logo": { "@type": "ImageObject", "url": "{{ site.url }}{{ site.logo }}" }
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/" },
+    { "@type": "ListItem", "position": 2, "name": "Work", "item": "{{ site.url }}/work/" },
+    { "@type": "ListItem", "position": 3, "name": "{{ video.title }}", "item": "{{ site.url }}/work/{{ video.slug }}/" }
+  ]
+}
+</script>
 
 <section class="wd-section">
   <a href="/" class="wd-back">&larr;&nbsp;Back to home</a>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="{{ robotsMeta if robotsMeta else 'index, follow' }}">
   <meta name="theme-color" content="#050505">
   <meta name="color-scheme" content="dark">
   <meta property="og:locale" content="en_CA">
@@ -20,17 +20,23 @@
   <meta property="og:url"          content="{{ site.url }}{{ page.url }}">
   <meta property="og:title"        content="{{ title if title else site.name + ' - ' + site.tagline }}">
   <meta property="og:description"  content="{{ description if description else site.description }}">
-  <meta property="og:image"        content="{{ site.url }}{{ ogImage if ogImage else site.ogImage }}">
+  <meta property="og:image"        content="{{ (ogImage if ogImage else site.ogImage) | absoluteUrl(site.url) }}">
   <meta property="og:image:width"  content="{{ site.ogImageWidth }}">
   <meta property="og:image:height" content="{{ site.ogImageHeight }}">
-  <meta property="og:image:alt"    content="{{ site.name }} - {{ site.tagline }}">
+  <meta property="og:image:alt"    content="{{ ogImageAlt if ogImageAlt else site.name + ' - ' + site.tagline }}">
+  {% if ogVideoUrl %}
+  <meta property="og:video"        content="{{ ogVideoUrl }}">
+  <meta property="og:video:type"   content="text/html">
+  <meta property="og:video:width"  content="1280">
+  <meta property="og:video:height" content="720">
+  {% endif %}
 
   {# ── Twitter Card ── #}
   <meta name="twitter:card"        content="summary_large_image">
   <meta name="twitter:site"        content="{{ site.twitterHandle }}">
   <meta name="twitter:title"       content="{{ title if title else site.name + ' - ' + site.tagline }}">
   <meta name="twitter:description" content="{{ description if description else site.description }}">
-  <meta name="twitter:image"       content="{{ site.url }}{{ ogImage if ogImage else site.ogImage }}">
+  <meta name="twitter:image"       content="{{ (ogImage if ogImage else site.ogImage) | absoluteUrl(site.url) }}">
 
   {# ── Structured data ── #}
   <script type="application/ld+json">
@@ -85,16 +91,6 @@
       "description": "{{ site.tagline }}"
     }
   ]
-  </script>
-
-  {# ── preview gate (bots bypass, humans without auth go to /wip) ── #}
-  <script>
-  (function(){
-    var ua = (navigator.userAgent || '').toLowerCase();
-    var bots = ['googlebot','bingbot','slurp','duckduckbot','baiduspider','yandexbot','applebot','facebot','twitterbot','linkedinbot','ia_archiver','ahrefsbot','semrushbot'];
-    var isBot = bots.some(function(b){ return ua.indexOf(b) > -1; });
-    if (!isBot && !localStorage.getItem('rv_preview_auth')) { window.location.replace('/wip'); }
-  })();
   </script>
 
   {# ── favicon ── #}
