@@ -1,0 +1,37 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: clientVideos
+  size: 1
+  alias: video
+permalink: "/work/{{ video.slug }}/"
+eleventyComputed:
+  title: "{{ video.title }} - Client Film | Rafhin Visuals"
+  description: "{{ video.description }}"
+pageCSS: video-detail.css
+pageScripts:
+  - video-detail.js
+---
+
+<section class="wd-section">
+  <a href="/" class="wd-back">&larr;&nbsp;Back to home</a>
+
+  <div class="wd-video-wrap{% if video.aspectRatio == '9 / 16' %} wd-video-wrap--vertical{% endif %}" style="aspect-ratio:{{ video.aspectRatio }}">
+    <iframe class="wd-video"
+      src="https://player.vimeo.com/video/{{ video.vimeoId }}?title=0&byline=0&portrait=0"
+      frameborder="0"
+      allow="autoplay; fullscreen; picture-in-picture"
+      allowfullscreen
+      title="{{ video.title }} client film"></iframe>
+  </div>
+
+  <div class="wd-info">
+    <p class="wd-eyebrow">Client Work</p>
+    <h1 class="wd-brand">{{ video.title }}</h1>
+    <p class="wd-category">{{ video.category }}</p>
+    {% if video.description %}
+    <p class="wd-desc">{{ video.description }}</p>
+    {% endif %}
+    <a href="/contact/" class="btn-primary">Start a Project &nbsp;&rarr;</a>
+  </div>
+</section>

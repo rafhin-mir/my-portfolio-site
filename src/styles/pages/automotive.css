@@ -465,12 +465,12 @@
 .auto-photo img {
   width: 100%;
   height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
   display: block;
 }
 .auto-masonry-item--land .auto-photo img {
   aspect-ratio: 16 / 9;
-  height: auto;
-  object-fit: cover;
 }
 .auto-photo span {
   position: absolute;

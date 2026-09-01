@@ -82,11 +82,29 @@
   function initHeroVideos() {
     var videos = Array.from(document.querySelectorAll('.carousel-card video'));
     if (!videos.length) return;
+
+    // These are 10 simultaneously-looping videos for the 3D stack effect, expensive to
+    // keep decoding once the hero is scrolled out of view, so track visibility and only
+    // ever play them while the hero is actually on screen (including the staggered start).
+    var heroVisible = true;
+    var heroSection = document.querySelector('.hero');
+    if (heroSection && window.IntersectionObserver) {
+      var io = new IntersectionObserver(function (entries) {
+        heroVisible = entries[0].isIntersecting;
+        if (heroVisible) {
+          videos.forEach(function (v) { if (v.getAttribute('preload') === 'auto') v.play().catch(function () {}); });
+        } else {
+          videos.forEach(function (v) { v.pause(); });
+        }
+      }, { threshold: 0 });
+      io.observe(heroSection);
+    }
+
     videos.forEach(function (v, i) {
       setTimeout(function () {
         v.setAttribute('preload', 'auto');
         v.load();
-        v.play().catch(function () {});
+        if (heroVisible) v.play().catch(function () {});
       }, i * 180);
     });
   }
@@ -165,6 +183,19 @@
         if (entries[0].isIntersecting) { loadActive(); io.disconnect(); }
       }, { rootMargin: '0px 0px 400px 0px' });
       io.observe(rail);
+
+      // Once loaded, the active video would otherwise keep decoding forever even after
+      // the rail scrolls off-screen — pause it while out of view, resume when it's back.
+      var visibilityIO = new IntersectionObserver(function (entries) {
+        var av = videos[activeIndex];
+        if (!av) return;
+        if (entries[0].isIntersecting) {
+          if (loaded) playVideo(av);
+        } else {
+          av.pause();
+        }
+      }, { threshold: 0 });
+      visibilityIO.observe(rail);
     } else {
       loadActive();
     }

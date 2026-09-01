@@ -245,7 +245,7 @@ details .acc-body { display: block !important; }
   position: relative;
 }
 .acc-body ul li::before {
-  content: '—';
+  content: '-';
   position: absolute;
   left: 0;
   color: rgba(204,34,85,.4);
