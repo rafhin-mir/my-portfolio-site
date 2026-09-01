@@ -51,8 +51,9 @@ pageScripts:
 
   <div class="wd-video-wrap{% if video.aspectRatio == '9 / 16' %} wd-video-wrap--vertical{% endif %}" style="aspect-ratio:{{ video.aspectRatio }}">
     <iframe class="wd-video"
-      src="https://player.vimeo.com/video/{{ video.vimeoId }}?title=0&byline=0&portrait=0"
+      src="https://player.vimeo.com/video/{{ video.vimeoId }}?title=0&byline=0&portrait=0&dnt=1"
       frameborder="0"
+      scrolling="no"
       allow="autoplay; fullscreen; picture-in-picture"
       allowfullscreen
       {% if video.startAt %}data-start-at="{{ video.startAt }}"{% endif %}
