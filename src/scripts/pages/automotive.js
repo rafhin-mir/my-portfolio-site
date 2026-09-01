@@ -155,10 +155,18 @@
     if (!v) return;
     v.muted = true;
     v.setAttribute('muted', '');
-    if (v.paused) {
+
+    // On a slow connection the first play() attempt can fire before any
+    // frames are buffered and silently fail — retry once real data is
+    // available instead of leaving the poster stuck indefinitely.
+    var tryPlay = function () {
+      if (!v.paused) return;
       var p = v.play();
       if (p !== undefined) p.catch(function () {});
-    }
+    };
+    tryPlay();
+    v.addEventListener('loadeddata', tryPlay);
+    v.addEventListener('canplay', tryPlay);
   }
 
   function initVideoCards() {
