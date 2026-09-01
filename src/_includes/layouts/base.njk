@@ -8,6 +8,15 @@
   <meta name="color-scheme" content="dark">
   <meta property="og:locale" content="en_CA">
 
+  {# ── Google Analytics (GA4) ── #}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.gaId }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ site.gaId }}');
+  </script>
+
   {# ── Primary meta ── #}
   <title>{{ title if title else site.name + " - " + site.tagline }}</title>
   <meta name="description" content="{{ description if description else site.description }}">
