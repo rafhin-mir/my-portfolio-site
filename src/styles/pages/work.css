@@ -214,6 +214,10 @@
 .work-grid + .work-card {
   margin-top: 14px;
 }
+.work-grid--split {
+  grid-template-columns: 1.3fr 1fr;
+  align-items: start;
+}
 
 /* ── CARD BASE */
 .work-card {
@@ -230,6 +234,8 @@
 .work-card:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
 .work-card--shadow { box-shadow: 0 4px 12px rgba(0,0,0,.6), 0 20px 60px rgba(0,0,0,.5); }
 .work-card--r12 { border-radius: 12px; }
+/* reset for cards rendered as <button> (photo-only cards that open a lightbox instead of navigating) */
+button.work-card { background: none; padding: 0; font: inherit; width: 100%; cursor: zoom-in; }
 
 .work-card img,
 .work-card video {
@@ -240,6 +246,10 @@
   object-fit: cover;
   display: block;
 }
+
+/* hover-to-play preview cards (poster crossfades out to reveal the looping video) */
+.work-card-poster { opacity: 1; transition: opacity .35s ease; }
+.work-card.is-playing .work-card-poster { opacity: 0; }
 
 /* scrims */
 .work-scrim-top {
@@ -396,13 +406,26 @@
 }
 .work-text-panel-list span { color: var(--primary); }
 
-/* café stacked pair */
-.work-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+/* natural sizing: the image keeps its own aspect ratio instead of being
+   cropped to fill a fixed box - the card grows/shrinks to match it */
+.work-card--natural img {
+  position: static;
+  display: block;
+  width: 100%;
+  height: auto;
 }
-.work-card--half { position: relative; flex: 1; min-height: 180px; border-radius: 16px; }
+
+/* masonry photo gallery - Pinterest-style columns, each card sized to its
+   own image so nothing gets cropped */
+.work-masonry {
+  columns: 3 260px;
+  column-gap: 14px;
+  margin-top: 14px;
+}
+.work-masonry .work-card {
+  break-inside: avoid;
+  margin-bottom: 14px;
+}
 
 /* ── CTA BAND */
 .work-cta {
@@ -456,9 +479,99 @@
   .work-card--wide { aspect-ratio: 16/10; min-height: 240px; }
   .work-wide-copy { max-width: 85%; }
   .work-cta { padding: 80px 24px; }
+  .work-grid--split { grid-template-columns: 1fr; }
+  .work-masonry { columns: 2 200px; }
 }
 
 @media (max-width: 480px) {
   .work-grid { grid-template-columns: 1fr; }
-  .work-card--half { min-height: 220px; }
+  .work-masonry { columns: 1; }
+}
+
+/* ── LIGHTBOX */
+.lb {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: rgba(0, 0, 0, .94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .22s ease, visibility .22s ease;
+}
+.lb.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+.lb-img-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 60px 80px;
+  box-sizing: border-box;
+}
+.lb-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 6px;
+  display: block;
+  transform: scale(.96);
+  transition: transform .28s cubic-bezier(0.22, 1, 0.36, 1);
+  user-select: none;
+}
+.lb.is-open .lb-img {
+  transform: scale(1);
+}
+.lb-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.12);
+  color: #f5f5f5;
+  font-size: 18px;
+  line-height: 1;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s, opacity .15s;
+  z-index: 1;
+}
+.lb-close:hover { background: rgba(255,255,255,.16); }
+.lb-prev,
+.lb-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.12);
+  color: #f5f5f5;
+  font-size: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s;
+  z-index: 1;
+}
+.lb-prev { left: 20px; }
+.lb-next { right: 20px; }
+.lb-prev:hover,
+.lb-next:hover { background: rgba(255,255,255,.18); }
+@media (max-width: 600px) {
+  .lb-img-wrap { padding: 56px 16px; }
+  .lb-prev { left: 8px; }
+  .lb-next { right: 8px; }
 }

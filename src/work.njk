@@ -269,33 +269,15 @@ pageScripts:
       </div>
     </div>
 
-    <div class="work-grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
-      <a href="/contact/" class="work-card work-card--shadow" style="aspect-ratio:4/5;min-height:380px">
-        <img src="https://placehold.co/700x875/121212/3a3a3a" alt="Room Tone">
+    <div class="work-grid work-grid--split">
+      <a href="/contact/" class="work-card work-card--shadow" style="aspect-ratio:5/4">
+        <video class="work-card-video" src="/assets/video/Work/Cafe/summer-menu-preview.mp4" poster="/assets/images/posters/work/cafe-pour.jpg" autoplay muted loop playsinline preload="auto"></video>
         <div class="work-scrim-top--soft"></div>
         <div class="work-card-bottom work-card-bottom--tight">
-          <p class="work-card-meta">Interiors · 2025</p>
-          <p class="work-card-title" style="font-size:clamp(20px,2vw,30px);margin-bottom:0">Room Tone</p>
+          <p class="work-card-meta">Menu Reveal · 2026</p>
+          <p class="work-card-title" style="font-size:clamp(20px,2vw,30px);margin-bottom:0">Summer Menu</p>
         </div>
       </a>
-      <div class="work-stack">
-        <a href="/contact/" class="work-card work-card--half">
-          <img src="https://placehold.co/700x360/121212/3a3a3a" alt="On The Counter">
-          <div class="work-scrim-top--soft"></div>
-          <div class="work-card-bottom" style="padding:20px">
-            <p class="work-card-meta" style="margin-bottom:4px">Menu Shoot · 2025</p>
-            <p class="work-card-title" style="font-size:20px;margin-bottom:0">On The Counter</p>
-          </div>
-        </a>
-        <a href="/contact/" class="work-card work-card--half">
-          <img src="https://placehold.co/700x360/121212/3a3a3a" alt="Open At Six">
-          <div class="work-scrim-top--soft"></div>
-          <div class="work-card-bottom" style="padding:20px">
-            <p class="work-card-meta" style="margin-bottom:4px">Brand Film · 2024</p>
-            <p class="work-card-title" style="font-size:20px;margin-bottom:0">Open At Six</p>
-          </div>
-        </a>
-      </div>
       <div class="work-text-panel">
         <p class="work-italic">the small details</p>
         <p class="work-text-panel-body">Steam, light through the window, hands on the machine. Hospitality sells atmosphere before it sells product. We shoot it that way.</p>
@@ -307,7 +289,29 @@ pageScripts:
         </div>
       </div>
     </div>
+
+    <div class="work-masonry">
+      <button type="button" class="work-card work-card--natural">
+        <img src="/assets/images/work/cafe/patio-pour.jpg" alt="Patio Pour">
+      </button>
+      <button type="button" class="work-card work-card--natural">
+        <img src="/assets/images/work/cafe/after-hours.jpg" alt="After Hours">
+      </button>
+      <button type="button" class="work-card work-card--natural">
+        <img src="/assets/images/work/cafe/on-the-counter.jpg" alt="On The Counter">
+      </button>
+    </div>
   </section>
+
+  <!-- ══════════════════════════════════ LIGHTBOX -->
+  <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+    <button class="lb-prev" id="lbPrev" aria-label="Previous">&#8592;</button>
+    <button class="lb-next" id="lbNext" aria-label="Next">&#8594;</button>
+    <div class="lb-img-wrap">
+      <img class="lb-img" id="lbImg" src="" alt="">
+    </div>
+  </div>
 
   <!-- ══════════════════════════════════ 04 — ADS -->
   <section class="work-panel" data-panel="ads" id="ads">

@@ -11,6 +11,98 @@
     );
   }
 
+  function initVideoCards() {
+    var cards = Array.from(document.querySelectorAll('.work-card'));
+    cards.forEach(function (card) {
+      var v = card.querySelector('video.work-card-video');
+      if (!v || v.hasAttribute('autoplay')) return; // autoplay videos manage themselves, see initAutoplayVideos
+
+      card.addEventListener('pointerenter', function () {
+        if (v.getAttribute('preload') !== 'auto') {
+          v.setAttribute('preload', 'auto');
+          v.load();
+        }
+        v.play().then(function () {
+          card.classList.add('is-playing');
+        }).catch(function () {});
+      });
+      card.addEventListener('pointerleave', function () {
+        card.classList.remove('is-playing');
+        v.pause();
+        v.currentTime = 0;
+      });
+    });
+  }
+
+  // Videos meant to always be running (not hover-to-play). Retry play() on
+  // loadeddata/canplay same as the Automotive hero, since autoplay can
+  // silently fail on a slow first attempt - and re-kick it whenever a tab
+  // switch reveals a panel that was previously display:none, since some
+  // browsers won't resume an autoplay video on their own once hidden that way.
+  function initAutoplayVideos() {
+    Array.from(document.querySelectorAll('.work-card-video[autoplay]')).forEach(function (v) {
+      var tryPlay = function () {
+        if (!v.paused) return;
+        var p = v.play();
+        if (p !== undefined) p.catch(function () {});
+      };
+      tryPlay();
+      v.addEventListener('loadeddata', tryPlay);
+      v.addEventListener('canplay', tryPlay);
+    });
+  }
+
+  function playAutoplayVideosIn(panel) {
+    panel.querySelectorAll('.work-card-video[autoplay]').forEach(function (v) {
+      var p = v.play();
+      if (p !== undefined) p.catch(function () {});
+    });
+  }
+
+  function initLightbox() {
+    var lb      = document.getElementById('lb');
+    var lbImg   = document.getElementById('lbImg');
+    var lbClose = document.getElementById('lbClose');
+    var lbPrev  = document.getElementById('lbPrev');
+    var lbNext  = document.getElementById('lbNext');
+    if (!lb) return;
+
+    var imgs = Array.from(document.querySelectorAll('.work-masonry .work-card img'));
+    var current = 0;
+
+    function open(idx) {
+      current = idx;
+      lbImg.src = imgs[current].src;
+      lbImg.alt = imgs[current].alt;
+      lb.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function close() {
+      lb.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    function prev() { open((current - 1 + imgs.length) % imgs.length); }
+    function next() { open((current + 1) % imgs.length); }
+
+    imgs.forEach(function (img, i) {
+      img.closest('.work-card').addEventListener('click', function () { open(i); });
+    });
+
+    lbClose.addEventListener('click', close);
+    lbPrev.addEventListener('click', function (e) { e.stopPropagation(); prev(); });
+    lbNext.addEventListener('click', function (e) { e.stopPropagation(); next(); });
+    lb.addEventListener('click', function (e) { if (e.target === lb || e.target === document.querySelector('.lb-img-wrap')) close(); });
+
+    document.addEventListener('keydown', function (e) {
+      if (!lb.classList.contains('is-open')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') prev();
+      if (e.key === 'ArrowRight') next();
+    });
+  }
+
   function initTabs() {
     var tabs = Array.from(document.querySelectorAll('.work-tab'));
     var panels = Array.from(document.querySelectorAll('.work-panel'));
@@ -30,6 +122,7 @@
       });
 
       if (activePanel && !opts.skipReveal) revealPanel(activePanel);
+      if (activePanel) playAutoplayVideosIn(activePanel);
       if (opts.updateHash) history.replaceState(null, '', tab === 'all' ? '#panel' : '#' + tab);
     }
 
@@ -87,9 +180,12 @@
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () { init(); initTabs(); });
+    document.addEventListener('DOMContentLoaded', function () { init(); initTabs(); initVideoCards(); initAutoplayVideos(); initLightbox(); });
   } else {
     init();
     initTabs();
+    initVideoCards();
+    initAutoplayVideos();
+    initLightbox();
   }
 })();
