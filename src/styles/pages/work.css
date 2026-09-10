@@ -216,7 +216,6 @@
 }
 .work-grid--split {
   grid-template-columns: 1.3fr 1fr;
-  align-items: start;
 }
 
 /* ── CARD BASE */
