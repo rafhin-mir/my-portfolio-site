@@ -1,7 +1,25 @@
 (function () {
-  gsap.registerPlugin(ScrollTrigger);
+  var gsapAvailable = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
+  if (gsapAvailable) gsap.registerPlugin(ScrollTrigger);
+
+  // The hero only ever reaches opacity:1 by the entrance animation below
+  // completing. Some mobile in-app browsers (Instagram, etc.) throttle
+  // rAF / the GSAP ticker right after load and can stall it indefinitely -
+  // that leaves the whole hero permanently invisible with nothing else on
+  // the page broken, which is exactly the "blank hero" reports turned out
+  // to be. Force everything visible after a beat no matter what happened.
+  function forceHeroVisible() {
+    ['.auto-hero', '.auto-eyebrow', '.auto-stripe', '.auto-hero-italic', '.auto-scroll-hint'].forEach(function (sel) {
+      document.querySelectorAll(sel).forEach(function (el) {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      });
+    });
+  }
 
   function init() {
+    if (!gsapAvailable) { forceHeroVisible(); return; }
+
     // Hero entrance
     gsap.from('.auto-hero', { opacity: 0, duration: 0.5, ease: 'power2.out', delay: 0.85 });
 
@@ -10,6 +28,8 @@
       .from('.auto-stripe',      { scaleX: 0, transformOrigin: 'center center', duration: 0.35, ease: 'power3.out' }, '-=0.1')
       .from('.auto-hero-italic', { opacity: 0, y: 14, duration: 0.32, ease: 'power3.out' }, '-=0.15')
       .from('.auto-scroll-hint', { opacity: 0, duration: 0.28, ease: 'power1.out' }, '-=0.05');
+
+    setTimeout(forceHeroVisible, 2500);
 
     // Capabilities copy
     gsap.from(['.auto-cap-italic', '.auto-cap-bold'], {

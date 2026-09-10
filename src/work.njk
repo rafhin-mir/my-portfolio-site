@@ -1,12 +1,11 @@
 ---
 layout: layouts/base.njk
-title: "Portfolio - Automotive Film, Photography & Video Production Work | Rafhin Visuals"
-description: "Browse the Rafhin Visuals portfolio: automotive films, real estate photography, wedding and event coverage, and brand content produced across Canada."
+title: "Portfolio - Events, Weddings, Ads & Café Content | Rafhin Visuals"
+description: "Browse the Rafhin Visuals portfolio: event coverage, wedding films, ad campaigns, and café brand content produced across Toronto and the GTA."
 pageKey: work
 pageCSS: work.css
 permalink: /work/
 pageScripts:
-  - work-filter.js
   - work-gsap.js
 ---
 
@@ -21,199 +20,360 @@ pageScripts:
 }
 </script>
 
-<!-- ══════════════════════════════════ HEADER -->
-<header class="work-header">
-  <span class="work-eyebrow">portfolio</span>
-  <h1 class="work-title">Work</h1>
-</header>
+<!-- ══════════════════════════════════ HERO -->
+<section class="work-hero">
+  <div class="work-hero-bg"></div>
+  <div class="work-hero-grid"></div>
+  <div class="work-hero-content">
+    <p class="work-eyebrow">work</p>
+    <div class="work-stripe"></div>
+    <p class="work-italic">people, places, product.</p>
+    <h1 class="work-hero-title">Same Standard.</h1>
+    <div class="work-hero-actions">
+      <a href="#panel" class="work-btn-primary">Watch the Reel &nbsp;→</a>
+      <a href="#panel" class="btn-ghost">See the Work</a>
+    </div>
+  </div>
+  <div class="work-scroll-hint">
+    <div class="work-scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
 
-<!-- ══════════════════════════════════ FILTERS -->
-<div class="work-filters" id="filters">
-  <button class="filter-btn active" data-filter="all">All</button>
-  <button class="filter-btn" data-filter="real-estate">Real Estate</button>
-  <button class="filter-btn" data-filter="weddings">Weddings</button>
-  <button class="filter-btn" data-filter="events">Events</button>
-  <button class="filter-btn" data-filter="cafe">Café</button>
+<!-- ══════════════════════════════════ CATEGORY INDEX -->
+<nav class="work-index" id="workIndex" aria-label="Portfolio categories">
+  <a href="#panel" class="work-tab is-active" data-tab="all">
+    <span class="work-tab-num">00</span>
+    <span class="work-tab-label">All</span>
+    <span class="work-tab-bar"></span>
+  </a>
+  <a href="#panel" class="work-tab" data-tab="events">
+    <span class="work-tab-num">01</span>
+    <span class="work-tab-label">Events</span>
+    <span class="work-tab-bar"></span>
+  </a>
+  <a href="#panel" class="work-tab" data-tab="weddings">
+    <span class="work-tab-num">02</span>
+    <span class="work-tab-label">Weddings</span>
+    <span class="work-tab-bar"></span>
+  </a>
+  <a href="#panel" class="work-tab" data-tab="cafe">
+    <span class="work-tab-num">03</span>
+    <span class="work-tab-label">Café</span>
+    <span class="work-tab-bar"></span>
+  </a>
+  <a href="#panel" class="work-tab" data-tab="ads">
+    <span class="work-tab-num">04</span>
+    <span class="work-tab-label">Ads</span>
+    <span class="work-tab-bar"></span>
+  </a>
+</nav>
+
+<div id="panel">
+
+  <!-- ══════════════════════════════════ 00 — ALL -->
+  <section class="work-panel is-active" data-panel="all">
+    <div class="work-panel-header">
+      <div class="work-panel-heading">
+        <p class="work-eyebrow">selected <span>· 00</span></p>
+        <p class="work-italic">a quick look</p>
+        <h2 class="work-panel-title">Best Work</h2>
+      </div>
+      <p class="work-panel-standfirst">A short edit of the strongest pieces across every category. Pick a category above for the full set.</p>
+    </div>
+
+    <a href="/contact/" class="work-card work-card--wide work-card--shadow" style="min-height:340px;margin-bottom:14px">
+      <img src="https://placehold.co/1600x686/121212/3a3a3a" alt="Nightfall Sessions">
+      <div class="work-scrim-right"></div>
+      <div class="work-wide-copy">
+        <p class="work-card-meta">Featured <span>·</span> Event Film <span>·</span> 2025</p>
+        <p class="work-card-title">Nightfall Sessions</p>
+        <div class="work-wide-play">
+          <div class="work-play-btn"><svg viewBox="0 0 12 14" fill="#f5f5f5"><path d="M1 1l10 6-10 6V1z"/></svg></div>
+          <span>Watch Film</span>
+        </div>
+      </div>
+    </a>
+
+    <div class="work-grid">
+      <a href="/contact/" class="work-card" style="aspect-ratio:4/5">
+        <img src="https://placehold.co/640x800/121212/3a3a3a" alt="Vendor Showcase">
+        <div class="work-scrim-top--soft"></div>
+        <div class="work-card-bottom work-card-bottom--tight">
+          <p class="work-card-meta">Events <span>·</span> Photo Set</p>
+          <p class="work-card-title work-card-title--sm">Vendor Showcase</p>
+        </div>
+      </a>
+      <a href="/contact/" class="work-card" style="aspect-ratio:4/5">
+        <img src="https://placehold.co/640x800/121212/3a3a3a" alt="Cold Brew, 6AM">
+        <div class="work-scrim-top--soft"></div>
+        <div class="work-card-bottom work-card-bottom--tight">
+          <p class="work-card-meta">Ads <span>·</span> Film</p>
+          <p class="work-card-title work-card-title--sm">Cold Brew, 6AM</p>
+        </div>
+      </a>
+      <a href="/contact/" class="work-card" style="aspect-ratio:4/5">
+        <img src="https://placehold.co/640x800/121212/3a3a3a" alt="Room Tone">
+        <div class="work-scrim-top--soft"></div>
+        <div class="work-card-bottom work-card-bottom--tight">
+          <p class="work-card-meta">Café <span>·</span> Interiors</p>
+          <p class="work-card-title work-card-title--sm">Room Tone</p>
+        </div>
+      </a>
+      <div class="work-text-panel">
+        <p class="work-italic">the short version</p>
+        <p class="work-text-panel-body">Events, ads and hospitality. Film and stills from the same set, cut for every placement.</p>
+        <div class="work-text-panel-list">
+          <p><span>·</span> Event coverage</p>
+          <p><span>·</span> Ad campaigns</p>
+          <p><span>·</span> Café</p>
+          <p><span>·</span> Portraits &amp; stills</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ 01 — EVENTS -->
+  <section class="work-panel" data-panel="events" id="events">
+    <div class="work-panel-header">
+      <div class="work-panel-heading">
+        <p class="work-eyebrow">coverage <span>· 01</span></p>
+        <p class="work-italic">the room</p>
+        <h2 class="work-panel-title work-panel-title--sm" style="font-size:clamp(46px,7vw,100px)">Events</h2>
+      </div>
+    </div>
+
+    <div class="work-grid" style="margin-bottom:14px">
+      <a href="/contact/" class="work-card work-card--shadow" style="aspect-ratio:9/16">
+        <img src="https://placehold.co/640x1138/121212/3a3a3a" alt="Nightfall Sessions">
+        <div class="work-scrim-top"></div>
+        <div class="work-card-tag">Live</div>
+        <div class="work-card-bottom">
+          <p class="work-card-meta">Event Film · 2025</p>
+          <p class="work-card-title">Nightfall Sessions</p>
+          <span class="work-card-cta">Watch Film →</span>
+        </div>
+      </a>
+      <a href="/contact/" class="work-card work-card--shadow" style="aspect-ratio:9/16">
+        <img src="https://placehold.co/640x1138/121212/3a3a3a" alt="Vendor Showcase">
+        <div class="work-scrim-top"></div>
+        <div class="work-card-tag">Vendor</div>
+        <div class="work-card-bottom">
+          <p class="work-card-meta">Photo Set · 2025</p>
+          <p class="work-card-title">Vendor Showcase</p>
+          <span class="work-card-cta">View Set →</span>
+        </div>
+      </a>
+      <div class="work-text-panel">
+        <p class="work-italic">the room reads first</p>
+        <p class="work-text-panel-body">Coverage is not a highlight reel. We shoot the arrivals, the speeches, the last hour, then cut it into something people actually rewatch.</p>
+        <div class="work-text-panel-list">
+          <p><span>·</span> Full-day coverage</p>
+          <p><span>·</span> Same-week recap film</p>
+          <p><span>·</span> Vertical social edits</p>
+          <p><span>·</span> Stills gallery</p>
+        </div>
+      </div>
+    </div>
+
+    <a href="/contact/" class="work-card work-card--wide work-card--r12">
+      <img src="https://placehold.co/1600x686/121212/3a3a3a" alt="Weekend Crowd">
+      <div class="work-scrim-right"></div>
+      <div class="work-wide-copy">
+        <p class="work-card-meta">City Market <span>·</span> Event Film <span>·</span> 2025</p>
+        <p class="work-card-title" style="font-size:clamp(22px,2.8vw,40px)">Weekend Crowd</p>
+        <div class="work-wide-play">
+          <div class="work-play-btn"><svg viewBox="0 0 12 14" fill="#f5f5f5"><path d="M1 1l10 6-10 6V1z"/></svg></div>
+          <span>Watch Film</span>
+        </div>
+      </div>
+      <div class="work-card-numeral">04</div>
+    </a>
+  </section>
+
+  <!-- ══════════════════════════════════ 02 — WEDDINGS -->
+  <section class="work-panel" data-panel="weddings" id="weddings">
+    <div class="work-panel-header">
+      <div class="work-panel-heading">
+        <p class="work-eyebrow">the day <span>· 02</span></p>
+        <p class="work-italic">once, properly</p>
+        <h2 class="work-panel-title">Weddings</h2>
+      </div>
+      <p class="work-panel-standfirst">Film and stills, one team, start to finish. Nothing staged twice.</p>
+    </div>
+
+    <div class="work-grid" style="margin-bottom:14px">
+      <a href="/contact/" class="work-card work-card--shadow" style="aspect-ratio:9/16">
+        <img src="https://placehold.co/640x1138/121212/3a3a3a" alt="Ceremony Day">
+        <div class="work-scrim-top"></div>
+        <div class="work-card-tag">Private</div>
+        <div class="work-card-bottom">
+          <p class="work-card-meta">Wedding Film · 2024</p>
+          <p class="work-card-title">Ceremony Day</p>
+          <span class="work-card-cta">Watch Film →</span>
+        </div>
+      </a>
+      <a href="/contact/" class="work-card work-card--shadow" style="aspect-ratio:9/16">
+        <img src="https://placehold.co/640x1138/121212/3a3a3a" alt="Last Dance">
+        <div class="work-scrim-top"></div>
+        <div class="work-card-tag">Reception</div>
+        <div class="work-card-bottom">
+          <p class="work-card-meta">Highlight Film <span>·</span> 2025</p>
+          <p class="work-card-title">Last Dance</p>
+          <span class="work-card-cta">Watch Film →</span>
+        </div>
+      </a>
+      <a href="/contact/" class="work-card work-card--shadow" style="aspect-ratio:9/16">
+        <img src="https://placehold.co/640x1138/121212/3a3a3a" alt="Golden Hour">
+        <div class="work-scrim-top"></div>
+        <div class="work-card-tag">Couple</div>
+        <div class="work-card-bottom">
+          <p class="work-card-meta">Photo Set <span>·</span> 2024</p>
+          <p class="work-card-title">Golden Hour</p>
+          <span class="work-card-cta">View Set →</span>
+        </div>
+      </a>
+      <div class="work-text-panel">
+        <p class="work-italic">no second takes</p>
+        <p class="work-text-panel-body">We plan the day around the light and stay out of the way. You get a film and a gallery, not a highlight reel of the photographer.</p>
+        <div class="work-text-panel-list">
+          <p><span>·</span> Full-day coverage</p>
+          <p><span>·</span> Highlight film</p>
+          <p><span>·</span> Ceremony &amp; speeches</p>
+          <p><span>·</span> Edited gallery</p>
+        </div>
+      </div>
+    </div>
+
+    <a href="/contact/" class="work-card work-card--wide work-card--r12">
+      <img src="https://placehold.co/1600x686/121212/3a3a3a" alt="The Long Table">
+      <div class="work-scrim-right"></div>
+      <div class="work-wide-copy">
+        <p class="work-card-meta">Full Day <span>·</span> Wedding Film <span>·</span> 2025</p>
+        <p class="work-card-title" style="font-size:clamp(22px,2.8vw,40px)">The Long Table</p>
+        <div class="work-wide-play">
+          <div class="work-play-btn"><svg viewBox="0 0 12 14" fill="#f5f5f5"><path d="M1 1l10 6-10 6V1z"/></svg></div>
+          <span>Watch Film</span>
+        </div>
+      </div>
+    </a>
+  </section>
+
+  <!-- ══════════════════════════════════ 03 — CAFÉ -->
+  <section class="work-panel work-panel--raised" data-panel="cafe" id="cafe">
+    <div class="work-panel-header">
+      <div class="work-panel-heading">
+        <p class="work-eyebrow">hospitality <span>· 03</span></p>
+        <p class="work-italic">warm rooms</p>
+        <h2 class="work-panel-title" style="font-size:clamp(38px,6vw,86px)">Café</h2>
+      </div>
+    </div>
+
+    <div class="work-grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+      <a href="/contact/" class="work-card work-card--shadow" style="aspect-ratio:4/5;min-height:380px">
+        <img src="https://placehold.co/700x875/121212/3a3a3a" alt="Room Tone">
+        <div class="work-scrim-top--soft"></div>
+        <div class="work-card-bottom work-card-bottom--tight">
+          <p class="work-card-meta">Interiors · 2025</p>
+          <p class="work-card-title" style="font-size:clamp(20px,2vw,30px);margin-bottom:0">Room Tone</p>
+        </div>
+      </a>
+      <div class="work-stack">
+        <a href="/contact/" class="work-card work-card--half">
+          <img src="https://placehold.co/700x360/121212/3a3a3a" alt="On The Counter">
+          <div class="work-scrim-top--soft"></div>
+          <div class="work-card-bottom" style="padding:20px">
+            <p class="work-card-meta" style="margin-bottom:4px">Menu Shoot · 2025</p>
+            <p class="work-card-title" style="font-size:20px;margin-bottom:0">On The Counter</p>
+          </div>
+        </a>
+        <a href="/contact/" class="work-card work-card--half">
+          <img src="https://placehold.co/700x360/121212/3a3a3a" alt="Open At Six">
+          <div class="work-scrim-top--soft"></div>
+          <div class="work-card-bottom" style="padding:20px">
+            <p class="work-card-meta" style="margin-bottom:4px">Brand Film · 2024</p>
+            <p class="work-card-title" style="font-size:20px;margin-bottom:0">Open At Six</p>
+          </div>
+        </a>
+      </div>
+      <div class="work-text-panel">
+        <p class="work-italic">the small details</p>
+        <p class="work-text-panel-body">Steam, light through the window, hands on the machine. Hospitality sells atmosphere before it sells product. We shoot it that way.</p>
+        <div class="work-text-panel-list">
+          <p><span>·</span> Interiors &amp; atmosphere</p>
+          <p><span>·</span> Menu &amp; product stills</p>
+          <p><span>·</span> Social verticals</p>
+          <p><span>·</span> Launch campaigns</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ 04 — ADS -->
+  <section class="work-panel" data-panel="ads" id="ads">
+    <div class="work-panel-header">
+      <div class="work-panel-heading">
+        <p class="work-eyebrow">brand work <span>· 04</span></p>
+        <p class="work-italic">the pitch</p>
+        <h2 class="work-panel-title">Ads</h2>
+      </div>
+      <p class="work-panel-standfirst">Client campaigns and self-directed concepts. Film and stills, cut for every placement.</p>
+    </div>
+
+    <div class="work-grid" style="grid-template-columns:repeat(auto-fit,minmax(320px,1fr));margin-bottom:14px">
+      <a href="/contact/" class="work-card work-card--land work-card--r12">
+        <img src="https://placehold.co/960x540/121212/3a3a3a" alt="Cold Brew, 6AM">
+        <div class="work-scrim-top--soft"></div>
+        <div class="work-card-bottom work-card-bottom--tight">
+          <p class="work-card-meta">Ad Film · 2025</p>
+          <p class="work-card-title work-card-title--sm">Cold Brew, 6AM</p>
+        </div>
+      </a>
+      <a href="/contact/" class="work-card work-card--land work-card--r12">
+        <img src="https://placehold.co/960x540/121212/3a3a3a" alt="Everyday Carry">
+        <div class="work-scrim-top--soft"></div>
+        <div class="work-card-bottom work-card-bottom--tight">
+          <p class="work-card-meta">Product Film · 2024</p>
+          <p class="work-card-title work-card-title--sm">Everyday Carry</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="work-grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));align-items:stretch">
+      <a href="/contact/" class="work-card work-card--r12" style="min-height:300px">
+        <img src="https://placehold.co/1200x600/121212/3a3a3a" alt="Sound Off">
+        <div class="work-scrim-top--soft"></div>
+        <div class="work-card-bottom">
+          <p class="work-card-meta">Ad Stills · 2025</p>
+          <p class="work-card-title" style="font-size:clamp(20px,2.2vw,32px);margin-bottom:0">Sound Off</p>
+        </div>
+      </a>
+      <div class="work-text-panel">
+        <p class="work-italic">have a concept?</p>
+        <p class="work-text-panel-body">Client campaigns and self-directed concepts. Written, shot and cut in-house. Film and stills from the same set.</p>
+        <div class="work-text-panel-list">
+          <p><span>·</span> Concept &amp; storyboard</p>
+          <p><span>·</span> Hero film + cutdowns</p>
+          <p><span>·</span> Product stills</p>
+          <p><span>·</span> Platform delivery</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </div>
 
-<!-- ══════════════════════════════════ GRID -->
-<div class="work-grid" id="workGrid">
-
-  <div class="work-item featured" data-category="real-estate">
-    <div class="work-thumb-wrap">
-      <div class="work-item-thumb" style="background:linear-gradient(135deg,#141c14,#1e2a1e,#0e160e);"></div>
-      <span class="work-cat-pill">Real Estate</span>
-    </div>
-    <div class="work-item-info">
-      <p class="work-item-title">Exterior Showcase</p>
-      <p class="work-item-credit">Photography</p>
-    </div>
-  </div>
-
-  <div class="work-item" data-category="real-estate">
-    <div class="work-thumb-wrap">
-      <div class="work-item-thumb" style="background:linear-gradient(135deg,#181c14,#222a1c,#121810);"></div>
-      <span class="work-cat-pill">Real Estate</span>
-    </div>
-    <div class="work-item-info">
-      <p class="work-item-title">Interior Editorial</p>
-      <p class="work-item-credit">Photography</p>
+<!-- ══════════════════════════════════ CTA -->
+<div class="work-cta">
+  <div class="work-cta-bg"></div>
+  <div class="work-cta-glow"></div>
+  <div class="work-cta-content">
+    <p class="work-eyebrow" style="text-align:center">start a project</p>
+    <p class="work-italic">your story.</p>
+    <h2 class="work-cta-title">Our Lens.</h2>
+    <div class="work-cta-actions">
+      <a href="/contact/" class="work-btn-primary">Get In Touch &nbsp;→</a>
+      <a href="/services/" class="btn-ghost">View All Services</a>
     </div>
   </div>
-
-  <div class="work-item" data-category="real-estate">
-    <div class="work-thumb-wrap">
-      <div class="work-item-thumb" style="background:linear-gradient(135deg,#161a12,#202614,#100e0a);"></div>
-      <span class="work-cat-pill">Real Estate</span>
-    </div>
-    <div class="work-item-info">
-      <p class="work-item-title">Twilight Shoot</p>
-      <p class="work-item-credit">Photography</p>
-    </div>
-  </div>
-
-  <div class="work-item" data-category="real-estate">
-    <div class="work-thumb-wrap">
-      <div class="work-item-thumb" style="background:linear-gradient(135deg,#141810,#1e2418,#0e1008);"></div>
-      <span class="work-cat-pill">Real Estate</span>
-    </div>
-    <div class="work-item-info">
-      <p class="work-item-title">Condo Listing</p>
-      <p class="work-item-credit">Photography</p>
-    </div>
-  </div>
-
-  <div class="work-item featured" data-category="weddings">
-    <div class="work-thumb-wrap">
-      <div class="work-item-thumb" style="background:linear-gradient(135deg,#1a1414,#261c1c,#120e0e);"></div>
-      <div class="work-play">
-        <svg viewBox="0 0 12 14" fill="#f5f5f5"><path d="M1 1l10 6-10 6V1z"/></svg>
-      </div>
-      <span class="work-cat-pill">Weddings</span>
-    </div>
-    <div class="work-item-info">
-      <p class="work-item-title">Wedding Film</p>
-      <p class="work-item-credit">Videography</p>
-    </div>
-  </div>
-
-  <div class="work-item" data-category="weddings">
-    <div class="work-thumb-wrap">
-      <div class="work-item-thumb" style="background:linear-gradient(135deg,#1c1616,#281e1e,#14100e);"></div>
-      <span class="work-cat-pill">Weddings</span>
-    </div>
-    <div class="work-item-info">
-      <p class="work-item-title">Ceremony Coverage</p>
-      <p class="work-item-credit">Photography</p>
-    </div>
-  </div>
-
-  <div class="work-item" data-category="weddings">
-    <div class="work-thumb-wrap">
-      <div class="work-item-thumb" style="background:linear-gradient(135deg,#181414,#221c1c,#100c0c);"></div>
-      <div class="work-play">
-        <svg viewBox="0 0 12 14" fill="#f5f5f5"><path d="M1 1l10 6-10 6V1z"/></svg>
-      </div>
-      <span class="work-cat-pill">Weddings</span>
-    </div>
-    <div class="work-item-info">
-      <p class="work-item-title">Reception Highlights</p>
-      <p class="work-item-credit">Videography</p>
-    </div>
-  </div>
-
-  <div class="work-item" data-category="weddings">
-    <div class="work-thumb-wrap">
-      <div class="work-item-thumb" style="background:linear-gradient(135deg,#1a1616,#241c1c,#12100e);"></div>
-      <span class="work-cat-pill">Weddings</span>
-    </div>
-    <div class="work-item-info">
-      <p class="work-item-title">Couple Portraits</p>
-      <p class="work-item-credit">Photography</p>
-    </div>
-  </div>
-
-  <div class="work-item" data-category="events">
-    <div class="work-thumb-wrap">
-      <div class="work-item-thumb" style="background:linear-gradient(135deg,#0e1018,#141824,#0a0c10);"></div>
-      <div class="work-play">
-        <svg viewBox="0 0 12 14" fill="#f5f5f5"><path d="M1 1l10 6-10 6V1z"/></svg>
-      </div>
-      <span class="work-cat-pill">Events</span>
-    </div>
-    <div class="work-item-info">
-      <p class="work-item-title">Event Recap Film</p>
-      <p class="work-item-credit">Videography</p>
-    </div>
-  </div>
-
-  <div class="work-item featured" data-category="events">
-    <div class="work-thumb-wrap">
-      <div class="work-item-thumb" style="background:linear-gradient(135deg,#100e18,#16141e,#0c0a10);"></div>
-      <span class="work-cat-pill">Events</span>
-    </div>
-    <div class="work-item-info">
-      <p class="work-item-title">Live Event Coverage</p>
-      <p class="work-item-credit">Photography</p>
-    </div>
-  </div>
-
-  <div class="work-item" data-category="events">
-    <div class="work-thumb-wrap">
-      <div class="work-item-thumb" style="background:linear-gradient(135deg,#0c1018,#121820,#080c10);"></div>
-      <div class="work-play">
-        <svg viewBox="0 0 12 14" fill="#f5f5f5"><path d="M1 1l10 6-10 6V1z"/></svg>
-      </div>
-      <span class="work-cat-pill">Events</span>
-    </div>
-    <div class="work-item-info">
-      <p class="work-item-title">Corporate Event</p>
-      <p class="work-item-credit">Videography</p>
-    </div>
-  </div>
-
-  <div class="work-item" data-category="events">
-    <div class="work-thumb-wrap">
-      <div class="work-item-thumb" style="background:linear-gradient(135deg,#0e0c18,#14121e,#0a0810);"></div>
-      <span class="work-cat-pill">Events</span>
-    </div>
-    <div class="work-item-info">
-      <p class="work-item-title">Night Event Portraits</p>
-      <p class="work-item-credit">Photography</p>
-    </div>
-  </div>
-
-  <div class="work-item" data-category="cafe">
-    <div class="work-thumb-wrap">
-      <div class="work-item-thumb" style="background:linear-gradient(135deg,#1c1610,#261e16,#14100a);"></div>
-      <span class="work-cat-pill">Café</span>
-    </div>
-    <div class="work-item-info">
-      <p class="work-item-title">Café Editorial</p>
-      <p class="work-item-credit">Photography</p>
-    </div>
-  </div>
-
-  <div class="work-item" data-category="cafe">
-    <div class="work-thumb-wrap">
-      <div class="work-item-thumb" style="background:linear-gradient(135deg,#1a1612,#221e16,#120e0a);"></div>
-      <span class="work-cat-pill">Café</span>
-    </div>
-    <div class="work-item-info">
-      <p class="work-item-title">Product Shots</p>
-      <p class="work-item-credit">Photography</p>
-    </div>
-  </div>
-
-  <div class="work-item featured" data-category="cafe">
-    <div class="work-thumb-wrap">
-      <div class="work-item-thumb" style="background:linear-gradient(135deg,#1c1810,#261e14,#140e08);"></div>
-      <span class="work-cat-pill">Café</span>
-    </div>
-    <div class="work-item-info">
-      <p class="work-item-title">Ambient Interior</p>
-      <p class="work-item-credit">Photography</p>
-    </div>
-  </div>
-
 </div>
