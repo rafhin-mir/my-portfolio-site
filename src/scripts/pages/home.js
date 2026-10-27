@@ -243,67 +243,108 @@
   }
 
   function initClientShowcaseInfinite() {
-    if (window.innerWidth > 768) return;
     var rail = document.getElementById('clientShowcaseRail');
     if (!rail) return;
 
-    // Build a track element and move items into it
-    var track = document.createElement('div');
-    track.className = 'showcase-rail--vert-track';
-
-    var origItems = Array.from(rail.querySelectorAll('.showcase-item'));
-    origItems.forEach(function (item) { track.appendChild(item); });
-    origItems.forEach(function (item) {
-      var clone = item.cloneNode(true);
-      clone.setAttribute('aria-hidden', 'true');
-      track.appendChild(clone);
-    });
-    rail.appendChild(track);
-
-    var SPEED = 0.3;
-    var offset = 0;
-    var loopW = 0;
-    var isPaused = false;
-    var resumeTimer = null;
-    var touchLastX = 0;
-
-    function setOffset(x) {
-      offset = ((x % loopW) + loopW) % loopW;
-      track.style.transform = 'translateX(' + (-offset) + 'px)';
+    // This used to check window.innerWidth once, at load. If the page loaded
+    // at desktop width and the viewport was only resized afterward (narrowing
+    // the window, rotating a tablet, toggling DevTools device mode without a
+    // refresh), the mobile marquee would never initialize - the rail would
+    // just sit there as the hover-only accordion with nothing to hover.
+    // Re-check on resize instead, and only build the marquee once.
+    var started = false;
+    function trySetup() {
+      if (started || window.innerWidth > 768) return;
+      started = true;
+      setup();
     }
+    trySetup();
+    window.addEventListener('resize', trySetup);
 
-    function tick() {
-      if (!isPaused) setOffset(offset + SPEED);
-      requestAnimationFrame(tick);
+    function setup() {
+      // Build a track element and move items into it
+      var track = document.createElement('div');
+      track.className = 'showcase-rail--vert-track';
+
+      var origItems = Array.from(rail.querySelectorAll('.showcase-item'));
+      origItems.forEach(function (item) { track.appendChild(item); });
+      origItems.forEach(function (item) {
+        var clone = item.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        track.appendChild(clone);
+      });
+      rail.appendChild(track);
+
+      // Smooothy-style drag: real momentum that carries past the finger lifting
+      // off and decays smoothly back into the ambient auto-scroll, instead of
+      // a hard 1:1 follow that abruptly resumes a constant speed after a pause.
+      var AMBIENT_SPEED = 0.3;   // px/frame once settled
+      var MAX_FLICK_SPEED = 6;   // px/frame cap so a hard flick doesn't blow past neighbours
+      var DECAY = 0.95;          // momentum falloff per frame
+      var SETTLE_LERP = 0.06;    // how quickly speed eases back to ambient after momentum dies out
+      var MIN_MOMENTUM = 0.02;   // px/frame below which momentum is considered done
+
+      var offset = 0;
+      var loopW = 0;
+      var speed = AMBIENT_SPEED; // current effective px/frame, signed
+      var mode = 'auto';         // 'auto' | 'drag' | 'momentum'
+      var touchLastX = 0;
+      var touchLastT = 0;
+      var velocity = 0;          // smoothed px/ms while dragging
+
+      function setOffset(x) {
+        offset = ((x % loopW) + loopW) % loopW;
+        track.style.transform = 'translateX(' + (-offset) + 'px)';
+      }
+
+      function tick() {
+        if (mode === 'auto') {
+          speed += (AMBIENT_SPEED - speed) * SETTLE_LERP;
+          setOffset(offset + speed);
+        } else if (mode === 'momentum') {
+          speed *= DECAY;
+          setOffset(offset + speed);
+          if (Math.abs(speed) < MIN_MOMENTUM) mode = 'auto';
+        }
+        // 'drag' mode: offset is driven directly by touchmove below, not here
+        requestAnimationFrame(tick);
+      }
+
+      function start() {
+        loopW = track.scrollWidth / 2;
+        requestAnimationFrame(tick);
+      }
+
+      rail.addEventListener('touchstart', function (e) {
+        mode = 'drag';
+        velocity = 0;
+        touchLastX = e.touches[0].clientX;
+        touchLastT = performance.now();
+      }, { passive: true });
+
+      rail.addEventListener('touchmove', function (e) {
+        var x = e.touches[0].clientX;
+        var t = performance.now();
+        var dx = touchLastX - x;
+        var dt = Math.max(t - touchLastT, 1);
+        velocity = velocity * 0.75 + (dx / dt) * 0.25; // low-pass so one noisy sample can't dominate
+        touchLastX = x;
+        touchLastT = t;
+        setOffset(offset + dx);
+      }, { passive: true });
+
+      function startMomentum() {
+        if (mode !== 'drag') return;
+        mode = 'momentum';
+        speed = Math.max(-MAX_FLICK_SPEED, Math.min(MAX_FLICK_SPEED, velocity * 16.67));
+      }
+
+      rail.addEventListener('touchend', startMomentum, { passive: true });
+      rail.addEventListener('touchcancel', startMomentum, { passive: true });
+
+      // Start after layout is painted
+      setTimeout(start, 100);
     }
-
-    function start() {
-      loopW = track.scrollWidth / 2;
-      requestAnimationFrame(tick);
-    }
-
-    rail.addEventListener('touchstart', function (e) {
-      isPaused = true;
-      clearTimeout(resumeTimer);
-      touchLastX = e.touches[0].clientX;
-    }, { passive: true });
-
-    rail.addEventListener('touchmove', function (e) {
-      var dx = touchLastX - e.touches[0].clientX;
-      touchLastX = e.touches[0].clientX;
-      setOffset(offset + dx);
-    }, { passive: true });
-
-    rail.addEventListener('touchend', function () {
-      resumeTimer = setTimeout(function () { isPaused = false; }, 2000);
-    }, { passive: true });
-
-    rail.addEventListener('touchcancel', function () {
-      resumeTimer = setTimeout(function () { isPaused = false; }, 2000);
-    }, { passive: true });
-
-    // Start after layout is painted
-    setTimeout(start, 100);
   }
 
   function initShowcase() {
@@ -312,12 +353,124 @@
     initClientShowcaseInfinite();
   }
 
+  // Grab-and-drag the hero 3D carousel: horizontal drag spins the ring with
+  // momentum on release (same lerp/decay technique as the brand marquee),
+  // vertical drag tilts it within a clamped range and eases back to center
+  // when let go. Works for mouse and touch alike via Pointer Events.
+  function initCarouselDrag() {
+    var wrap = document.getElementById('heroCarousel');
+    var track = document.querySelector('.carousel-track');
+    var dragLayer = document.querySelector('.carousel-drag');
+    if (!wrap || !track || !dragLayer || !window.PointerEvent) return;
+
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Hand the ring's rotation off from the CSS keyframe to JS so dragging can
+    // take over seamlessly - same 70s-per-revolution rate, so there's no jump.
+    track.style.animation = 'none';
+
+    var AMBIENT_DEG = reduceMotion ? 0 : 360 / 70 / 60; // deg/frame, matches the old CSS rate
+    var MAX_FLICK_DEG = 7;       // deg/frame cap so a hard flick doesn't go flying
+    var DECAY = 0.97;            // momentum falloff per frame - closer to 1 = keeps coasting longer, like it has mass
+    var MIN_MOMENTUM = 0.01;     // deg/frame below which momentum is considered done
+    var DRAG_SENSITIVITY = 0.12; // deg of spin per px of horizontal drag - low on purpose, a small nudge shouldn't spin it far
+    var TILT_SENSITIVITY = 0.05; // deg of tilt per px of vertical drag
+    var TILT_MAX = 16;           // deg, clamp on the vertical tilt
+    // Every value below is a *target* - the actual render always eases toward
+    // it every frame (Smooothy's lerp/damp technique) instead of snapping to
+    // wherever the last pointer event landed, which is what made drag feel
+    // steppy: pointermove doesn't fire every frame, so without this the ring
+    // only "catches up" in visible jumps. A lower lerp factor also means the
+    // render lags further behind the target, which reads as the carousel
+    // having weight/inertia rather than being weightless and twitchy.
+    var ANGLE_LERP = 0.08;
+    var TILT_LERP = 0.07;
+
+    var targetAngle = 0, renderAngle = 0;
+    var targetTilt = 0, renderTilt = 0;
+    var momentumSpeed = 0;
+    var mode = 'auto';        // 'auto' | 'momentum' (dragging drives the target directly)
+    var dragging = false;
+    // Vertical drag tilts on mouse, but never on touch - touch-action:pan-y
+    // reserves vertical gestures for native page scroll, so trying to also
+    // read vertical drag there just fights the browser and gets "stuck".
+    var allowTilt = false;
+    var lastX = 0, lastY = 0, lastT = 0;
+    var velocity = 0; // smoothed horizontal deg/ms while dragging
+
+    function tick() {
+      if (!dragging) {
+        if (mode === 'momentum') {
+          momentumSpeed *= DECAY;
+          targetAngle += momentumSpeed;
+          if (Math.abs(momentumSpeed) < MIN_MOMENTUM) mode = 'auto';
+        } else {
+          targetAngle += AMBIENT_DEG;
+        }
+        targetTilt = 0; // ease back to resting center once released
+      }
+
+      renderAngle += (targetAngle - renderAngle) * ANGLE_LERP;
+      renderTilt += (targetTilt - renderTilt) * TILT_LERP;
+
+      track.style.transform = 'rotateY(' + renderAngle + 'deg)';
+      dragLayer.style.transform = 'rotateX(' + renderTilt + 'deg)';
+
+      requestAnimationFrame(tick);
+    }
+
+    function onDown(e) {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      dragging = true;
+      allowTilt = e.pointerType !== 'touch';
+      mode = 'auto';
+      velocity = 0;
+      lastX = e.clientX;
+      lastY = e.clientY;
+      lastT = performance.now();
+      wrap.classList.add('is-dragging');
+    }
+
+    function onMove(e) {
+      if (!dragging) return;
+      var x = e.clientX, y = e.clientY, t = performance.now();
+      var dx = x - lastX, dy = y - lastY;
+      var dt = Math.max(t - lastT, 1);
+
+      targetAngle += dx * DRAG_SENSITIVITY;
+      velocity = velocity * 0.7 + (dx * DRAG_SENSITIVITY / dt) * 0.3; // low-pass so one noisy sample can't dominate
+
+      if (allowTilt) {
+        targetTilt = Math.max(-TILT_MAX, Math.min(TILT_MAX, targetTilt - dy * TILT_SENSITIVITY));
+      }
+
+      lastX = x; lastY = y; lastT = t;
+    }
+
+    function onUp() {
+      if (!dragging) return;
+      dragging = false;
+      mode = 'momentum';
+      momentumSpeed = Math.max(-MAX_FLICK_DEG, Math.min(MAX_FLICK_DEG, velocity * 16.67));
+      wrap.classList.remove('is-dragging');
+    }
+
+    wrap.addEventListener('pointerdown', onDown);
+    window.addEventListener('pointermove', onMove);
+    window.addEventListener('pointerup', onUp);
+    window.addEventListener('pointercancel', onUp);
+    wrap.addEventListener('dragstart', function (e) { e.preventDefault(); });
+
+    requestAnimationFrame(tick);
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () { init(); initCarouselHover(); initShowcase(); initHeroVideos(); });
+    document.addEventListener('DOMContentLoaded', function () { init(); initCarouselHover(); initShowcase(); initHeroVideos(); initCarouselDrag(); });
   } else {
     init();
     initCarouselHover();
     initShowcase();
     initHeroVideos();
+    initCarouselDrag();
   }
 })();
