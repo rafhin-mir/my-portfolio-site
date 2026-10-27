@@ -398,20 +398,36 @@
     var lastX = 0, lastY = 0, lastT = 0;
     var velocity = 0; // smoothed horizontal deg/ms while dragging
 
-    function tick() {
+    // All the constants above are tuned per ~16.67ms frame (60fps). rAF
+    // doesn't always fire at a steady 60fps though - it dips under load, on a
+    // throttled background tab, etc. - and on a 120Hz display it fires twice
+    // as often. Applying a fixed per-frame delta made the spin speed drift
+    // with whatever frame rate the browser actually achieved ("rotates too
+    // slowly sometimes"). Scale every step by real elapsed time instead, so
+    // the speed stays constant no matter the frame rate.
+    var FRAME_MS = 16.67;
+    var lastFrameTime = null;
+
+    function tick(now) {
+      var dt = lastFrameTime === null ? FRAME_MS : Math.min(now - lastFrameTime, 100);
+      lastFrameTime = now;
+      var steps = dt / FRAME_MS;
+
       if (!dragging) {
         if (mode === 'momentum') {
-          momentumSpeed *= DECAY;
-          targetAngle += momentumSpeed;
+          momentumSpeed *= Math.pow(DECAY, steps);
+          targetAngle += momentumSpeed * steps;
           if (Math.abs(momentumSpeed) < MIN_MOMENTUM) mode = 'auto';
         } else {
-          targetAngle += AMBIENT_DEG;
+          targetAngle += AMBIENT_DEG * steps;
         }
         targetTilt = 0; // ease back to resting center once released
       }
 
-      renderAngle += (targetAngle - renderAngle) * ANGLE_LERP;
-      renderTilt += (targetTilt - renderTilt) * TILT_LERP;
+      var angleStep = 1 - Math.pow(1 - ANGLE_LERP, steps);
+      var tiltStep = 1 - Math.pow(1 - TILT_LERP, steps);
+      renderAngle += (targetAngle - renderAngle) * angleStep;
+      renderTilt += (targetTilt - renderTilt) * tiltStep;
 
       track.style.transform = 'rotateY(' + renderAngle + 'deg)';
       dragLayer.style.transform = 'rotateX(' + renderTilt + 'deg)';
