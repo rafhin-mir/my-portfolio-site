@@ -245,6 +245,11 @@
       img.parentElement.addEventListener('click', function () { open(i); });
     });
 
+    var viewGalleryBtn = document.getElementById('viewGalleryBtn');
+    if (viewGalleryBtn && imgs.length) {
+      viewGalleryBtn.addEventListener('click', function () { open(0); });
+    }
+
     lbClose.addEventListener('click', close);
     lbPrev.addEventListener('click', function (e) { e.stopPropagation(); prev(); });
     lbNext.addEventListener('click', function (e) { e.stopPropagation(); next(); });
