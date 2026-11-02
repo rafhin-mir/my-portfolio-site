@@ -45,7 +45,7 @@
   width: 60px;
   height: 2px;
   border-radius: 9999px;
-  background: linear-gradient(to right, #b8960c, #d4af6a, #f0e8d0);
+  background: var(--gradient-gold-stripe);
   margin: 0 0 16px;
 }
 
@@ -135,9 +135,7 @@
   height: var(--c-h);
   border-radius: 14px;
   overflow: hidden;
-  box-shadow:
-    0 4px 12px rgba(0,0,0,.6),
-    0 20px 60px rgba(0,0,0,.5);
+  box-shadow: var(--shadow-elevated);
   backface-visibility: visible;
 }
 
@@ -271,7 +269,7 @@
   font-weight: 700;
   letter-spacing: .22em;
   text-transform: uppercase;
-  color: #f5f5f5;
+  color: var(--white);
   margin: 0 0 10px;
 }
 .creations-italic {
@@ -301,7 +299,7 @@
   height: 460px;
   cursor: pointer;
   border: 1px solid rgba(255,255,255,.06);
-  box-shadow: 0 4px 12px rgba(0,0,0,.6), 0 20px 60px rgba(0,0,0,.5);
+  box-shadow: var(--shadow-elevated);
   transition: transform .4s cubic-bezier(0.22, 1, 0.36, 1), border-color .4s ease;
 }
 .creation-card:hover { transform: translateY(-6px); border-color: rgba(204,34,85,.4); }
@@ -329,7 +327,7 @@
   border-radius: 100px;
   margin-bottom: 12px;
   background: rgba(8,8,8,.7);
-  color: #f5f5f5;
+  color: var(--white);
   border: 1px solid rgba(245,245,245,.12);
 }
 .creation-name {
@@ -349,7 +347,7 @@
   font-weight: 700;
   letter-spacing: .16em;
   text-transform: uppercase;
-  color: #f5f5f5;
+  color: var(--white);
   text-decoration: none;
   transition: color .2s ease;
 }
@@ -410,7 +408,7 @@
 }
 .creation-badge--soon {
   background: rgba(102,0,51,.2);
-  color: #cc2255;
+  color: var(--primary);
   border: 1px solid rgba(204,34,85,.35);
 }
 .creation-card--featured {
@@ -600,7 +598,7 @@
   pointer-events: auto;
   transition: transform .2s cubic-bezier(.25,.46,.45,.94), color .2s ease;
 }
-.showcase-link:hover { color: #f5f5f5; transform: translateX(4px); }
+.showcase-link:hover { color: var(--white); transform: translateX(4px); }
 .showcase-link:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; border-radius: 2px; }
 
 /* ── brands ── */

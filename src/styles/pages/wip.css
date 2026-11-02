@@ -64,9 +64,7 @@
   height: var(--c-h);
   border-radius: 14px;
   overflow: hidden;
-  box-shadow:
-    0 4px 12px rgba(0,0,0,.6),
-    0 20px 60px rgba(0,0,0,.5);
+  box-shadow: var(--shadow-elevated);
   backface-visibility: visible;
 }
 
@@ -113,7 +111,7 @@
   width: 60px;
   height: 2px;
   border-radius: 9999px;
-  background: linear-gradient(to right, #b8960c, #d4af6a, #f0e8d0);
+  background: var(--gradient-gold-stripe);
   margin: 0 auto 18px;
 }
 
@@ -238,7 +236,7 @@
 
 .wip-submit {
   background: #a81e48;
-  color: #f5f5f5;
+  color: var(--white);
   border: none;
   padding: 14px 22px;
   font-family: 'Archivo', sans-serif;

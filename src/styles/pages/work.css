@@ -17,7 +17,7 @@
   width: 48px;
   height: 2px;
   border-radius: 9999px;
-  background: linear-gradient(to right, #b8960c, #d4af6a, #f0e8d0);
+  background: var(--gradient-gold-stripe);
   margin: 0 auto 20px;
 }
 
@@ -34,8 +34,8 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #a81e48;
-  color: #f5f5f5;
+  background: var(--accent-crimson);
+  color: var(--white);
   font-family: 'Archivo', sans-serif;
   font-size: 11px;
   font-weight: 800;
@@ -48,9 +48,9 @@
   cursor: pointer;
   transition: background .2s ease, transform .2s cubic-bezier(.25,.46,.45,.94);
 }
-.work-btn-primary:hover { background: #8c1a3d; transform: translateY(-2px); }
+.work-btn-primary:hover { background: var(--accent-crimson-hover); transform: translateY(-2px); }
 .work-btn-primary:active { transform: translateY(0); }
-.work-btn-primary:focus-visible { outline: 2px solid #f5f5f5; outline-offset: 4px; }
+.work-btn-primary:focus-visible { outline: 2px solid var(--white); outline-offset: 4px; }
 
 /* ── HERO */
 .work-hero {
@@ -94,7 +94,7 @@
   letter-spacing: -.048em;
   line-height: .86;
   text-transform: uppercase;
-  color: #f5f5f5;
+  color: var(--white);
   margin: 0 0 32px;
 }
 .work-hero-actions {
@@ -113,7 +113,7 @@
   gap: 10px;
   opacity: .3;
 }
-.work-scroll-line { width: 28px; height: 1px; background: #f5f5f5; }
+.work-scroll-line { width: 28px; height: 1px; background: var(--white); }
 .work-scroll-hint span {
   font-size: 10px;
   font-weight: 600;
@@ -133,7 +133,7 @@
 }
 .work-tab {
   position: relative;
-  background: #050505;
+  background: var(--black);
   padding: 26px 22px;
   display: flex;
   align-items: baseline;
@@ -156,7 +156,7 @@
   font-weight: 900;
   letter-spacing: -.01em;
   text-transform: uppercase;
-  color: #f5f5f5;
+  color: var(--white);
   font-family: 'Archivo', sans-serif;
 }
 .work-tab-bar {
@@ -191,7 +191,7 @@
   letter-spacing: -.048em;
   line-height: .86;
   text-transform: uppercase;
-  color: #f5f5f5;
+  color: var(--white);
   margin: 0;
 }
 .work-panel-title--sm { font-size: clamp(42px, 6.5vw, 92px); }
@@ -231,7 +231,7 @@
 }
 .work-card:hover { border-color: rgba(245,245,245,.22); }
 .work-card:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
-.work-card--shadow { box-shadow: 0 4px 12px rgba(0,0,0,.6), 0 20px 60px rgba(0,0,0,.5); }
+.work-card--shadow { box-shadow: var(--shadow-elevated); }
 .work-card--r12 { border-radius: 12px; }
 /* reset for cards rendered as <button> (photo-only cards that open a lightbox instead of navigating) */
 button.work-card { background: none; padding: 0; font: inherit; width: 100%; cursor: zoom-in; }
@@ -308,7 +308,7 @@ button.work-card { background: none; padding: 0; font: inherit; width: 100%; cur
   letter-spacing: -.02em;
   line-height: 1.05;
   text-transform: uppercase;
-  color: #f5f5f5;
+  color: var(--white);
   margin: 0 0 10px;
 }
 .work-card-title--sm { font-size: clamp(18px, 1.8vw, 26px); margin-bottom: 0; }
@@ -462,7 +462,7 @@ button.work-card { background: none; padding: 0; font: inherit; width: 100%; cur
   letter-spacing: -.05em;
   line-height: .86;
   text-transform: uppercase;
-  color: #f5f5f5;
+  color: var(--white);
   margin: 0 0 40px;
 }
 .work-cta-actions {
@@ -537,7 +537,7 @@ button.work-card { background: none; padding: 0; font: inherit; width: 100%; cur
   right: 24px;
   background: rgba(255,255,255,.08);
   border: 1px solid rgba(255,255,255,.12);
-  color: #f5f5f5;
+  color: var(--white);
   font-size: 18px;
   line-height: 1;
   width: 40px;
@@ -558,7 +558,7 @@ button.work-card { background: none; padding: 0; font: inherit; width: 100%; cur
   transform: translateY(-50%);
   background: rgba(255,255,255,.08);
   border: 1px solid rgba(255,255,255,.12);
-  color: #f5f5f5;
+  color: var(--white);
   font-size: 20px;
   width: 44px;
   height: 44px;

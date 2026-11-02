@@ -4,7 +4,7 @@
   font-weight: 700;
   letter-spacing: .22em;
   text-transform: uppercase;
-  color: #f5f5f5;
+  color: var(--white);
   margin: 0 0 12px;
 }
 .abt-eyebrow--center { display: block; text-align: center; }
@@ -13,7 +13,7 @@
   width: 48px;
   height: 2px;
   border-radius: 9999px;
-  background: linear-gradient(to right, #b8960c, #d4af6a, #f0e8d0);
+  background: var(--gradient-gold-stripe);
   margin: 0 0 20px;
 }
 
@@ -21,21 +21,21 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #a81e48;
-  color: #f5f5f5;
+  background: var(--accent-crimson);
+  color: var(--white);
   font-family: 'Archivo', sans-serif;
   font-size: 11px;
   font-weight: 800;
   letter-spacing: .12em;
   text-transform: uppercase;
-  padding: 14px 32px;
+  padding: 14px 28px;
   border-radius: 100px;
   text-decoration: none;
   transition: background .2s ease, transform .2s cubic-bezier(.25,.46,.45,.94);
 }
-.abt-btn:hover  { background: #8c1a3d; transform: translateY(-2px); }
+.abt-btn:hover  { background: var(--accent-crimson-hover); transform: translateY(-2px); }
 .abt-btn:active { transform: translateY(0); }
-.abt-btn:focus-visible { outline: 2px solid #f5f5f5; outline-offset: 4px; }
+.abt-btn:focus-visible { outline: 2px solid var(--white); outline-offset: 4px; }
 
 /* ── INTRO */
 .abt-intro {
@@ -101,7 +101,7 @@
   font-family: 'IvyPresto Display', serif;
   font-style: italic;
   font-size: clamp(52px, 7vw, 90px);
-  color: #f5f5f5;
+  color: var(--white);
   font-weight: 400;
   letter-spacing: -.01em;
 }
@@ -110,7 +110,7 @@
   font-family: 'Archivo', sans-serif;
   font-size: clamp(52px, 7vw, 90px);
   font-weight: 900;
-  color: #f5f5f5;
+  color: var(--white);
   letter-spacing: -.03em;
   text-transform: uppercase;
   line-height: .9;
@@ -120,7 +120,7 @@
   font-family: 'Archivo', sans-serif;
   font-size: 16px;
   line-height: 1.75;
-  color: #f5f5f5;
+  color: var(--white);
   max-width: 480px;
 }
 
@@ -144,7 +144,7 @@
   font-weight: 900;
   letter-spacing: -.03em;
   text-transform: uppercase;
-  color: #f5f5f5;
+  color: var(--white);
   margin: 0;
 }
 
@@ -186,7 +186,7 @@
   font-weight: 900;
   letter-spacing: -.03em;
   text-transform: uppercase;
-  color: #f5f5f5;
+  color: var(--white);
   line-height: 1.05;
   margin: 0;
 }
@@ -198,7 +198,7 @@
   font-size: 1.1em;
   text-transform: none;
   letter-spacing: -.01em;
-  color: #f5f5f5;
+  color: var(--white);
 }
 
 /* ── TABLET */
