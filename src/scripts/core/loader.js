@@ -2,7 +2,7 @@ const loader      = document.getElementById('pageLoader');
 const pageContent = document.getElementById('pageContent');
 
 const loaderVariant = loader ? loader.dataset.variant : 'default';
-const loaderDelay   = loaderVariant === 'contact' ? 1900 : 900;
+const loaderDelay   = loaderVariant === 'contact' ? 1100 : 900;
 
 setTimeout(() => {
   loader.classList.add('hidden');

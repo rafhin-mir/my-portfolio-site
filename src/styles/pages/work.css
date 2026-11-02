@@ -8,7 +8,7 @@
   font-weight: 700;
   letter-spacing: .22em;
   text-transform: uppercase;
-  color: rgba(245,245,245,.38);
+  color: rgba(245,245,245,.55);
   margin: 0 0 10px;
 }
 .work-eyebrow span { color: var(--primary); }
@@ -55,7 +55,7 @@
 /* ── HERO */
 .work-hero {
   position: relative;
-  min-height: 44vh;
+  min-height: 92vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -198,7 +198,7 @@
 .work-panel-standfirst {
   font-size: 13px;
   line-height: 1.8;
-  color: rgba(245,245,245,.45);
+  color: rgba(245,245,245,.55);
   max-width: 320px;
   text-wrap: pretty;
   margin: 0;
@@ -296,7 +296,7 @@ button.work-card { background: none; padding: 0; font: inherit; width: 100%; cur
   font-weight: 700;
   letter-spacing: .18em;
   text-transform: uppercase;
-  color: rgba(245,245,245,.4);
+  color: rgba(245,245,245,.55);
   margin: 0 0 8px;
   font-family: 'Archivo', sans-serif;
 }
@@ -317,12 +317,17 @@ button.work-card { background: none; padding: 0; font: inherit; width: 100%; cur
   font-weight: 700;
   letter-spacing: .16em;
   text-transform: uppercase;
-  color: rgba(245,245,245,.42);
+  color: rgba(245,245,245,.55);
   font-family: 'Archivo', sans-serif;
 }
 
 /* wide card (21:9 + 16:9 hero-style, left copy block) */
 .work-card--wide { aspect-ratio: 21/9; min-height: 320px; }
+/* the "Best Work" hero card needs a taller min-height than the other wide
+   cards - a modifier class instead of an inline style, so the mobile
+   override below (same specificity, later in source order) still wins */
+.work-card--featured { min-height: 340px; margin-bottom: 14px; }
+.work-card--tall { min-height: 300px; }
 .work-wide-copy {
   position: absolute;
   top: 0; bottom: 0; left: 0;
@@ -448,7 +453,7 @@ button.work-card { background: none; padding: 0; font: inherit; width: 100%; cur
     linear-gradient(to bottom, rgba(5,5,5,.85) 0%, rgba(5,5,5,.6) 50%, rgba(5,5,5,.9) 100%);
 }
 .work-cta-content { position: relative; z-index: 2; }
-.work-cta .work-eyebrow { color: rgba(245,245,245,.45); }
+.work-cta .work-eyebrow { color: rgba(245,245,245,.55); }
 .work-cta .work-italic { font-size: clamp(32px, 4vw, 60px); margin-bottom: 4px; }
 .work-cta-title {
   font-family: 'Archivo', sans-serif;
@@ -469,13 +474,13 @@ button.work-card { background: none; padding: 0; font: inherit; width: 100%; cur
 
 /* ── MOBILE (≤1024px) */
 @media (max-width: 1024px) {
-  .work-hero { min-height: 52vh; padding: 100px 24px 40px; }
+  .work-hero { min-height: 90vh; padding: 100px 24px 40px; }
   .work-scroll-hint { right: 24px; }
   .work-index { padding: 0; }
   .work-tab { padding: 20px 18px; }
   .work-panel { padding: 56px 24px 48px; }
   .work-panel-standfirst { max-width: none; }
-  .work-card--wide { aspect-ratio: 16/10; min-height: 240px; }
+  .work-card--wide { width: 100%; aspect-ratio: 16/10; min-height: 240px; }
   .work-wide-copy { max-width: 85%; }
   .work-cta { padding: 80px 24px; }
   .work-grid--split { grid-template-columns: 1fr; }

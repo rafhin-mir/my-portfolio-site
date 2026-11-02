@@ -91,6 +91,7 @@
   transition: color .2s ease;
 }
 .nav-overlay-close:hover { color: var(--white); }
+.nav-overlay-close:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; border-radius: 2px; }
 .nav-overlay-links {
   list-style: none;
   margin: 0;
@@ -110,6 +111,7 @@
   transition: color .2s ease;
 }
 .nav-overlay-links a:hover { color: var(--white); }
+.nav-overlay-links a:focus-visible { outline: 2px solid var(--primary); outline-offset: 6px; border-radius: 2px; }
 
 @media (max-width: 1024px) {
   .nav-hamburger { display: flex; }

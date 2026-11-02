@@ -1,6 +1,11 @@
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 
+/* The landmark wrapped around each page's content in base.njk is purely
+   semantic - it must not insert itself into the #pageContent flex chain
+   that pages like .contact-main depend on for height/centering. */
+main { display: contents; }
+
 body {
   background-color: var(--black);
   color: var(--white);

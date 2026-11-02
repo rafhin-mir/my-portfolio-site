@@ -83,6 +83,12 @@
     var videos = Array.from(document.querySelectorAll('.carousel-card video'));
     if (!videos.length) return;
 
+    // ~11MB across the 10 clips. On a slow connection or with data-saver on,
+    // loading all of them is a real cost for a hero decoration - leave the
+    // poster images showing instead of fetching any video.
+    var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    if (conn && (conn.saveData || /^(slow-2g|2g|3g)$/.test(conn.effectiveType))) return;
+
     // All 10 play at once - that's the intended effect for the 3D carousel. They're
     // expensive to keep decoding once the hero is scrolled out of view though, so
     // pause/resume the whole set based on visibility instead.

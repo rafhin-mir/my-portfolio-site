@@ -357,7 +357,10 @@
 .creation-index {
   font-size: 12px;
   font-weight: 700;
-  color: rgba(245,245,245,.22);
+  color: rgba(245,245,245,.6);
+  /* sits directly on raw video/image with no scrim behind it - a shadow,
+     not just alpha, keeps it readable over bright footage too */
+  text-shadow: 0 1px 3px rgba(0,0,0,.8);
 }
 .creation-index--sub {
   position: absolute;
@@ -430,7 +433,7 @@
   border: none;
   padding: 0;
   border-radius: 0;
-  color: rgba(245,245,245,.38);
+  color: rgba(245,245,245,.55);
   letter-spacing: .18em;
   margin-bottom: 0;
 }
@@ -464,7 +467,7 @@
   font-weight: 700;
   letter-spacing: .22em;
   text-transform: uppercase;
-  color: rgba(245,245,245,.38);
+  color: rgba(245,245,245,.55);
   margin: 0 0 10px;
 }
 .showcase-italic {
@@ -558,6 +561,25 @@
   transition: opacity 0.38s ease 0.15s, transform 0.48s ease 0.15s;
 }
 .showcase-item.is-active .showcase-content { opacity: 1; transform: translateY(0); }
+
+/* Unlike the horizontal rail (inactive items collapse to slivers too narrow for
+   text), the vertical "Brands" rail's inactive cards stay full-size, so hiding
+   their labels just reads as missing client names - show them, smaller. */
+.showcase-rail--vert .showcase-item:not(.is-active) .showcase-content {
+  opacity: 1;
+  transform: none;
+  justify-content: flex-end;
+  padding-bottom: 20px;
+  gap: 0;
+}
+.showcase-rail--vert .showcase-item:not(.is-active) .showcase-label {
+  font-size: 12px;
+  letter-spacing: -.01em;
+  padding: 0 10px;
+  text-align: center;
+}
+.showcase-rail--vert .showcase-item:not(.is-active) .showcase-link { display: none; }
+
 .showcase-label {
   font-size: clamp(16px, 1.6vw, 24px);
   font-weight: 900;
@@ -623,7 +645,7 @@
   font-weight: 700;
   letter-spacing: .22em;
   text-transform: uppercase;
-  color: rgba(245,245,245,.38);
+  color: rgba(245,245,245,.55);
   margin: 0 0 10px;
 }
 .exp-italic-heading {
@@ -723,7 +745,7 @@
   font-weight: 700;
   letter-spacing: .22em;
   text-transform: uppercase;
-  color: rgba(245,245,245,.38);
+  color: rgba(245,245,245,.55);
   margin: 0 0 20px;
 }
 .cta-heading {

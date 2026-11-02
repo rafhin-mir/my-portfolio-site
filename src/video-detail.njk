@@ -49,8 +49,9 @@ pageScripts:
 <section class="wd-section">
   <a href="/" class="wd-back">&larr;&nbsp;Back to home</a>
 
-  <div class="wd-video-wrap{% if video.aspectRatio == '9 / 16' %} wd-video-wrap--vertical{% endif %}" style="aspect-ratio:{{ video.aspectRatio }}">
+  <div class="wd-video-wrap{% if video.aspectRatio == '9 / 16' %} wd-video-wrap--vertical{% endif %}" style="aspect-ratio:{{ video.aspectRatio }}" id="wdVideoWrap">
     <iframe class="wd-video"
+      id="wdVideo"
       src="https://player.vimeo.com/video/{{ video.vimeoId }}?title=0&byline=0&portrait=0&dnt=1"
       frameborder="0"
       scrolling="no"
@@ -58,6 +59,22 @@ pageScripts:
       allowfullscreen
       {% if video.startAt %}data-start-at="{{ video.startAt }}"{% endif %}
       title="{{ video.title }} client film"></iframe>
+
+    <div class="wd-video-loading" id="wdVideoLoading" aria-hidden="true">
+      <span class="wd-video-spinner"></span>
+    </div>
+
+    <div class="wd-video-fallback" id="wdVideoFallback" role="alert">
+      <img class="wd-video-fallback-poster" src="{{ video.poster }}" alt="" loading="lazy">
+      <div class="wd-video-fallback-scrim"></div>
+      <div class="wd-video-fallback-content">
+        <p class="wd-video-fallback-text">This video couldn't load.</p>
+        <div class="wd-video-fallback-actions">
+          <button type="button" class="btn-ghost" id="wdVideoRetry">Try Again</button>
+          <a href="https://vimeo.com/{{ video.vimeoId }}" target="_blank" rel="noopener" class="btn-primary">Watch on Vimeo&nbsp;→</a>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="wd-info">

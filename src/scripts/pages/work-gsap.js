@@ -15,7 +15,7 @@
     var cards = Array.from(document.querySelectorAll('.work-card'));
     cards.forEach(function (card) {
       var v = card.querySelector('video.work-card-video');
-      if (!v || v.hasAttribute('autoplay')) return; // autoplay videos manage themselves, see initAutoplayVideos
+      if (!v || v.hasAttribute('data-autoplay')) return; // autoplay videos manage themselves, see initAutoplayVideos
 
       card.addEventListener('pointerenter', function () {
         if (v.getAttribute('preload') !== 'auto') {
@@ -34,13 +34,20 @@
     });
   }
 
-  // Videos meant to always be running (not hover-to-play). Retry play() on
-  // loadeddata/canplay same as the Automotive hero, since autoplay can
-  // silently fail on a slow first attempt - and re-kick it whenever a tab
-  // switch reveals a panel that was previously display:none, since some
-  // browsers won't resume an autoplay video on their own once hidden that way.
-  function initAutoplayVideos() {
-    Array.from(document.querySelectorAll('.work-card-video[autoplay]')).forEach(function (v) {
+  // Videos meant to always be running once their panel is visible (not
+  // hover-to-play). Unlike a native [autoplay] video, nothing here fetches
+  // any data until the tab that contains it is actually selected - the old
+  // markup's autoplay+preload=auto downloaded this in the background on
+  // every page load even for visitors who never opened the Café tab.
+  function initAutoplayVideos() {} // kept for the shared init() call list below; activation is tab-driven now
+
+  function playAutoplayVideosIn(panel) {
+    panel.querySelectorAll('.work-card-video[data-autoplay]').forEach(function (v) {
+      if (v.dataset.src) {
+        v.src = v.dataset.src;
+        v.removeAttribute('data-src');
+        v.load();
+      }
       var tryPlay = function () {
         if (!v.paused) return;
         var p = v.play();
@@ -52,10 +59,9 @@
     });
   }
 
-  function playAutoplayVideosIn(panel) {
-    panel.querySelectorAll('.work-card-video[autoplay]').forEach(function (v) {
-      var p = v.play();
-      if (p !== undefined) p.catch(function () {});
+  function pauseAutoplayVideosIn(panel) {
+    panel.querySelectorAll('.work-card-video[data-autoplay]').forEach(function (v) {
+      if (!v.paused) v.pause();
     });
   }
 
@@ -69,25 +75,34 @@
 
     var imgs = Array.from(document.querySelectorAll('.work-masonry .work-card img'));
     var current = 0;
+    var lastTrigger = null;
+    var lbFocusable = [lbClose, lbPrev, lbNext];
 
-    function open(idx) {
+    function open(idx, triggerEl) {
       current = idx;
       lbImg.src = imgs[current].src;
       lbImg.alt = imgs[current].alt;
+      if (triggerEl) lastTrigger = triggerEl;
       lb.classList.add('is-open');
       document.body.style.overflow = 'hidden';
+      // .lb's visibility transition (.22s, see work.css) has to actually
+      // finish before Chrome treats lbClose as focusable - a bare rAF isn't
+      // enough of a delay for focus() to stick.
+      setTimeout(function () { lbClose.focus(); }, 230);
     }
 
     function close() {
       lb.classList.remove('is-open');
       document.body.style.overflow = '';
+      if (lastTrigger) lastTrigger.focus();
     }
 
     function prev() { open((current - 1 + imgs.length) % imgs.length); }
     function next() { open((current + 1) % imgs.length); }
 
     imgs.forEach(function (img, i) {
-      img.closest('.work-card').addEventListener('click', function () { open(i); });
+      var card = img.closest('.work-card');
+      card.addEventListener('click', function () { open(i, card); });
     });
 
     lbClose.addEventListener('click', close);
@@ -97,9 +112,21 @@
 
     document.addEventListener('keydown', function (e) {
       if (!lb.classList.contains('is-open')) return;
-      if (e.key === 'Escape') close();
+      if (e.key === 'Escape') { close(); return; }
       if (e.key === 'ArrowLeft') prev();
       if (e.key === 'ArrowRight') next();
+
+      if (e.key === 'Tab') {
+        var first = lbFocusable[0];
+        var last  = lbFocusable[lbFocusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     });
   }
 
@@ -119,6 +146,7 @@
         var isActive = p.dataset.panel === tab;
         p.classList.toggle('is-active', isActive);
         if (isActive) activePanel = p;
+        else pauseAutoplayVideosIn(p);
       });
 
       if (activePanel && !opts.skipReveal) revealPanel(activePanel);

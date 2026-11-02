@@ -154,15 +154,22 @@
     {% include "components/nav.njk" %}
     {% include "components/nav-overlay.njk" %}
 
-    {{ content | safe }}
+    <main>
+      {{ content | safe }}
+    </main>
 
     {% include "components/footer.njk" %}
 
   </div>
 
   {# ── animation library ── #}
+  {# gsap.min.js is needed on every page - nav.js's mobile overlay animation uses
+     it directly. ScrollTrigger is only registered by per-page scripts below, so
+     skip it entirely on pages (like 404) that declare none. #}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  {% if pageScripts %}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  {% endif %}
 
   {# ── core scripts (every page) ── #}
   <script src="/scripts/core/nav.js" defer></script>

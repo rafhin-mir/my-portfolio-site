@@ -3,25 +3,79 @@
 
   // The Vimeo #t= URL fragment trick isn't reliably honored by the bare player
   // embed, so use the official Player SDK to seek once it's actually loaded.
-  var wdVideoIframe = document.querySelector('.wd-video[data-start-at]');
-  if (wdVideoIframe) {
-    var m = wdVideoIframe.getAttribute('data-start-at').match(/(?:(\d+)m)?(?:(\d+(?:\.\d+)?)s)?/);
-    var startSeconds = (parseInt(m[1] || 0, 10) * 60) + parseFloat(m[2] || 0);
+  var wdVideoIframe = document.getElementById('wdVideo');
+  var wdVideoWrap    = document.getElementById('wdVideoWrap');
+  var wdVideoFallback = document.getElementById('wdVideoFallback');
+  var wdVideoRetry    = document.getElementById('wdVideoRetry');
+  var wdVideoLoading  = document.getElementById('wdVideoLoading');
 
-    if (!window.__vimeoSDKPromise) {
-      window.__vimeoSDKPromise = new Promise(function (resolve) {
-        var s = document.createElement('script');
-        s.src = 'https://player.vimeo.com/api/player.js';
-        s.onload = function () { resolve(); };
-        document.head.appendChild(s);
+  if (wdVideoIframe && wdVideoWrap) {
+    var startAtAttr = wdVideoIframe.getAttribute('data-start-at');
+    var originalSrc = wdVideoIframe.src;
+    var failTimer    = null;
+
+    function getVimeoSDK() {
+      if (!window.__vimeoSDKPromise) {
+        window.__vimeoSDKPromise = new Promise(function (resolve, reject) {
+          var s = document.createElement('script');
+          s.src = 'https://player.vimeo.com/api/player.js';
+          s.onload = function () { resolve(); };
+          s.onerror = reject;
+          document.head.appendChild(s);
+        });
+      }
+      return window.__vimeoSDKPromise;
+    }
+
+    function hideLoading() {
+      if (wdVideoLoading) wdVideoLoading.classList.add('is-hidden');
+    }
+
+    function showFallback() {
+      clearTimeout(failTimer);
+      hideLoading();
+      wdVideoWrap.classList.add('is-errored');
+    }
+
+    function hideFallback() {
+      clearTimeout(failTimer);
+      wdVideoWrap.classList.remove('is-errored');
+    }
+
+    function attachPlayer() {
+      if (wdVideoLoading) wdVideoLoading.classList.remove('is-hidden');
+
+      // If the SDK itself can't load (blocked, offline), there's nothing left to
+      // wait on - the iframe content is unreachable either way.
+      getVimeoSDK().then(function () {
+        var player = new window.Vimeo.Player(wdVideoIframe);
+
+        failTimer = setTimeout(showFallback, 8000);
+
+        player.on('loaded', function () {
+          clearTimeout(failTimer);
+          hideLoading();
+          hideFallback();
+          if (startAtAttr) {
+            var m = startAtAttr.match(/(?:(\d+)m)?(?:(\d+(?:\.\d+)?)s)?/);
+            var startSeconds = (parseInt(m[1] || 0, 10) * 60) + parseFloat(m[2] || 0);
+            player.setCurrentTime(startSeconds).catch(function () {});
+          }
+        });
+        player.on('error', showFallback);
+      }, showFallback);
+    }
+
+    attachPlayer();
+
+    if (wdVideoRetry) {
+      wdVideoRetry.addEventListener('click', function () {
+        hideFallback();
+        // Force a real reload rather than relying on a no-op same-src assignment.
+        wdVideoIframe.src = originalSrc + (originalSrc.indexOf('?') > -1 ? '&' : '?') + '_retry=' + Date.now();
+        attachPlayer();
       });
     }
-    window.__vimeoSDKPromise.then(function () {
-      var player = new window.Vimeo.Player(wdVideoIframe);
-      player.on('loaded', function () {
-        player.setCurrentTime(startSeconds).catch(function () {});
-      });
-    });
   }
 
   // The template renders every other video in the collection - pick a random

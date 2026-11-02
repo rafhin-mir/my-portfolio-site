@@ -202,7 +202,7 @@
 }
 
 /* ── TABLET */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .abt-intro {
     padding: 100px 40px 80px;
     min-height: auto;

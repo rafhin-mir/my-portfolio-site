@@ -116,9 +116,6 @@
   color: #f5f5f5;
   border: 1px solid rgba(245,245,245,.08);
 }
-.svc-card.svc-web .svc-name { color: #cc2255; }
-.svc-card.svc-web .svc-num { color: rgba(204,34,85,.4); }
-
 /* ── how I work ── */
 .how-section {
   padding: 80px 40px 100px;

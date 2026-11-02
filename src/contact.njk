@@ -7,24 +7,58 @@ pageCSS: contact.css
 loaderVariant: contact
 permalink: /contact/
 pageScripts:
+  - contact-form.js
   - contact-gsap.js
 ---
 
-<main class="contact-main">
+<div class="contact-main">
   <h1 class="contact-heading">Contact</h1>
 
-  <div class="contact-cards">
-    <a href="mailto:{{ contact.email }}" class="contact-card">
-      <p class="contact-card-label">Email</p>
-      <p class="contact-card-value">{{ contact.email }}</p>
-    </a>
-    <a href="{{ contact.instagramUrl }}" class="contact-card" target="_blank" rel="noopener">
-      <p class="contact-card-label">Instagram</p>
-      <p class="contact-card-value">{{ contact.instagram }}</p>
-    </a>
-    <a href="tel:{{ contact.phoneHref }}" class="contact-card">
-      <p class="contact-card-label">Phone</p>
-      <p class="contact-card-value">{{ contact.phone }}</p>
-    </a>
+  <div class="contact-columns">
+    <div class="contact-form-col">
+      <form class="contact-form" id="contactForm" action="https://formspree.io/f/xaeelwez" method="POST" novalidate>
+        <div class="field">
+          <label class="field-label" for="cf-name">Name</label>
+          <input class="field-input" type="text" id="cf-name" name="name" autocomplete="name" aria-describedby="cf-name-error" required>
+          <p class="field-error" id="cf-name-error" role="alert"></p>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="cf-email">Email</label>
+          <input class="field-input" type="email" id="cf-email" name="email" autocomplete="email" aria-describedby="cf-email-error" required>
+          <p class="field-error" id="cf-email-error" role="alert"></p>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="cf-message">Message</label>
+          <textarea class="field-input field-textarea" id="cf-message" name="message" rows="5" aria-describedby="cf-message-error" required></textarea>
+          <p class="field-error" id="cf-message-error" role="alert"></p>
+        </div>
+
+        <div class="form-submit-row">
+          <button type="submit" class="btn-primary" id="cfSubmit">Send Inquiry&nbsp;→</button>
+          <p class="form-status" id="cfStatus" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+    </div>
+
+    <div class="contact-secondary-col">
+      <p class="contact-divider-label">Or reach out directly</p>
+
+      <div class="contact-cards">
+        <a href="mailto:{{ contact.email }}" class="contact-card">
+          <p class="contact-card-label">Email</p>
+          <p class="contact-card-value">{{ contact.email }}</p>
+        </a>
+        <a href="{{ contact.instagramUrl }}" class="contact-card" target="_blank" rel="noopener">
+          <p class="contact-card-label">Instagram</p>
+          <p class="contact-card-value">{{ contact.instagram }}</p>
+        </a>
+        <a href="tel:{{ contact.phoneHref }}" class="contact-card">
+          <p class="contact-card-label">Phone</p>
+          <p class="contact-card-value">{{ contact.phone }}</p>
+        </a>
+      </div>
+    </div>
   </div>
-</main>
+</div>
