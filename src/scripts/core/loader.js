@@ -2,13 +2,13 @@ const loader      = document.getElementById('pageLoader');
 const pageContent = document.getElementById('pageContent');
 
 const loaderVariant = loader ? loader.dataset.variant : 'default';
-const loaderDelay   = loaderVariant === 'contact' ? 1100 : 900;
+const loaderDelay   = loaderVariant === 'contact' ? 1100 : 1000;
 
 setTimeout(() => {
   loader.classList.add('hidden');
 }, loaderDelay);
 
-setTimeout(() => loader.remove(), loaderDelay + 1200);
+setTimeout(() => loader.remove(), loaderDelay + 1000);
 
 document.addEventListener('visibilitychange', function () {
   if (document.visibilityState === 'visible') {
