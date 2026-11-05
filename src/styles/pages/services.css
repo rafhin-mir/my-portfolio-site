@@ -38,7 +38,9 @@
 }
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 920px;
+  margin: 0 auto;
   gap: 2px;
 }
 .svc-card {
@@ -332,9 +334,6 @@ details .acc-body { display: block !important; }
 }
 
 /* ── mobile ── */
-@media (max-width: 1024px) {
-  .services-grid { grid-template-columns: repeat(2, 1fr); }
-}
 @media (max-width: 768px) {
   .services-header { padding: 120px 24px 60px; }
   .services-grid-section { padding: 60px 24px 80px; }
