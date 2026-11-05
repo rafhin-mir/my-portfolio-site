@@ -869,9 +869,9 @@
 
   .brands-grid { grid-template-columns: repeat(2, 1fr); }
 
-  .showcase-rail--vert { height: 360px; }
-  .showcase-rail--vert .showcase-item { flex: 0 0 202px !important; height: 360px; }
-  .showcase-rail--vert-track { height: 360px; }
+  .showcase-rail--vert { height: 480px; }
+  .showcase-rail--vert .showcase-item { flex: 0 0 270px !important; height: 480px; }
+  .showcase-rail--vert-track { height: 480px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
