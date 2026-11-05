@@ -39,8 +39,6 @@
 .services-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  max-width: 920px;
-  margin: 0 auto;
   gap: 2px;
 }
 .svc-card {
