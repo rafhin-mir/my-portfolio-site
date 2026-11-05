@@ -2,7 +2,7 @@
   gsap.registerPlugin(ScrollTrigger);
 
   function init() {
-    var tl = gsap.timeline({ delay: 1.0 });
+    var tl = gsap.timeline({ delay: 0.1 });
     tl.from('.services-eyebrow',      { opacity: 0, y: 10, duration: 0.28, ease: 'power2.out' })
       .from('.services-title-italic', { opacity: 0, y: 14, duration: 0.32, ease: 'power3.out' }, '-=0.1')
       .from('.services-title-bold',   { opacity: 0, y: 14, duration: 0.32, ease: 'power3.out' }, '-=0.18');

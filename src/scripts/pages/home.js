@@ -2,7 +2,7 @@
   gsap.registerPlugin(ScrollTrigger);
 
   function init() {
-    var tl = gsap.timeline({ delay: 1.0 });
+    var tl = gsap.timeline({ delay: 0.1 });
     tl.from('.hero-stripe',    { scaleX: 0, transformOrigin: 'left center', duration: 0.35, ease: 'power3.out' })
       .from('.hero-italic',    { opacity: 0, y: 12, duration: 0.3, ease: 'power2.out' }, '-=0.1')
       .from('.hero-bold-main', { opacity: 0, y: 16, duration: 0.32, ease: 'power3.out' }, '-=0.18')
@@ -17,7 +17,7 @@
           rotateX: 15, rotateY: -8, rotateZ: -8,
           duration: 2.2,
           ease: 'power3.out',
-          delay: 1.2,
+          delay: 0.3,
           onComplete: function () {
             gsap.set(tiltEl, { clearProps: 'transform' });
             tiltEl.style.animationPlayState = 'running';

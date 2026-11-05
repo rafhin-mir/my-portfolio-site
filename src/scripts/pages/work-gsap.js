@@ -170,7 +170,7 @@
 
   function init() {
     // Hero entrance
-    var tl = gsap.timeline({ delay: 0.85 });
+    var tl = gsap.timeline({ delay: 0.1 });
     tl.from('.work-eyebrow',        { opacity: 0, y: 10, duration: 0.3, ease: 'power2.out' })
       .from('.work-stripe',         { scaleX: 0, transformOrigin: 'center center', duration: 0.35, ease: 'power3.out' }, '-=0.1')
       .from('.work-hero-content .work-italic', { opacity: 0, y: 14, duration: 0.32, ease: 'power3.out' }, '-=0.15')

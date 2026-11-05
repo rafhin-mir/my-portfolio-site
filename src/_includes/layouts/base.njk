@@ -14,11 +14,32 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', '{{ site.gaId }}');
+    // Don't count a speculative prerender as a pageview; fire once it's
+    // actually activated (or immediately, for a normal navigation).
+    if (document.prerendering) {
+      document.addEventListener('prerenderingchange', function () {
+        gtag('config', '{{ site.gaId }}');
+      }, { once: true });
+    } else {
+      gtag('config', '{{ site.gaId }}');
+    }
   </script>
 
   {# ── Vercel Speed Insights ── #}
   <script defer src="/_vercel/speed-insights/script.js"></script>
+
+  {# ── Speculative prerendering: same-origin links load in the background
+       on hover/touch intent, so clicked navigations feel instant ── #}
+  <script type="speculationrules">
+  {
+    "prerender": [
+      {
+        "where": { "href_matches": "/*" },
+        "eagerness": "moderate"
+      }
+    ]
+  }
+  </script>
 
   {# ── Primary meta ── #}
   <title>{{ title if title else site.name + " - " + site.tagline }}</title>
@@ -132,6 +153,7 @@
   <link rel="stylesheet" href="/styles/base/tokens.css">
   <link rel="stylesheet" href="/styles/base/reset.css">
   <link rel="stylesheet" href="/styles/base/typography.css">
+  <link rel="stylesheet" href="/styles/base/view-transitions.css">
 
   {# ── component styles ── #}
   <link rel="stylesheet" href="/styles/components/loader.css">

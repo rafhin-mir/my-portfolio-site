@@ -21,9 +21,9 @@
     if (!gsapAvailable) { forceHeroVisible(); return; }
 
     // Hero entrance
-    gsap.from('.auto-hero', { opacity: 0, duration: 0.5, ease: 'power2.out', delay: 0.85 });
+    gsap.from('.auto-hero', { opacity: 0, duration: 0.5, ease: 'power2.out', delay: 0.05 });
 
-    var tl = gsap.timeline({ delay: 1.1 });
+    var tl = gsap.timeline({ delay: 0.15 });
     tl.from('.auto-eyebrow',     { opacity: 0, y: 10, duration: 0.3, ease: 'power2.out' })
       .from('.auto-stripe',      { scaleX: 0, transformOrigin: 'center center', duration: 0.35, ease: 'power3.out' }, '-=0.1')
       .from('.auto-hero-italic', { opacity: 0, y: 14, duration: 0.32, ease: 'power3.out' }, '-=0.15')
