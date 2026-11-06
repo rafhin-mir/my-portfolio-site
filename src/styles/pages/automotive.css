@@ -69,16 +69,6 @@
     radial-gradient(ellipse 60% 50% at 50% 30%, rgba(102,0,51,.08) 0%, transparent 65%);
   z-index: 1;
 }
-.auto-hero-grid {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  opacity: .03;
-  background-image:
-    linear-gradient(rgba(245,245,245,1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(245,245,245,1) 1px, transparent 1px);
-  background-size: 80px 80px;
-}
 .auto-hero-content {
   position: relative;
   z-index: 2;
