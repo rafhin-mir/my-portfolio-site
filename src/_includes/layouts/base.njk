@@ -8,6 +8,31 @@
   <meta name="color-scheme" content="dark">
   <meta property="og:locale" content="en_CA">
 
+  {# ── View transition guard: if a link is clicked again before the current
+       page's own entrance transition has finished, navigating away mid-flight
+       throws an aborted/half-finished snapshot into the next transition and
+       can flash as a bright frame. Skip the outgoing transition in that case
+       so a too-quick nav just cuts cleanly instead. ── #}
+  <script>
+    (function () {
+      function markActive() { try { sessionStorage.setItem('vtActive', '1'); } catch (e) {} }
+      function clearActive() { try { sessionStorage.removeItem('vtActive'); } catch (e) {} }
+
+      window.addEventListener('pagereveal', function (e) {
+        if (!e.viewTransition) return;
+        markActive();
+        e.viewTransition.finished.then(clearActive, clearActive);
+      });
+
+      window.addEventListener('pageswap', function (e) {
+        if (!e.viewTransition) return;
+        var active;
+        try { active = sessionStorage.getItem('vtActive') === '1'; } catch (err) { active = false; }
+        if (active) e.viewTransition.skipTransition();
+      });
+    })();
+  </script>
+
   {# ── Google Analytics (GA4) ── #}
   <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.gaId }}"></script>
   <script>
