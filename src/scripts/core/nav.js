@@ -1,7 +1,6 @@
 const siteNav    = document.querySelector('.site-nav');
 const navToggle  = document.getElementById('navToggle');
 const navOverlay = document.getElementById('navOverlay');
-const navClose   = document.getElementById('navClose');
 const overlayLinks = navOverlay.querySelectorAll('.nav-overlay-links li');
 const overlayFocusable = navOverlay.querySelectorAll('a, button');
 
@@ -20,16 +19,17 @@ gsap.set(overlayLinks, { y: 30, opacity: 0 });
 function openMenu() {
   navOverlay.inert = false;
   navOverlay.style.pointerEvents = 'all';
+  navToggle.classList.add('is-open');
   navToggle.setAttribute('aria-expanded', 'true');
   navToggle.setAttribute('aria-label', 'Close menu');
   gsap.timeline()
     .to(navOverlay, { opacity: 1, duration: 0.45, ease: 'power2.out' })
     .to(overlayLinks, { y: 0, opacity: 1, duration: 0.5, stagger: 0.07, ease: 'power3.out' }, '-=0.2');
-  navClose.focus();
 }
 
 function closeMenu() {
   navOverlay.inert = true;
+  navToggle.classList.remove('is-open');
   navToggle.setAttribute('aria-expanded', 'false');
   navToggle.setAttribute('aria-label', 'Open menu');
   gsap.timeline({ onComplete: () => { navOverlay.style.pointerEvents = 'none'; } })
@@ -38,8 +38,13 @@ function closeMenu() {
   navToggle.focus();
 }
 
-navToggle.addEventListener('click', openMenu);
-navClose.addEventListener('click', closeMenu);
+navToggle.addEventListener('click', function () {
+  if (navToggle.getAttribute('aria-expanded') === 'true') {
+    closeMenu();
+  } else {
+    openMenu();
+  }
+});
 navOverlay.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 
 document.addEventListener('keydown', function (e) {

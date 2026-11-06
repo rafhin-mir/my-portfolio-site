@@ -1,8 +1,25 @@
 <div class="nav-overlay" id="navOverlay" role="dialog" aria-modal="true" aria-label="Site navigation">
-  <button class="nav-overlay-close" id="navClose" aria-label="Close menu">✕</button>
+  <span class="nav-overlay-eyebrow">menu</span>
+
   <ul class="nav-overlay-links">
     {% for item in nav %}
-    <li><a href="{{ item.href }}">{{ item.label }}</a></li>
+    <li>
+      <a href="{{ item.href }}" {% if pageKey == item.key %}class="active"{% endif %}>{{ item.label }}</a>
+    </li>
     {% endfor %}
   </ul>
+
+  <div class="nav-overlay-bottom">
+    <div class="nav-overlay-socials">
+      {% for item in social %}
+      <a href="{{ item.href }}" class="social-btn" aria-label="{{ item.label }}" target="_blank" rel="noopener">
+        {% if item.icon == 'instagram' %}{% include "icons/instagram.njk" %}
+        {% elif item.icon == 'tiktok' %}{% include "icons/tiktok.njk" %}
+        {% elif item.icon == 'youtube' %}{% include "icons/youtube.njk" %}
+        {% endif %}
+      </a>
+      {% endfor %}
+    </div>
+    <p class="nav-overlay-tagline">Built with intent. Made to last.</p>
+  </div>
 </div>
