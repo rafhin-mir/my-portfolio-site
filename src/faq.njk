@@ -98,6 +98,17 @@ pageScripts:
 }
 </script>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/" },
+    { "@type": "ListItem", "position": 2, "name": "FAQ", "item": "{{ site.url }}/faq/" }
+  ]
+}
+</script>
+
 <section class="faq-hero">
   <span class="faq-eyebrow">frequently asked</span>
   <h1 class="faq-heading">
