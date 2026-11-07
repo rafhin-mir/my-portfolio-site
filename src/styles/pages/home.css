@@ -58,10 +58,10 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  opacity: .35;
+  opacity: .5;
 }
 .scroll-hint span {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: .15em;
   text-transform: uppercase;
@@ -408,7 +408,7 @@
 }
 .creation-badge--soon {
   background: rgba(102,0,51,.2);
-  color: var(--primary);
+  color: var(--primary-tint);
   border: 1px solid rgba(204,34,85,.35);
 }
 .creation-card--featured {
@@ -594,7 +594,7 @@
   letter-spacing: .16em;
   text-transform: uppercase;
   text-decoration: none;
-  color: var(--primary);
+  color: var(--primary-tint);
   pointer-events: auto;
   transition: transform .2s cubic-bezier(.25,.46,.45,.94), color .2s ease;
 }
@@ -684,7 +684,7 @@
 .exp-num {
   font-size: 1.9rem;
   font-weight: 800;
-  color: var(--primary);
+  color: var(--primary-tint);
   margin: 0 0 14px;
   line-height: 1;
 }

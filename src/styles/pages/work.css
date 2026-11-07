@@ -11,7 +11,7 @@
   color: rgba(245,245,245,.55);
   margin: 0 0 10px;
 }
-.work-eyebrow span { color: var(--primary); }
+.work-eyebrow span { color: var(--primary-tint); }
 
 .work-stripe {
   width: 48px;
@@ -72,15 +72,6 @@
     radial-gradient(ellipse 40% 40% at 18% 82%, rgba(102,0,51,.05) 0%, transparent 60%),
     radial-gradient(ellipse 35% 35% at 82% 70%, rgba(180,150,20,.03) 0%, transparent 60%);
 }
-.work-hero-grid {
-  position: absolute;
-  inset: 0;
-  opacity: .03;
-  background-image:
-    linear-gradient(rgba(245,245,245,1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(245,245,245,1) 1px, transparent 1px);
-  background-size: 80px 80px;
-}
 .work-hero-content {
   position: relative;
   z-index: 2;
@@ -111,11 +102,11 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  opacity: .3;
+  opacity: .5;
 }
 .work-scroll-line { width: 28px; height: 1px; background: var(--white); }
 .work-scroll-hint span {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: .15em;
   text-transform: uppercase;
@@ -148,7 +139,7 @@
   font-size: 10px;
   font-weight: 800;
   letter-spacing: .14em;
-  color: var(--primary);
+  color: var(--primary-tint);
   font-family: 'Archivo', sans-serif;
 }
 .work-tab-label {
@@ -300,7 +291,7 @@ button.work-card { background: none; padding: 0; font: inherit; width: 100%; cur
   margin: 0 0 8px;
   font-family: 'Archivo', sans-serif;
 }
-.work-card-meta span { color: var(--primary); }
+.work-card-meta span { color: var(--primary-tint); }
 .work-card-title {
   font-family: 'Archivo', sans-serif;
   font-weight: 900;
@@ -313,7 +304,7 @@ button.work-card { background: none; padding: 0; font: inherit; width: 100%; cur
 }
 .work-card-title--sm { font-size: clamp(18px, 1.8vw, 26px); margin-bottom: 0; }
 .work-card-cta {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: .16em;
   text-transform: uppercase;
@@ -356,7 +347,7 @@ button.work-card { background: none; padding: 0; font: inherit; width: 100%; cur
 }
 .work-play-btn svg { width: 15px; height: 15px; }
 .work-wide-play span {
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: .16em;
   text-transform: uppercase;
@@ -408,7 +399,7 @@ button.work-card { background: none; padding: 0; font: inherit; width: 100%; cur
   color: rgba(245,245,245,.5);
   margin: 0;
 }
-.work-text-panel-list span { color: var(--primary); }
+.work-text-panel-list span { color: var(--primary-tint); }
 
 /* natural sizing: the image keeps its own aspect ratio instead of being
    cropped to fill a fixed box - the card grows/shrinks to match it */

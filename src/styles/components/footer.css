@@ -57,7 +57,7 @@
   transition: color .2s ease;
 }
 .footer-nav-right a:hover { color: var(--white); }
-.footer-nav-right a.footer-active { color: var(--primary); }
+.footer-nav-right a.footer-active { color: var(--primary-tint); }
 .footer-bottom {
   border-top: 1px solid rgba(245,245,245,.5);
   padding-top: 20px;
