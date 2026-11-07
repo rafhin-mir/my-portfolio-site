@@ -2,24 +2,26 @@
   navigation: auto;
 }
 
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation-duration: .7s;
-  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+::view-transition-group(root) {
+  animation-duration: .9s;
 }
 
+/* Old page dismisses fast and sharp - it's leaving, so it shouldn't linger.
+   New page eases in slower with a settle, which is what actually reads as
+   premium: the destination arriving deliberately rather than a flat
+   same-speed crossfade on both sides. */
 ::view-transition-old(root) {
-  animation-name: vt-blur-out;
+  animation: vt-blur-out .45s cubic-bezier(.4, 0, 1, 1) both;
 }
 ::view-transition-new(root) {
-  animation-name: vt-blur-in;
+  animation: vt-blur-in .9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes vt-blur-out {
-  from { opacity: 1; filter: blur(0); }
-  to   { opacity: 0; filter: blur(32px); }
+  from { opacity: 1; filter: blur(0); transform: scale(1); }
+  to   { opacity: 0; filter: blur(26px); transform: scale(1.045); }
 }
 @keyframes vt-blur-in {
-  from { opacity: 0; filter: blur(32px); }
-  to   { opacity: 1; filter: blur(0); }
+  from { opacity: 0; filter: blur(36px); transform: scale(0.97); }
+  to   { opacity: 1; filter: blur(0); transform: scale(1); }
 }
