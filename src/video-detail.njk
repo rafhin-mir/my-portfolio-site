@@ -6,10 +6,10 @@ pagination:
   alias: video
 permalink: "/work/{{ video.slug }}/"
 eleventyComputed:
-  title: "{{ video.title }} - {{ video.category }} | Rafhin Visuals"
-  description: "{{ video.description }}"
-  ogImage: "{{ video.poster }}"
-  ogImageAlt: "{{ video.title }} - {{ video.category }} by Rafhin Visuals"
+  title: "{{ video.title | safe }} - {{ video.category | safe }} | Rafhin Visuals"
+  description: "{{ video.description | safe }}"
+  ogImage: "{{ video.poster | safe }}"
+  ogImageAlt: "{{ video.title | safe }} - {{ video.category | safe }} by Rafhin Visuals"
   ogVideoUrl: "https://player.vimeo.com/video/{{ video.vimeoId }}"
 pageCSS: video-detail.css
 pageScripts:

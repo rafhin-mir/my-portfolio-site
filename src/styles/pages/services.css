@@ -12,6 +12,7 @@
   display: block;
   margin: 0 0 14px;
 }
+.services-title { margin: 0; }
 .services-title-italic {
   font-family: 'IvyPresto Display', serif;
   font-style: italic;
