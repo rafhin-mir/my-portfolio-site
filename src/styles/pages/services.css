@@ -44,10 +44,64 @@
 .services-grid-section {
   padding: 80px 40px 100px;
 }
+.svcgrid-layout {
+  display: block;
+}
+.svcgrid-sticky {
+  display: none;
+}
 .services-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2px;
+}
+@media (min-width: 1440px) {
+  .svcgrid-layout {
+    display: grid;
+    grid-template-columns: minmax(200px, 320px) 1fr;
+    gap: clamp(40px, 5vw, 100px);
+    align-items: start;
+  }
+  .svcgrid-sticky {
+    display: block;
+    position: sticky;
+    top: 120px;
+  }
+  .svcgrid-eyebrow {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--white);
+    display: block;
+    margin: 0 0 12px;
+  }
+  .svcgrid-italic {
+    font-family: 'IvyPresto Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(28px, 3vw, 46px);
+    letter-spacing: -.02em;
+    line-height: 1;
+    display: block;
+    margin: 0 0 4px;
+  }
+  .svcgrid-bold {
+    font-weight: 900;
+    font-size: clamp(40px, 5vw, 64px);
+    letter-spacing: -.048em;
+    line-height: .86;
+    text-transform: uppercase;
+    display: block;
+    margin: 0 0 28px;
+  }
+  .svcgrid-body {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--white);
+    max-width: 280px;
+    margin: 0;
+  }
 }
 .svc-card {
   padding: 40px 36px 44px;
