@@ -2,8 +2,14 @@
   navigation: auto;
 }
 
+/* Without this, the old and new snapshots can both be near-transparent at
+   the same instant mid-crossfade (old fading to opacity 0, new still
+   fading in from opacity 0), and the browser's default canvas - white -
+   shows through underneath for a frame. A black backdrop here means that
+   gap reveals black instead of a bright white flash. */
 ::view-transition-group(root) {
   animation-duration: .9s;
+  background-color: var(--black);
 }
 
 /* Old page dismisses fast and sharp - it's leaving, so it shouldn't linger.

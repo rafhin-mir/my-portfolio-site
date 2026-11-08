@@ -8,6 +8,13 @@
   <meta name="color-scheme" content="dark">
   <meta property="og:locale" content="en_CA">
 
+  {# ── Critical inline background: guarantees the very first paint is black
+       with zero dependency on the external stylesheet finishing its fetch,
+       so there's no white flash before reset.css applies - including on a
+       skipped/non-transitioned navigation, which doesn't get the View
+       Transition API's own built-in "wait for styles" protection. ── #}
+  <style>html{background:#050505}</style>
+
   {# ── View transition guard: if a link is clicked again before the current
        page's own entrance transition has finished, navigating away mid-flight
        throws an aborted/half-finished snapshot into the next transition and

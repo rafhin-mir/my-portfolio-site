@@ -20,13 +20,16 @@
   function init() {
     if (!gsapAvailable) { forceHeroVisible(); return; }
 
-    // Hero entrance
-    gsap.from('.auto-hero', { opacity: 0, duration: 0.5, ease: 'power2.out', delay: 0.05 });
+    // Hero entrance — only the video/bg layers fade in. The text itself
+    // never gets an opacity:0 starting state, so it's on-screen immediately
+    // no matter how slow the device/network is; it only gets a subtle
+    // position-based motion on top of that.
+    gsap.from(['.auto-hero-video', '.auto-hero-bg'], { opacity: 0, duration: 0.5, ease: 'power2.out', delay: 0.05 });
 
     var tl = gsap.timeline({ delay: 0.15 });
-    tl.from('.auto-eyebrow',     { opacity: 0, y: 10, duration: 0.3, ease: 'power2.out' })
+    tl.from('.auto-eyebrow',     { y: 10, duration: 0.3, ease: 'power2.out' })
       .from('.auto-stripe',      { scaleX: 0, transformOrigin: 'center center', duration: 0.35, ease: 'power3.out' }, '-=0.1')
-      .from('.auto-hero-italic', { opacity: 0, y: 14, duration: 0.32, ease: 'power3.out' }, '-=0.15')
+      .from('.auto-hero-italic', { y: 14, duration: 0.32, ease: 'power3.out' }, '-=0.15')
       .from('.auto-scroll-hint', { opacity: 0, duration: 0.28, ease: 'power1.out' }, '-=0.05');
 
     setTimeout(forceHeroVisible, 2500);
