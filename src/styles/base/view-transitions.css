@@ -23,11 +23,18 @@
   animation: vt-blur-in .9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+/* Blur radius kept modest on purpose: a full-viewport layer animating a
+   heavy blur() together with scale() forces the GPU to repeatedly
+   reallocate a large backing texture, and on real hardware (not visible
+   in software-rendered test automation) that reallocation can briefly
+   clear to white before the next frame paints - showing up as a bright
+   flash mid-transition. Lower radius here trades a little blur intensity
+   for not risking that. */
 @keyframes vt-blur-out {
   from { opacity: 1; filter: blur(0); transform: scale(1); }
-  to   { opacity: 0; filter: blur(26px); transform: scale(1.045); }
+  to   { opacity: 0; filter: blur(10px); transform: scale(1.03); }
 }
 @keyframes vt-blur-in {
-  from { opacity: 0; filter: blur(36px); transform: scale(0.97); }
+  from { opacity: 0; filter: blur(14px); transform: scale(0.98); }
   to   { opacity: 1; filter: blur(0); transform: scale(1); }
 }
