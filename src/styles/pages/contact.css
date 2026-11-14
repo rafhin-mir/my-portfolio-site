@@ -117,6 +117,15 @@ body {
 .form-status[data-state="error"] { color: var(--primary-tint); }
 .form-status a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
 
+.form-consent {
+  font-size: 11px;
+  line-height: 1.6;
+  color: rgba(245,245,245,.45);
+  margin: 16px 0 0;
+}
+.form-consent a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.form-consent a:hover { color: var(--white); }
+
 .contact-divider-label {
   font-size: 10px;
   font-weight: 700;
