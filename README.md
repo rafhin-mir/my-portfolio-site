@@ -1,68 +1,68 @@
 # Rafhin Visuals — Portfolio Site
 
-Official portfolio website for **Rafhin Visuals**, a premium video and photo production studio based in Canada. The site showcases the studio's work across automotive, music, commercial, and documentary genres — built with a dark, cinematic aesthetic and refined motion design.
+[![Live Site](https://img.shields.io/badge/live-rafhin.com-cc2255?style=flat-square)](https://www.rafhin.com)
+[![Built with Eleventy](https://img.shields.io/badge/built%20with-Eleventy%20v3-333?style=flat-square)](https://www.11ty.dev/)
+[![Hosted on Vercel](https://img.shields.io/badge/hosted%20on-Vercel-black?style=flat-square)](https://vercel.com)
 
-Live at: [www.rafhin.com](https://www.rafhin.com)
+Official portfolio website for **Rafhin Visuals**, a video and photo production studio based in Toronto, Ontario, serving the GTA and clients across Canada. Automotive films, brand campaigns, short-form content, and photography — presented with a dark, cinematic aesthetic and refined motion design.
+
+**Live at: [www.rafhin.com](https://www.rafhin.com)**
+
+---
+
+## Contents
+
+- [Pages](#pages)
+- [Stack](#stack)
+- [Project Structure](#project-structure)
+- [Key Implementation Notes](#key-implementation-notes)
+- [Local Development](#local-development)
+- [Deployment](#deployment)
+- [Known Gaps](#known-gaps)
+- [Contact](#contact)
 
 ---
 
 ## Pages
 
 ### Home (`/`)
-Full-viewport hero with a 3D rotating card carousel featuring 10 real video assets, all playing simultaneously. Cards are rendered in grayscale and switch to full colour on hover (desktop only — permanently grayscale on mobile). The carousel enters with a GSAP tilt animation that settles into a continuous CSS float, with an `IntersectionObserver` pausing/resuming playback as the hero scrolls in and out of view.
+Full-viewport hero with a 3D rotating card carousel featuring real video assets, all playing simultaneously. Cards render in grayscale and switch to full colour on hover (desktop only — stays grayscale on mobile). The carousel enters with a GSAP tilt animation that settles into a continuous CSS float, with an `IntersectionObserver` pausing/resuming playback as the hero scrolls in and out of view.
 
-**Section order (top → bottom):**
-1. **Hero** — 3D carousel (10 videos) + "DEFINED BY DETAIL" (`<h1>`) lockup
-2. **Mission** — centered Azeret Mono paragraph + "Learn More →" ghost button
-3. **Clients / Featured By** — static logo grid of brand partners (Mercedes-Benz, McLaren, Honda, RWB, Pfaff, ECC, MOVMAX, PartsEngine, Importfest, BMW, Formula Drift, Gridlife, PRI, S-Team Overland, TX2K26, and more); 2-column on mobile. All logos `loading="lazy"`.
-4. **Featured Work / Showcase** — horizontal flex accordion, 5 real client films (Shayne's GTR, Jaiden's NSX, NSX Feature, Alan's E30, Matt's E55 AMG). Each panel plays a compressed local preview clip and links out to its own `/work/<slug>/` detail page. Inactive panels collapse to ~90px; active panel expands via `flex: 1 1 auto`.
-5. **Client Work / Brands** — 9:16 vertical video accordion, 6 client films (Morning Meets, Aston Martin, ECC Tuned, MOVMAX, Garrett Turbos, PFAFF Reserve), each linking to its own detail page. Desktop: active panel locks to a 9:16 ratio; mobile switches to a transform-driven infinite horizontal scroll gallery (auto-drifts via `requestAnimationFrame`, pauses on touch).
-6. **About the Studio** — split grid (photo left / copy right); photo is grayscale → full colour on hover.
-7. **Creations** — hidden (`display:none`), preserved for future activation
-8. **Key Expertise** — numbered grid
-9. **CTA** — full-bleed footer image, "COLLABORATE" heading, crimson pill button
+**Section order (top → bottom):** Hero carousel → Mission statement → Client/brand logo grid → Featured Work showcase (horizontal accordion) → Client Work rail (9:16 vertical accordion) → About the Studio → Key Expertise grid → Collaborate CTA.
 
-All showcase videos are local, pre-compressed hover-preview clips (not live Vimeo embeds) — this eliminates iframe-load flash and keeps hover response instant. Each card's poster `<img>` crossfades over the video on hover-out so it always returns to its true thumbnail rather than freezing on an arbitrary video frame.
+All showcase videos are local, pre-compressed hover-preview clips (not live Vimeo embeds) — this eliminates iframe-load flash and keeps hover response instant.
 
 ### Automotive (`/automotive/`)
-Dedicated automotive filmmaking page. Features:
-- **Hero** — fullscreen autoplay video background, entrance animation, stripe reveal, "precision in motion" `<h1>`
-- **Capabilities** — 3-column animated filmstrip (vertical/horizontal/square frames, seamless infinite scroll) alongside service lists
-- **Bring a Trailer Listings** — dedicated section (styled after the homepage "About the Studio" split layout) promoting BaT listing photography/video packages, linking out to a live BaT listing
-- **Video Work** — 3-column vertical card grid + 3-card horizontal stack, all real client films with hover-to-play local preview clips, linking to `/work/<slug>/`
-- **Photography** — 3-column masonry gallery with descriptive, per-photo alt text
-- **CTA** — full-bleed background image with contact prompt
+Dedicated automotive filmmaking page: fullscreen autoplay hero video, a 3-column animated filmstrip (seamless infinite scroll), a Bring a Trailer listings section, a video work grid, a photography masonry gallery, and a closing CTA.
 
 ### Work (`/work/<slug>/`) — video detail pages
-One shared Nunjucks template (`video-detail.njk`) drives a unique page per film via Eleventy pagination over `src/_data/clientVideos.json`. Each entry (slug, title, category, Vimeo ID, aspect ratio, poster, description, duration, upload date) produces its own page at `/work/<slug>/` with:
-- Embedded Vimeo player sized to the film's real aspect ratio
-- Title, category, and description pulled straight from the data file
-- `VideoObject` + `BreadcrumbList` JSON-LD structured data
-- A "More Work" grid that client-side shuffles a random subset of the other films on every load
-- Per-video Open Graph/Twitter image and `og:video` tags (falls back correctly whether the poster is a local asset or an absolute Vimeo CDN URL)
+One shared Nunjucks template (`video-detail.njk`) drives a unique page per film via Eleventy pagination over `src/_data/clientVideos.json`. Each entry produces its own page with an embedded Vimeo player, `VideoObject` + `BreadcrumbList` structured data, and a "More Work" grid that shuffles a random subset of other films on every load.
 
-Adding a new film is a two-step process: append an entry to `clientVideos.json`, then link to `/work/<slug>/` from wherever it should appear (home showcase, automotive grid, etc.) — no template duplication required.
+Adding a new film is a two-step process: append an entry to `clientVideos.json`, then link to `/work/<slug>/` from wherever it should appear — no template duplication required.
 
 ### Work (`/work/`) — portfolio index
-Filterable project grid. **Currently placeholder content** (gradient cards, generic titles) — not yet wired to the real `clientVideos.json` films. Categories: All, Real Estate, Weddings, Events, Café. Filter switching animates newly visible items via GSAP stagger.
+Filterable project grid (All, Real Estate, Weddings, Events, Café). The automotive-adjacent content is real; the Events/Weddings/Café tabs are still placeholder imagery pending real client photos — see [Known Gaps](#known-gaps).
 
 ### Services (`/services/`)
-Full-page services overview in three sections:
-- **Header** — centered IvyPresto italic + Archivo bold `<h1>` lockup ("built to Perform")
-- **Services grid** — 6 cards (Film & Video, Photography & Composites, Short Form & UGC, Monthly Retainer, Content Strategy, Website Design & Build), each with number, SVG icon, name, description, and tag pills
-- **How I Work** — sticky heading left / accordion right
-- **CTA** — real background image, crimson pill button
-
-Includes `Service` + `OfferCatalog` JSON-LD listing all six offerings.
+Four service cards (Film & Video, Photography & Composites, Short Form & UGC, Website Design & Build), each with an icon, description, a short "includes" list, and tag pills. On wide viewports (≥1440px) a sticky intro column sits beside the grid so it doesn't read as empty space on large monitors; below that it's a plain 2×2 grid. A "How We Work" process accordion and CTA follow. Includes `Service` + `OfferCatalog` JSON-LD.
 
 ### About (`/about/`)
-Single-page biography. Two-column intro (photo left / copy right) with a `Person` JSON-LD schema for E-E-A-T, location section with ScrollTrigger entrance, and a full-bleed CTA.
+Single-page biography: two-column intro (photo + copy), a `Person` JSON-LD schema, a location section, and a closing CTA.
 
 ### Contact (`/contact/`)
-Minimal contact page with cards linking to email, Instagram, and phone. A companion vCard-style page lives at `/contactcard/` (`noindex`) for sharing a scannable digital business card.
+Contact form (name/email/message via Formspree) plus direct links to email, Instagram, and phone. Includes a short consent line linking to the Privacy Policy. A companion vCard-style page lives at `/contactcard/` (`noindex`) for sharing a scannable digital business card.
+
+### FAQ (`/faq/`)
+Ten Q&As with `FAQPage` JSON-LD, grounded only in facts stated elsewhere on the site. Deliberately **not** linked from navigation or the footer — it exists for search/AI-answer-engine discovery, not for a visitor who already knows the site.
+
+### Privacy Policy (`/privacy/`) & Terms of Use (`/terms/`)
+Plain-language pages covering what data the contact form and analytics actually collect, the third-party services involved (Google Analytics, Google Fonts, Formspree, Vimeo, Vercel), and basic content-ownership terms. Linked from the footer.
 
 ### 404 (`/404.html`)
-Custom not-found page matching the site's dark theme — "Page Not Found" heading, short explanation, and buttons back to Home and to Work. Served with `noindex, follow` via a per-page `robotsMeta` override in the base layout.
+Custom not-found page matching the site's dark theme, served `noindex, follow` via a per-page `robotsMeta` override.
+
+### `/llms.txt`
+A plain-markdown summary of the site aimed at AI crawlers/agents — an emerging, unofficial convention, cheap to publish and not relied on as a primary SEO channel.
 
 ---
 
@@ -71,13 +71,12 @@ Custom not-found page matching the site's dark theme — "Page Not Found" headin
 | Layer | Technology |
 |---|---|
 | Static site generator | [Eleventy (11ty) v3](https://www.11ty.dev/) with Nunjucks templating |
-| Styling | Vanilla CSS — design tokens, component styles, per-page stylesheets |
-| Animations | [GSAP 3.12.5](https://greensock.com/gsap/) + ScrollTrigger |
+| Styling | Vanilla CSS — design tokens, component styles, one stylesheet per page |
+| Animations | [GSAP 3](https://greensock.com/gsap/) + ScrollTrigger, plus the CSS View Transitions API for cross-page blur crossfades |
 | Fonts | Archivo (sans), IvyPresto Display (serif/italic), Azeret Mono (mono) via Google Fonts |
-| Hosting | GitHub → Vercel (production) |
+| Hosting | GitHub → Vercel (production), auto-deployed on push to `main` |
 
-**Brand accent:** `#660033` fill / `#cc2255` text
-**Brand stripe:** gold gradient `#b8960c → #d4af6a → #f0e8d0`
+**Brand accent:** `--primary: #cc2255` / `--primary-tint: #d44c75` (the tint is used wherever the accent sits on small/normal text, since the raw primary fails WCAG AA contrast on black — large bold headings can use the raw primary)
 
 ---
 
@@ -86,130 +85,121 @@ Custom not-found page matching the site's dark theme — "Page Not Found" headin
 ```
 src/
 ├── _data/
-│   ├── site.json           # Name, tagline, logo, favicon, URL, OG image, Twitter handle, NAP
-│   ├── nav.json             # Navigation links and active keys
-│   ├── contact.json         # Email, phone, Instagram
-│   ├── social.json          # Social media links
-│   └── clientVideos.json    # One entry per film: slug, title, category, vimeoId, aspectRatio,
-│                             #   poster, description, durationSeconds, uploadDate — drives every
-│                             #   /work/<slug>/ page plus the homepage/automotive video cards
+│   ├── site.json            # Name, tagline, logo, favicon, URL, OG image, GA id, NAP
+│   ├── nav.json              # Navigation links and active keys
+│   ├── contact.json          # Email, phone, Instagram
+│   ├── social.json           # Social media links
+│   └── clientVideos.json     # One entry per film: slug, title, category, vimeoId, aspectRatio,
+│                              #   poster, description, durationSeconds, uploadDate — drives every
+│                              #   /work/<slug>/ page plus the homepage/automotive video cards
 │
 ├── _includes/
 │   ├── layouts/
-│   │   └── base.njk         # HTML shell — styles, fonts, GSAP, SEO meta, JSON-LD, OG/Twitter tags
+│   │   └── base.njk          # HTML shell — critical inline background, styles, fonts, GSAP,
+│   │                          #   view-transition guard, SEO meta, JSON-LD, OG/Twitter tags
 │   └── components/
-│       ├── nav.njk          # Fixed nav with hamburger
-│       ├── nav-overlay.njk  # Full-screen mobile nav overlay
-│       ├── footer.njk       # Footer with logo, socials, nav links
-│       └── loader.njk       # Page entrance loader
+│       ├── nav.njk, nav-overlay.njk   # Fixed nav + full-screen mobile overlay
+│       ├── footer.njk                  # Logo, socials, nav links, legal links, copyright
+│       └── loader.njk                  # Page entrance loader
 │
 ├── assets/
-│   ├── images/               # Per-page image assets, video posters, photography galleries
-│   ├── video/                # Hero carousel, showcase/client-work preview clips, filmstrip clips
-│   ├── logos/                # Studio logo files
+│   ├── images/                # Per-page image assets, video posters, photography galleries
+│   ├── video/                 # Hero carousel, showcase/client-work preview clips, filmstrip clips
+│   ├── logos/                 # Studio logo files
 │   └── icons/                 # Favicon assets
 │
 ├── scripts/
 │   ├── core/
-│   │   ├── loader.js         # Fades out + removes the loader overlay after entrance
-│   │   └── nav.js            # Hamburger toggle, overlay open/close
-│   └── pages/
-│       ├── home.js            # Hero carousel, showcase accordions, infinite client scroll
-│       ├── automotive.js      # Hero video, filmstrip (clone/captureStream loop), video card hover-play, scroll reveals
-│       ├── video-detail.js    # "More Work" shuffle, entrance animations
-│       ├── about-gsap.js, work-filter.js, work-gsap.js,
-│       │ accordion.js, services-gsap.js, contact-gsap.js
+│   │   ├── loader.js           # Fades out the loader, replays the intro once per session
+│   │   └── nav.js               # Hamburger toggle, overlay open/close
+│   └── pages/                   # One GSAP/behaviour script per page that needs one
 │
-├── video-detail.njk          # Shared template, paginated over clientVideos → /work/<slug>/
+├── video-detail.njk            # Shared template, paginated over clientVideos → /work/<slug>/
 ├── work.njk, automotive.njk, services.njk, about.njk, contact.njk, index.njk
-├── 404.njk                    # Custom not-found page (permalink: /404.html)
-├── contactcard.njk            # Standalone noindex digital business card
-├── robots.njk                 # → /robots.txt
-├── sitemap.njk                # → /sitemap.xml (dynamic, see SEO below)
+├── faq.njk, privacy.njk, terms.njk, llms.njk
+├── 404.njk                      # Custom not-found page (permalink: /404.html)
+├── contactcard.njk              # Standalone noindex digital business card
+├── robots.njk, sitemap.njk      # → /robots.txt, /sitemap.xml (sitemap built dynamically)
 │
 └── styles/
-    ├── base/                  # tokens.css, reset.css, typography.css
-    ├── components/            # nav, footer, buttons, loader, layout
-    └── pages/                 # One stylesheet per page (home.css, automotive.css, video-detail.css, ...)
+    ├── base/                    # tokens.css, reset.css, typography.css, view-transitions.css
+    ├── components/               # nav, footer, buttons, loader, layout
+    └── pages/                    # One stylesheet per page
 
-eleventy.config.mjs            # Passthrough copies + two custom filters:
-                                #   otherVideos  — filters clientVideos to "everything but the current slug"
-                                #   absoluteUrl  — resolves a possibly-relative asset path against site.url,
-                                #                  leaving already-absolute URLs (e.g. Vimeo CDN) untouched
+eleventy.config.mjs              # Passthrough copies + two custom filters:
+                                  #   otherVideos  — filters clientVideos to "everything but the current slug"
+                                  #   absoluteUrl  — resolves a possibly-relative asset path against site.url,
+                                  #                  leaving already-absolute URLs (e.g. Vimeo CDN) untouched
+
+vercel.json                      # trailingSlash: true (matches every internal link), immutable
+                                  #   caching for video, cache-with-revalidation for CSS/JS/images
 ```
 
 ---
 
 ## Key Implementation Notes
 
-### 3D Carousel (Home)
-- CSS `perspective` + `rotateY` per card with `translateZ(radius)` — 10 cards evenly distributed, all playing simultaneously
-- Card sizing uses `clamp()` custom properties (`--c-w`, `--c-h`, `--c-r`) responsive across all screens
-- Grayscale ↔ colour hover: JS `getBoundingClientRect()` detects the front-facing card — CSS `pointer-events` is unreliable in 3D space
-- Entrance: GSAP tilt animation hands off to CSS `animation` via `clearProps: 'transform'` + `animationPlayState: running`
-- `IntersectionObserver` pauses/resumes all 10 videos when the hero scrolls off/on screen
-- Mobile: hover colour switching disabled; carousel stays permanently grayscale
+### Cross-page transitions & the white-flash fix
+Navigation uses the CSS View Transitions API (`@view-transition { navigation: auto }`) for a blur crossfade between pages. Two non-obvious things make it reliable:
+- `::view-transition-group(root)` has an explicit black `background-color`. Without it, the outgoing and incoming snapshots can both be briefly near-transparent at the same instant mid-crossfade, and the browser's default white canvas shows through for a frame.
+- A critical inline `<style>` sets the `html` background before anything else in `<head>`, so first paint is never dependent on an external stylesheet's fetch timing — important specifically for navigations that skip the transition (see below).
+- A `pagereveal`/`pageswap` guard skips the transition if a link is clicked again before the current page's own entrance transition has finished, since navigating away mid-flight can otherwise leave the browser compositing a half-finished snapshot into the next transition.
 
-### Showcase Rails (Home)
-- **Desktop flex accordion:** inactive panels collapse to a fixed basis; active panel uses `flex: 1 1 auto`. Transition on `flex-basis`/`flex-grow` with a spring-style `cubic-bezier`.
-- **9:16 client rail:** active panel locks to an exact 9:16 ratio; inactive panels fill remaining width.
-- **Video loading:** all rail videos start `preload="none"`; an `IntersectionObserver` at `rootMargin: '300px'` upgrades and plays the active video once the rail nears the viewport.
-- Every panel is a real `<a class="showcase-link" href="/work/<slug>/">` — `pointer-events` must stay `auto` on it (a leftover `pointer-events: none` from an earlier decorative-text version previously blocked clicks).
+### Caching & routing
+`vercel.json` sets `trailingSlash: true` to match how every internal link and Eleventy permalink is written (`/services/`, not `/services`) — a mismatch here previously forced every single navigation through a 308 redirect before the real page even started loading. CSS/JS/images get real `Cache-Control` headers (Vercel's unconfigured default is `max-age=0, must-revalidate`, which forces a revalidation round-trip for every render-blocking stylesheet on every page load).
+
+### 3D Carousel (Home)
+CSS `perspective` + `rotateY` per card with `translateZ(radius)`, evenly distributed and all playing simultaneously. Grayscale ↔ colour hover uses JS `getBoundingClientRect()` to detect the front-facing card, since CSS `pointer-events` is unreliable in 3D space. `IntersectionObserver` pauses/resumes video playback as the hero scrolls off/on screen.
 
 ### Video Detail Pages (`/work/<slug>/`)
-- Eleventy pagination (`size: 1`, `alias: video`) over `clientVideos.json` generates one page per film from a single template.
-- `otherVideos` filter (in `eleventy.config.mjs`) hands the template every other film; `video-detail.js` then randomly shuffles and trims to 4 for the "More Work" grid client-side, so the picks differ on every load.
-- `eleventyComputed` derives `title`, `description`, `ogImage`, `ogImageAlt`, and `ogVideoUrl` per page from the current `video` object.
-- Adding a `startAt` field to a video entry is wired up (via the Vimeo Player SDK, since the `#t=` URL fragment isn't honored by bare player embeds) but currently unused by any entry.
+Eleventy pagination (`size: 1`, `alias: video`) over `clientVideos.json` generates one page per film from a single template. `eleventyComputed` derives `title`/`description`/`ogImage`/`ogImageAlt` per page — these pass through Nunjucks twice (once for the computed value, once in the layout), so any value containing user-authored text needs `| safe` to avoid double-escaping HTML entities.
 
 ### Automotive Filmstrip
-- 3 columns, each duplicated (original + clone) for a seamless `translateY(-50%)` loop.
-- Clone videos are filled via `captureStream()` (Chrome/Firefox) rather than re-requesting the same `src`, avoiding double-decoding; Safari falls back to sharing the cached `src`.
-- Because clones use `srcObject` instead of `src`, every visibility-based play/pause check in `automotive.js` must test `!v.src && !v.srcObject` — checking `src` alone silently skips every clone.
-- Columns scroll at different speeds and alternate directions for depth; `will-change: transform` on each column for GPU acceleration.
+Three columns, each duplicated (original + clone) for a seamless loop. Clone videos are filled via `captureStream()` rather than re-requesting the same `src`, avoiding double-decoding; because clones use `srcObject` instead of `src`, visibility-based play/pause checks must test `!v.src && !v.srcObject` — checking `src` alone silently skips every clone.
 
-### Automotive Video Cards
-- Each card is a real `<a>` linking to its `/work/<slug>/` page, with a `<video class="auto-card-bg">` background that hover-plays via `pointerenter`/`pointerleave` (not CSS `:hover`, since it needs to lazily upgrade `preload` and call `.play()`).
-- A separate `<img class="auto-card-poster">` sits above the video and crossfades out only while the `is-playing` class is active, so hovering off always restores the true thumbnail rather than whatever frame the video paused on.
-- No colour-tint overlay is applied to the video/poster — an earlier `mix-blend-mode: screen` accent layer (left over from a placeholder-gradient version of these cards) was removed since it doesn't belong over real footage.
-
-### Page Entrance Animations
-- All pages follow the same pattern: section fade at `delay: 0.85`, text sequence at `delay: 1.0–1.1`, synced to the loader fade.
-- Below-fold reveals use `ScrollTrigger` with `once: true` + independent `gsap.fromTo()` tweens per element (not a single shared stagger tween, and not `gsap.from()`'s implicit "to" sampling) — both alternatives were found to leave every element but the first permanently stuck invisible in this codebase.
+### Page entrance animations
+Primary hero text never starts at `opacity: 0` from JS alone — critical content stays visible by default and only gets a subtle transform-based entrance, so a stalled/slow script can never leave a visitor looking at a blank page. Below-fold reveals use `ScrollTrigger` with independent `gsap.fromTo()` tweens per element, not a single shared stagger tween.
 
 ### SEO
-- **Meta & social:** Full title/description, Open Graph, and Twitter Card tags in `base.njk`, with `og:image`/`twitter:image` resolved via the `absoluteUrl` filter so both local posters and absolute Vimeo CDN thumbnails render correctly. Per-page `robotsMeta` override supported (used by `404.njk`).
-- **Structured data:** `ProfessionalService` + `WebSite` JSON-LD sitewide; `VideoObject` + `BreadcrumbList` on every `/work/<slug>/` page; `Service`/`OfferCatalog` on Services; `Person` on About; `BreadcrumbList` on Automotive and Work.
-- **Sitemap:** `sitemap.njk` → `/sitemap.xml` is generated dynamically from `clientVideos.json` plus the static top-level pages — every film page is included automatically, with no manual upkeep. It also emits Google's video-sitemap extension (`video:thumbnail_loc`, `video:player_loc`, `video:duration`, `video:publication_date`, etc.) for each film, a dedicated signal for Google Video Search.
-- **robots.txt:** `robots.njk` → `/robots.txt`, allows everything, points to the sitemap.
-- **Headings:** every page has exactly one real `<h1>` (several hero titles were previously styled `<p>`/`<span>` elements with no semantic heading at all).
-- **Alt text:** descriptive, specific alt text on all photography — no generic "automotive photography" placeholders.
-- **404 handling:** a real `/404.html` page exists (there wasn't one previously), served `noindex, follow`.
+Full Open Graph/Twitter meta, `ProfessionalService` + `WebSite` JSON-LD sitewide, `VideoObject`/`BreadcrumbList`/`Service`/`Person`/`FAQPage` schema where relevant. `sitemap.njk` generates `/sitemap.xml` dynamically from `clientVideos.json` plus the static pages (including Google's video-sitemap extension), so adding a film never requires manual sitemap upkeep.
 
-### No Preview Gate
-The site previously redirected any visitor without a saved `localStorage` flag to a `/wip` "coming soon" page (with search-engine bots whitelisted so the real pages could still be crawled and indexed pre-launch). That gate, the `/wip` page, and its script have been removed now that the site is live — every visitor lands directly on the real pages.
+### Accessibility
+Interactive/small text uses `--primary-tint` rather than the raw `--primary`, which fails WCAG AA contrast on black at normal text sizes (large bold headings can still use the raw accent, since the contrast threshold relaxes at that size/weight).
 
 ---
 
 ## Local Development
 
-**Install dependencies:**
 ```bash
 npm install
+npm start          # serves at http://localhost:3000
 ```
 
-**Start the dev server:**
+or, to run on a specific port:
+
 ```bash
-node serve.mjs
+npx @11ty/eleventy --serve --port 3010
 ```
 
-Eleventy builds to `_site/`, watches for changes, and serves at `http://localhost:3001` (or the next free port).
+Eleventy builds to `_site/` and rebuilds on file changes.
+
+**Production build:**
+```bash
+npm run build
+```
 
 ---
 
 ## Deployment
 
-Connected to GitHub. Every push to `main` is auto-deployed via Vercel. Video streaming headers (`Accept-Ranges: bytes`) are configured in `vercel.json` for range request support.
+Connected to GitHub. Every push to `main` auto-deploys to production via Vercel.
+
+---
+
+## Known Gaps
+
+- **`/work/` placeholder imagery** — the Events, Weddings, and Café tabs on the work index still show generic placeholder images rather than real client photos.
+- **`/web-design/`** — a fourth service page (website design & build) is built but not yet linked from navigation or shipped to production.
 
 ---
 
